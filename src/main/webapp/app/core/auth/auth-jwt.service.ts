@@ -8,7 +8,7 @@ import { ApplicationConfigService } from '../config/application-config.service';
 import { Login } from 'app/login/login.model';
 
 type JwtToken = {
-  id_token: string;
+  token: string;
 };
 
 @Injectable({ providedIn: 'root' })
@@ -41,7 +41,7 @@ export class AuthServerProvider {
   }
 
   private authenticateSuccess(response: JwtToken, rememberMe: boolean): void {
-    const jwt = response.id_token;
+    const jwt = response.token;
     if (rememberMe) {
       this.localStorageService.store('authenticationToken', jwt);
       this.sessionStorageService.clear('authenticationToken');

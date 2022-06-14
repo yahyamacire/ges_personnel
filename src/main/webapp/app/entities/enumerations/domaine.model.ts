@@ -1,0 +1,7 @@
+export enum Domaine {
+  NUMERIQUE = 'NUMERIQUE',
+
+  INNOVATION = 'INNOVATION',
+
+  MODERNISATION = 'MODERNISATION',
+}

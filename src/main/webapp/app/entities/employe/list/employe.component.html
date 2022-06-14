@@ -1,0 +1,155 @@
+<div>
+  <h2 id="page-heading" data-cy="EmployeHeading">
+    <span jhiTranslate="gesEmployerApp.employe.home.title">Employes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gesEmployerApp.employe.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-employe"
+        [routerLink]="['/employe/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gesEmployerApp.employe.home.createLabel"> Create a new Employe </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="employes?.length === 0">
+    <span jhiTranslate="gesEmployerApp.employe.home.notFound">No employes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="employes && employes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nni"><span jhiTranslate="gesEmployerApp.employe.nni">Nni</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nom"><span jhiTranslate="gesEmployerApp.employe.nom">Nom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prenom">
+            <span jhiTranslate="gesEmployerApp.employe.prenom">Prenom</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sexe"><span jhiTranslate="gesEmployerApp.employe.sexe">Sexe</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateNaissance">
+            <span jhiTranslate="gesEmployerApp.employe.dateNaissance">Date Naissance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <span jhiTranslate="gesEmployerApp.employe.email">Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="telephone">
+            <span jhiTranslate="gesEmployerApp.employe.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateRecrutement">
+            <span jhiTranslate="gesEmployerApp.employe.dateRecrutement">Date Recrutement</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="matricule">
+            <span jhiTranslate="gesEmployerApp.employe.matricule">Matricule</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="fonction">
+            <span jhiTranslate="gesEmployerApp.employe.fonction">Fonction</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="adresse">
+            <span jhiTranslate="gesEmployerApp.employe.adresse">Adresse</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="gesEmployerApp.employe.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="domaine">
+            <span jhiTranslate="gesEmployerApp.employe.domaine">Domaine</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="photo">
+            <span jhiTranslate="gesEmployerApp.employe.photo">Photo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="structure.id">
+            <span jhiTranslate="gesEmployerApp.employe.structure">Structure</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employe of employes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/employe', employe.id, 'view']">{{ employe.id }}</a>
+          </td>
+          <td>{{ employe.nni }}</td>
+          <td>{{ employe.nom }}</td>
+          <td>{{ employe.prenom }}</td>
+          <td jhiTranslate="{{ 'gesEmployerApp.Genre.' + employe.sexe }}">{{ employe.sexe }}</td>
+          <td>{{ employe.dateNaissance | formatMediumDatetime }}</td>
+          <td>{{ employe.email }}</td>
+          <td>{{ employe.telephone }}</td>
+          <td>{{ employe.dateRecrutement | formatMediumDatetime }}</td>
+          <td>{{ employe.matricule }}</td>
+          <td jhiTranslate="{{ 'gesEmployerApp.Fonction.' + employe.fonction }}">{{ employe.fonction }}</td>
+          <td>{{ employe.adresse }}</td>
+          <td jhiTranslate="{{ 'gesEmployerApp.Status.' + employe.status }}">{{ employe.status }}</td>
+          <td jhiTranslate="{{ 'gesEmployerApp.Domaine.' + employe.domaine }}">{{ employe.domaine }}</td>
+          <td>
+            <a *ngIf="employe.photo" (click)="openFile(employe.photo, employe.photoContentType)" jhiTranslate="entity.action.open">open</a>
+            <span *ngIf="employe.photo">{{ employe.photoContentType }}, {{ byteSize(employe.photo) }}</span>
+          </td>
+          <td>
+            <div *ngIf="employe.structure">
+              <a [routerLink]="['/structure', employe.structure?.id, 'view']">{{ employe.structure?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/employe', employe.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/employe', employe.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(employe)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="employes && employes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-diplome-heading" data-cy="DiplomeCreateUpdateHeading" jhiTranslate="gesEmployerApp.diplome.home.createOrEditLabel">
+        Create or edit a Diplome
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.libelle" for="field_libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.universite" for="field_universite">Universite</label>
+          <input
+            type="text"
+            class="form-control"
+            name="universite"
+            id="field_universite"
+            data-cy="universite"
+            formControlName="universite"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.diplome" for="field_diplome">Diplome</label>
+          <div>
+            <div *ngIf="editForm.get('diplome')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('diplome')!.value, editForm.get('diplomeContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('diplomeContentType')!.value }}, {{ byteSize(editForm.get('diplome')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ diplome: null }); editForm.patchValue({ diplomeContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_diplome"
+              data-cy="diplome"
+              (change)="setFileData($event, 'diplome', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="diplome" id="field_diplome" data-cy="diplome" formControlName="diplome" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="diplomeContentType"
+            id="field_diplomeContentType"
+            formControlName="diplomeContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.employe" for="field_employe">Employe</label>
+          <select class="form-control" id="field_employe" data-cy="employe" name="employe" formControlName="employe">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="employeOption.id === editForm.get('employe')!.value?.id ? editForm.get('employe')!.value : employeOption"
+              *ngFor="let employeOption of employesSharedCollection; trackBy: trackEmployeById"
+            >
+              {{ employeOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220614162825",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "structure",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Type",
+      "fieldValues": "Division,Service,Direction,Cabinet,Secretariat_Generale"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Structure",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "employe",
+      "otherEntityRelationshipName": "structure",
+      "relationshipName": "employe",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

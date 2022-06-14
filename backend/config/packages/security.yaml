@@ -10,7 +10,6 @@ security:
                 property: username
   
     enable_authenticator_manager: true
-    # ...
 
     firewalls:
         register:
@@ -31,6 +30,6 @@ security:
             jwt: ~
 
     access_control:
-        - { path: ^/api/authenticate, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/authenticate, roles: PUBLIC_ACCESS  }
+        - { path: ^/api/register, roles: PUBLIC_ACCESS  }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

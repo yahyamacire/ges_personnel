@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20220614162826",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "projet",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Projet",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "employe",
+      "otherEntityRelationshipName": "projet",
+      "ownerSide": false,
+      "relationshipName": "employe",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

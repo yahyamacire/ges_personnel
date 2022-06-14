@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20220614162827",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "diplome",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "universite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "diplome",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Diplome",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "employe",
+      "otherEntityRelationshipName": "diplome",
+      "relationshipName": "employe",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20220614162821",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "langue",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Langue",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "competenceLinguistique",
+      "otherEntityRelationshipName": "langue",
+      "relationshipName": "competenceLinguistique",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

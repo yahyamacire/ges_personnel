@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20220614162823",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "competence_linguistique",
+  "fields": [
+    {
+      "fieldName": "niveau",
+      "fieldType": "Niveau",
+      "fieldValues": "TRES_BIEN,BIEN,ASSEZ_BIEN"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CompetenceLinguistique",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "employe",
+      "otherEntityRelationshipName": "competenceLinguistique",
+      "relationshipName": "employe",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "langue",
+      "otherEntityRelationshipName": "competenceLinguistique",
+      "relationshipName": "langue",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

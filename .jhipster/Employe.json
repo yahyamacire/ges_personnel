@@ -1,0 +1,124 @@
+{
+  "applications": "*",
+  "changelogDate": "20220614162820",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "employe",
+  "fields": [
+    {
+      "fieldName": "nni",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Genre",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "HOMME,FEMME"
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateRecrutement",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "matricule",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fonction",
+      "fieldType": "Fonction",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MINISTRE,SG,CHARGE_MISSION,CONSEILLER,INSPECTEUR,DIRECTEUR,DIRECTEUR_ADJOINT,CHEF_SERVICE,CHEF_DIVISION,CADRE,AUTRE"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "DISPONIBLE,NON_DISPONIBLE,SUSPENDU,EN_CONGE"
+    },
+    {
+      "fieldName": "domaine",
+      "fieldType": "Domaine",
+      "fieldValues": "NUMERIQUE,INNOVATION,MODERNISATION"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Employe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "diplome",
+      "otherEntityRelationshipName": "employe",
+      "relationshipName": "diplome",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "competence",
+      "otherEntityRelationshipName": "employe",
+      "relationshipName": "competence",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "competenceLinguistique",
+      "otherEntityRelationshipName": "employe",
+      "relationshipName": "competenceLinguistique",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "experience",
+      "otherEntityRelationshipName": "employe",
+      "relationshipName": "experience",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "employe",
+      "ownerSide": true,
+      "relationshipName": "projet",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "structure",
+      "otherEntityRelationshipName": "employe",
+      "relationshipName": "structure",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

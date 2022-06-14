@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="diplome">
+      <h2 data-cy="diplomeDetailsHeading"><span jhiTranslate="gesEmployerApp.diplome.detail.title">Diplome</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ diplome.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.diplome.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ diplome.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.diplome.universite">Universite</span></dt>
+        <dd>
+          <span>{{ diplome.universite }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.diplome.date">Date</span></dt>
+        <dd>
+          <span>{{ diplome.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.diplome.description">Description</span></dt>
+        <dd>
+          <span>{{ diplome.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.diplome.diplome">Diplome</span></dt>
+        <dd>
+          <div *ngIf="diplome.diplome">
+            <a (click)="openFile(diplome.diplome, diplome.diplomeContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ diplome.diplomeContentType }}, {{ byteSize(diplome.diplome) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.diplome.employe">Employe</span></dt>
+        <dd>
+          <div *ngIf="diplome.employe">
+            <a [routerLink]="['/employe', diplome.employe?.id, 'view']">{{ diplome.employe?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/diplome', diplome.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

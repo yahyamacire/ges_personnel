@@ -1,0 +1,270 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-employe-heading" data-cy="EmployeCreateUpdateHeading" jhiTranslate="gesEmployerApp.employe.home.createOrEditLabel">
+        Create or edit a Employe
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.nni" for="field_nni">Nni</label>
+          <input type="number" class="form-control" name="nni" id="field_nni" data-cy="nni" formControlName="nni" />
+          <div *ngIf="editForm.get('nni')!.invalid && (editForm.get('nni')!.dirty || editForm.get('nni')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nni')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('nni')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.prenom" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.sexe" for="field_sexe">Sexe</label>
+          <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe">
+            <option [ngValue]="null">{{ 'gesEmployerApp.Genre.null' | translate }}</option>
+            <option *ngFor="let genre of genreValues" [value]="genre">{{ 'gesEmployerApp.Genre.' + genre | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('sexe')!.invalid && (editForm.get('sexe')!.dirty || editForm.get('sexe')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('sexe')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.dateNaissance" for="field_dateNaissance">Date Naissance</label>
+          <div class="d-flex">
+            <input
+              id="field_dateNaissance"
+              data-cy="dateNaissance"
+              type="datetime-local"
+              class="form-control"
+              name="dateNaissance"
+              formControlName="dateNaissance"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dateNaissance')!.invalid && (editForm.get('dateNaissance')!.dirty || editForm.get('dateNaissance')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateNaissance')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateNaissance')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.telephone" for="field_telephone">Telephone</label>
+          <input type="number" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
+          <div *ngIf="editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('telephone')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('telephone')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.dateRecrutement" for="field_dateRecrutement"
+            >Date Recrutement</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateRecrutement"
+              data-cy="dateRecrutement"
+              type="datetime-local"
+              class="form-control"
+              name="dateRecrutement"
+              formControlName="dateRecrutement"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.matricule" for="field_matricule">Matricule</label>
+          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.fonction" for="field_fonction">Fonction</label>
+          <select class="form-control" name="fonction" formControlName="fonction" id="field_fonction" data-cy="fonction">
+            <option [ngValue]="null">{{ 'gesEmployerApp.Fonction.null' | translate }}</option>
+            <option *ngFor="let fonction of fonctionValues" [value]="fonction">
+              {{ 'gesEmployerApp.Fonction.' + fonction | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('fonction')!.invalid && (editForm.get('fonction')!.dirty || editForm.get('fonction')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fonction')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.adresse" for="field_adresse">Adresse</label>
+          <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gesEmployerApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'gesEmployerApp.Status.' + status | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.domaine" for="field_domaine">Domaine</label>
+          <select class="form-control" name="domaine" formControlName="domaine" id="field_domaine" data-cy="domaine">
+            <option [ngValue]="null">{{ 'gesEmployerApp.Domaine.null' | translate }}</option>
+            <option *ngFor="let domaine of domaineValues" [value]="domaine">{{ 'gesEmployerApp.Domaine.' + domaine | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.photo" for="field_photo">Photo</label>
+          <div>
+            <div *ngIf="editForm.get('photo')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('photo')!.value, editForm.get('photoContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(editForm.get('photo')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ photo: null }); editForm.patchValue({ photoContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_photo"
+              data-cy="photo"
+              (change)="setFileData($event, 'photo', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo" id="field_photo" data-cy="photo" formControlName="photo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoContentType"
+            id="field_photoContentType"
+            formControlName="photoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="gesEmployerApp.employe.projet" for="field_projets">Projet</label>
+          <select class="form-control" id="field_projets" data-cy="projet" multiple name="projets" formControlName="projets">
+            <option
+              [ngValue]="getSelectedProjet(projetOption, editForm.get('projets')!.value)"
+              *ngFor="let projetOption of projetsSharedCollection; trackBy: trackProjetById"
+            >
+              {{ projetOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.employe.structure" for="field_structure">Structure</label>
+          <select class="form-control" id="field_structure" data-cy="structure" name="structure" formControlName="structure">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="structureOption.id === editForm.get('structure')!.value?.id ? editForm.get('structure')!.value : structureOption"
+              *ngFor="let structureOption of structuresSharedCollection; trackBy: trackStructureById"
+            >
+              {{ structureOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

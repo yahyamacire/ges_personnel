@@ -1,0 +1,104 @@
+
+entity Employe {
+	nni Integer required
+    nom String required
+    prenom String required
+    sexe Genre required
+    dateNaissance Instant required
+    email String required
+    telephone Integer required
+    dateRecrutement Instant
+    matricule String
+    fonction Fonction required
+    adresse String
+    status Status
+    domaine Domaine
+    photo Blob
+}
+
+enum Status {
+	DISPONIBLE, NON_DISPONIBLE, SUSPENDU, EN_CONGE
+}
+
+enum Fonction {
+	MINISTRE, SG, CHARGE_MISSION, CONSEILLER, INSPECTEUR, DIRECTEUR, DIRECTEUR_ADJOINT, CHEF_SERVICE, CHEF_DIVISION, CADRE, AUTRE
+}
+
+enum Genre {
+	HOMME,FEMME
+}
+
+enum Domaine {
+	NUMERIQUE,INNOVATION, MODERNISATION
+}
+
+entity Langue {
+	nom String
+}
+
+entity Competence {
+	nom String
+    description String
+}
+
+entity CompetenceLinguistique {
+    niveau Niveau
+}
+
+ enum Niveau{
+   TRES_BIEN, BIEN, ASSEZ_BIEN
+ }
+
+entity Experience {
+    entreprise String required
+    dateDebut Instant required
+    dateFin Instant
+    description String required
+
+}
+
+entity Structure {
+	nom String
+    type Type
+}
+
+enum Type {
+	Division, Service, Direction, Cabinet, Secretariat_Generale
+}
+
+entity Projet{
+   nom String
+   dateDebut Instant
+   dateFin Instant
+   description String
+}
+
+entity Diplome {
+   libelle String
+   universite String
+   date Instant
+   description String
+   diplome Blob
+}
+
+relationship OneToMany {
+	Employe to Diplome{employe}
+	Employe to Competence{employe}
+	Employe to CompetenceLinguistique{employe}
+	Langue to CompetenceLinguistique{langue}
+	Employe to Experience{employe}
+
+	Structure to Employe{structure}
+	// Structure to Structure{structure}
+}
+
+
+relationship ManyToMany {
+	// Employe{projet} to Projet
+	Employe{projet(id)} to Projet{employe}
+}
+
+
+paginate Employe, Structure with pagination
+
+

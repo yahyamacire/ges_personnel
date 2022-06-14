@@ -57,7 +57,6 @@ class LoginController extends AbstractFOSRestController
     }
 
     #[Route('account', name: 'user_account')]
-
     public function getConnectedUser()
     {
 

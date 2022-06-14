@@ -1,0 +1,26 @@
+{
+  "gesEmployerApp": {
+    "competenceLinguistique": {
+      "home": {
+        "title": "Competence Linguistiques",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Competence Linguistique",
+        "createOrEditLabel": "Create or edit a Competence Linguistique",
+        "notFound": "No Competence Linguistiques found"
+      },
+      "created": "A new Competence Linguistique is created with identifier {{ param }}",
+      "updated": "A Competence Linguistique is updated with identifier {{ param }}",
+      "deleted": "A Competence Linguistique is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Competence Linguistique {{ id }}?"
+      },
+      "detail": {
+        "title": "Competence Linguistique"
+      },
+      "id": "ID",
+      "niveau": "Niveau",
+      "employe": "Employe",
+      "langue": "Langue"
+    }
+  }
+}

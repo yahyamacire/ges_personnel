@@ -1,0 +1,9 @@
+{
+  "gesEmployerApp": {
+    "Genre": {
+      "null": "",
+      "HOMME": "HOMME",
+      "FEMME": "FEMME"
+    }
+  }
+}

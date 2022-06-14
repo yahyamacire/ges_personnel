@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-competence-linguistique-heading"
+        data-cy="CompetenceLinguistiqueCreateUpdateHeading"
+        jhiTranslate="gesEmployerApp.competenceLinguistique.home.createOrEditLabel"
+      >
+        Create or edit a Competence Linguistique
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.competenceLinguistique.niveau" for="field_niveau">Niveau</label>
+          <select class="form-control" name="niveau" formControlName="niveau" id="field_niveau" data-cy="niveau">
+            <option [ngValue]="null">{{ 'gesEmployerApp.Niveau.null' | translate }}</option>
+            <option *ngFor="let niveau of niveauValues" [value]="niveau">{{ 'gesEmployerApp.Niveau.' + niveau | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.competenceLinguistique.employe" for="field_employe">Employe</label>
+          <select class="form-control" id="field_employe" data-cy="employe" name="employe" formControlName="employe">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="employeOption.id === editForm.get('employe')!.value?.id ? editForm.get('employe')!.value : employeOption"
+              *ngFor="let employeOption of employesSharedCollection; trackBy: trackEmployeById"
+            >
+              {{ employeOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.competenceLinguistique.langue" for="field_langue">Langue</label>
+          <select class="form-control" id="field_langue" data-cy="langue" name="langue" formControlName="langue">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="langueOption.id === editForm.get('langue')!.value?.id ? editForm.get('langue')!.value : langueOption"
+              *ngFor="let langueOption of languesSharedCollection; trackBy: trackLangueById"
+            >
+              {{ langueOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

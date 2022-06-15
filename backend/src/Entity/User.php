@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation as Serializer;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -20,9 +22,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $username;
 
     #[ORM\Column(type: 'json')]
+    #[Serializer\SerializedName("authorities")]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Serializer\Exclude()]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -32,36 +36,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $active;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\SerializedName("firstName")]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\SerializedName("lastName")]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 30, nullable: true)]
+    #[Serializer\SerializedName("langKey")]
     private $langKey;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\SerializedName("imageUrl")]
     private $imageUrl;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\Exclude()]
     private $activationKey;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\Exclude()]
     private $resetKey;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\Exclude()]
     private $resetDate;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Serializer\SerializedName("createDate")]
     private $createDate;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\SerializedName("createdBy")]
     private $createdBy;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Serializer\SerializedName("lastModifiedBy")]
     private $lastModifiedBy;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Serializer\SerializedName("lastModifiedDate")]
     private $lastModifiedDate;
 
     public function __construct()

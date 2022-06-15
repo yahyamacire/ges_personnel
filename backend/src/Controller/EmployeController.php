@@ -64,7 +64,7 @@ class EmployeController extends AbstractFOSRestController
         $employe->setFonction($fonction);
         $employe->setDomaine($domaine);
         $employe->setPhoto($photo);
-        
+
 
         if($dateNaissance != null) {
             $dateNaissance = new DateTime($parameters['dateNaissance']);
@@ -75,6 +75,11 @@ class EmployeController extends AbstractFOSRestController
 
         $employe->setDateNaissance($dateNaissance);
         $employe->setDateRecrutement($dateRecrutement);
+
+
+        $user = $this->getUser();
+
+        $employe->setCompte($user);
 
 
         $em = $doctrine->getManager();
@@ -150,7 +155,7 @@ class EmployeController extends AbstractFOSRestController
     {
        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
         $employeRepository->remove($employe, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',

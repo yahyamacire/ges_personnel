@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IEmploye } from '../employe.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { IDiplome } from '../../diplome/diplome.model';
+import { DiplomeDeleteDialogComponent } from '../../diplome/delete/diplome-delete-dialog.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-employe-detail',
@@ -11,7 +14,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 export class EmployeDetailComponent implements OnInit {
   employe: IEmploye | null = null;
 
-  constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected modalService: NgbModal, protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ employe }) => {
@@ -29,5 +32,20 @@ export class EmployeDetailComponent implements OnInit {
 
   previousState(): void {
     window.history.back();
+  }
+
+  trackId(_index: number, item: IDiplome): number {
+    return item.id!;
+  }
+
+  delete(diplome: IDiplome): void {
+    const modalRef = this.modalService.open(DiplomeDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.diplome = diplome;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.ngOnInit();
+      }
+    });
   }
 }

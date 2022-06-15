@@ -18,13 +18,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 #[Route('/api/')]
 class DiplomeController extends AbstractFOSRestController
 {
-    
+
     #[Rest\Get('diplomes', name: 'api_list_diplomes')]
     public function list(DiplomeRepository $diplomeRepository)
     {
-        $list = $diplomeRepository->findAll();
+
+        $list = [];
+
+        $user = $this->getUser();
+        if($user != null){
+            $list = $diplomeRepository->findBy(['employe' => $user->getEmployer()->getId()]);
+        }
+
         return $this->handleView($this->view($list));
     }
+
+
     #[Rest\Post('diplomes', name: 'api_new_diplome', )]
     public function new(Request $request, ManagerRegistry  $doctrine)
     {
@@ -44,16 +53,19 @@ class DiplomeController extends AbstractFOSRestController
         $diplome->setLibelle($libelle);
         $diplome->setUniversite($universite);
         $diplome->setDescription($description);
-        
+
         $diplome->setDiplome($dp);
         if($date != null) {
             $date = new DateTime($parameters['date']);
         }
-       
+
 
         $diplome->setDate($date);
-        
 
+        $user = $this->getUser();
+        if($user != null){
+            $diplome->setEmploye($user->getEmploye());
+        }
 
         $em = $doctrine->getManager();
 
@@ -92,10 +104,10 @@ class DiplomeController extends AbstractFOSRestController
         if($date != null) {
             $date = new DateTime($parameters['date']);
         }
-       
+
 
         $diplome->setDate($date);
-     
+
 
 
         $em = $doctrine->getManager();
@@ -111,7 +123,7 @@ class DiplomeController extends AbstractFOSRestController
     {
        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
         $diplomeRepository->remove($diplome, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',

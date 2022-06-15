@@ -79,11 +79,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Serializer\SerializedName("lastModifiedDate")]
     private $lastModifiedDate;
 
+    #[ORM\OneToOne(mappedBy: 'compte', targetEntity: Employe::class, cascade: ['persist', 'remove'])]
+    private $employe;
+
     public function __construct()
     {
         $this->active = false;
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -306,6 +309,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastModifiedDate(?\DateTimeInterface $lastModifiedDate): self
     {
         $this->lastModifiedDate = $lastModifiedDate;
+
+        return $this;
+    }
+
+    public function getEmploye(): ?Employe
+    {
+        return $this->employe;
+    }
+
+    public function setEmploye(?Employe $employe): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($employe === null && $this->employe !== null) {
+            $this->employe->setTest(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($employe !== null && $employe->getTest() !== $this) {
+            $employe->setTest($this);
+        }
+
+        $this->employe = $employe;
 
         return $this;
     }

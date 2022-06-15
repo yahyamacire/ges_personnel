@@ -33,7 +33,6 @@ export class DiplomeUpdateComponent implements OnInit {
     description: [],
     diplome: [],
     diplomeContentType: [],
-    employe: [],
   });
 
   constructor(
@@ -119,7 +118,6 @@ export class DiplomeUpdateComponent implements OnInit {
       description: diplome.description,
       diplome: diplome.diplome,
       diplomeContentType: diplome.diplomeContentType,
-      employe: diplome.employe,
     });
 
     this.employesSharedCollection = this.employeService.addEmployeToCollectionIfMissing(this.employesSharedCollection, diplome.employe);
@@ -145,7 +143,6 @@ export class DiplomeUpdateComponent implements OnInit {
       description: this.editForm.get(['description'])!.value,
       diplomeContentType: this.editForm.get(['diplomeContentType'])!.value,
       diplome: this.editForm.get(['diplome'])!.value,
-      employe: this.editForm.get(['employe'])!.value,
     };
   }
 }

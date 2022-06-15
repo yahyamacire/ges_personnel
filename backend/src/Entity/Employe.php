@@ -6,6 +6,7 @@ use App\Repository\EmployeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
 class Employe
@@ -58,7 +59,13 @@ class Employe
     private $photo;
 
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Diplome::class)]
+    #[Serializer\SerializedName("diplomes")]
     private $diplome;
+
+    #[ORM\OneToOne(targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[Serializer\SerializedName("user")]
+    private $compte;
+
 
     public function __construct()
     {
@@ -264,6 +271,18 @@ class Employe
                 $diplome->setEmploye(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCompte(): ?User
+    {
+        return $this->compte;
+    }
+
+    public function setCompte(?User $compte): self
+    {
+        $this->compte = $compte;
 
         return $this;
     }

@@ -69,6 +69,9 @@
           <th scope="col" jhiSortBy="photo">
             <span jhiTranslate="gesEmployerApp.employe.photo">Photo</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="gesEmployerApp.employe.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="structure.id">
             <span jhiTranslate="gesEmployerApp.employe.structure">Structure</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -96,6 +99,9 @@
           <td>
             <a *ngIf="employe.photo" (click)="openFile(employe.photo, employe.photoContentType)" jhiTranslate="entity.action.open">open</a>
             <span *ngIf="employe.photo">{{ employe.photoContentType }}, {{ byteSize(employe.photo) }}</span>
+          </td>
+          <td>
+            {{ employe.user?.id }}
           </td>
           <td>
             <div *ngIf="employe.structure">

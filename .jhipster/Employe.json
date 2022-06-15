@@ -82,6 +82,13 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "employe",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    },
+    {
       "otherEntityName": "diplome",
       "otherEntityRelationshipName": "employe",
       "relationshipName": "diplome",

@@ -93,6 +93,11 @@ relationship OneToMany {
 }
 
 
+relationship OneToOne {
+	Structure{parent} to Structure
+    Employe{user} to User
+}
+
 relationship ManyToMany {
 	// Employe{projet} to Projet
 	Employe{projet(id)} to Projet{employe}

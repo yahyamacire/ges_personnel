@@ -13,6 +13,8 @@ import { EmployeService } from '../service/employe.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 import { IProjet } from 'app/entities/projet/projet.model';
 import { ProjetService } from 'app/entities/projet/service/projet.service';
 import { IStructure } from 'app/entities/structure/structure.model';
@@ -33,6 +35,7 @@ export class EmployeUpdateComponent implements OnInit {
   statusValues = Object.keys(Status);
   domaineValues = Object.keys(Domaine);
 
+  usersSharedCollection: IUser[] = [];
   projetsSharedCollection: IProjet[] = [];
   structuresSharedCollection: IStructure[] = [];
 
@@ -53,6 +56,7 @@ export class EmployeUpdateComponent implements OnInit {
     domaine: [],
     photo: [],
     photoContentType: [],
+    user: [],
     projets: [],
     structure: [],
   });
@@ -61,6 +65,7 @@ export class EmployeUpdateComponent implements OnInit {
     protected dataUtils: DataUtils,
     protected eventManager: EventManager,
     protected employeService: EmployeService,
+    protected userService: UserService,
     protected projetService: ProjetService,
     protected structureService: StructureService,
     protected activatedRoute: ActivatedRoute,
@@ -108,6 +113,10 @@ export class EmployeUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.employeService.create(employe));
     }
+  }
+
+  trackUserById(_index: number, item: IUser): number {
+    return item.id!;
   }
 
   trackProjetById(_index: number, item: IProjet): number {
@@ -166,10 +175,12 @@ export class EmployeUpdateComponent implements OnInit {
       domaine: employe.domaine,
       photo: employe.photo,
       photoContentType: employe.photoContentType,
+      user: employe.user,
       projets: employe.projets,
       structure: employe.structure,
     });
 
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, employe.user);
     this.projetsSharedCollection = this.projetService.addProjetToCollectionIfMissing(
       this.projetsSharedCollection,
       ...(employe.projets ?? [])
@@ -181,6 +192,12 @@ export class EmployeUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.userService
+      .query()
+      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
+      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value)))
+      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
+
     this.projetService
       .query()
       .pipe(map((res: HttpResponse<IProjet[]>) => res.body ?? []))
@@ -225,6 +242,7 @@ export class EmployeUpdateComponent implements OnInit {
       domaine: this.editForm.get(['domaine'])!.value,
       photoContentType: this.editForm.get(['photoContentType'])!.value,
       photo: this.editForm.get(['photo'])!.value,
+      user: this.editForm.get(['user'])!.value,
       projets: this.editForm.get(['projets'])!.value,
       structure: this.editForm.get(['structure'])!.value,
     };

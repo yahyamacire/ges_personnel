@@ -73,6 +73,10 @@
             {{ employe.photoContentType }}, {{ byteSize(employe.photo) }}
           </div>
         </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.user">User</span></dt>
+        <dd>
+          <span>{{ employe.user?.id }}</span>
+        </dd>
         <dt><span jhiTranslate="gesEmployerApp.employe.projet">Projet</span></dt>
         <dd>
           <span *ngFor="let projet of employe.projets; let last = last">

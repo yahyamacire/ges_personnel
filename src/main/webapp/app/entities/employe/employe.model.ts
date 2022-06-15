@@ -1,4 +1,5 @@
 import dayjs from 'dayjs/esm';
+import { IUser } from 'app/entities/user/user.model';
 import { IDiplome } from 'app/entities/diplome/diplome.model';
 import { ICompetence } from 'app/entities/competence/competence.model';
 import { ICompetenceLinguistique } from 'app/entities/competence-linguistique/competence-linguistique.model';
@@ -27,6 +28,7 @@ export interface IEmploye {
   domaine?: Domaine | null;
   photoContentType?: string | null;
   photo?: string | null;
+  user?: IUser | null;
   diplomes?: IDiplome[] | null;
   competences?: ICompetence[] | null;
   competenceLinguistiques?: ICompetenceLinguistique[] | null;
@@ -53,6 +55,7 @@ export class Employe implements IEmploye {
     public domaine?: Domaine | null,
     public photoContentType?: string | null,
     public photo?: string | null,
+    public user?: IUser | null,
     public diplomes?: IDiplome[] | null,
     public competences?: ICompetence[] | null,
     public competenceLinguistiques?: ICompetenceLinguistique[] | null,

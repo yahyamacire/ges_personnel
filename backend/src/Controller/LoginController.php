@@ -39,6 +39,8 @@ class LoginController extends AbstractFOSRestController
         );
         $user->setPassword($hashedPassword);
 
+        $user->setRoles(['ROLE_USER']);
+
         $em = $doctrine->getManager();
 
         $em->persist($user);

@@ -32,6 +32,7 @@
       "status": "Status",
       "domaine": "Domaine",
       "photo": "Photo",
+      "user": "User",
       "diplome": "Diplome",
       "competence": "Competence",
       "competenceLinguistique": "Competence Linguistique",

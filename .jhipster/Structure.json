@@ -22,6 +22,13 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityName": "structure",
+      "otherEntityRelationshipName": "structure",
+      "ownerSide": true,
+      "relationshipName": "parent",
+      "relationshipType": "one-to-one"
+    },
+    {
       "otherEntityName": "employe",
       "otherEntityRelationshipName": "structure",
       "relationshipName": "employe",

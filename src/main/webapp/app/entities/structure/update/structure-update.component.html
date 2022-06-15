@@ -25,6 +25,19 @@
             <option *ngFor="let type of typeValues" [value]="type">{{ 'gesEmployerApp.Type.' + type | translate }}</option>
           </select>
         </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="gesEmployerApp.structure.parent" for="field_parent">Parent</label>
+          <select class="form-control" id="field_parent" data-cy="parent" name="parent" formControlName="parent">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="structureOption.id === editForm.get('parent')!.value?.id ? editForm.get('parent')!.value : structureOption"
+              *ngFor="let structureOption of parentsCollection; trackBy: trackStructureById"
+            >
+              {{ structureOption.id }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

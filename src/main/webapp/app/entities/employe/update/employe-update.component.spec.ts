@@ -8,6 +8,9 @@ import { of, Subject, from } from 'rxjs';
 
 import { EmployeService } from '../service/employe.service';
 import { IEmploye, Employe } from '../employe.model';
+
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 import { IProjet } from 'app/entities/projet/projet.model';
 import { ProjetService } from 'app/entities/projet/service/projet.service';
 import { IStructure } from 'app/entities/structure/structure.model';
@@ -20,6 +23,7 @@ describe('Employe Management Update Component', () => {
   let fixture: ComponentFixture<EmployeUpdateComponent>;
   let activatedRoute: ActivatedRoute;
   let employeService: EmployeService;
+  let userService: UserService;
   let projetService: ProjetService;
   let structureService: StructureService;
 
@@ -43,6 +47,7 @@ describe('Employe Management Update Component', () => {
     fixture = TestBed.createComponent(EmployeUpdateComponent);
     activatedRoute = TestBed.inject(ActivatedRoute);
     employeService = TestBed.inject(EmployeService);
+    userService = TestBed.inject(UserService);
     projetService = TestBed.inject(ProjetService);
     structureService = TestBed.inject(StructureService);
 
@@ -50,6 +55,25 @@ describe('Employe Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
+    it('Should call User query and add missing value', () => {
+      const employe: IEmploye = { id: 456 };
+      const user: IUser = { id: 10937 };
+      employe.user = user;
+
+      const userCollection: IUser[] = [{ id: 43283 }];
+      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [user];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ employe });
+      comp.ngOnInit();
+
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(userCollection, ...additionalUsers);
+      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should call Projet query and add missing value', () => {
       const employe: IEmploye = { id: 456 };
       const projets: IProjet[] = [{ id: 29922 }];
@@ -90,6 +114,8 @@ describe('Employe Management Update Component', () => {
 
     it('Should update editForm', () => {
       const employe: IEmploye = { id: 456 };
+      const user: IUser = { id: 48827 };
+      employe.user = user;
       const projets: IProjet = { id: 94774 };
       employe.projets = [projets];
       const structure: IStructure = { id: 84444 };
@@ -99,6 +125,7 @@ describe('Employe Management Update Component', () => {
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(employe));
+      expect(comp.usersSharedCollection).toContain(user);
       expect(comp.projetsSharedCollection).toContain(projets);
       expect(comp.structuresSharedCollection).toContain(structure);
     });
@@ -169,6 +196,14 @@ describe('Employe Management Update Component', () => {
   });
 
   describe('Tracking relationships identifiers', () => {
+    describe('trackUserById', () => {
+      it('Should return tracked User primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackUserById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
+    });
+
     describe('trackProjetById', () => {
       it('Should return tracked Projet primary key', () => {
         const entity = { id: 123 };

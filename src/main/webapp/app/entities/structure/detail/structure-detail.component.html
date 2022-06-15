@@ -22,6 +22,12 @@
         <dd>
           <span jhiTranslate="{{ 'gesEmployerApp.Type.' + structure.type }}">{{ structure.type }}</span>
         </dd>
+        <dt><span jhiTranslate="gesEmployerApp.structure.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="structure.parent">
+            <a [routerLink]="['/structure', structure.parent?.id, 'view']">{{ structure.parent?.id }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

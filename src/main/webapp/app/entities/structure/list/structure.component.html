@@ -37,6 +37,9 @@
           <th scope="col" jhiSortBy="type">
             <span jhiTranslate="gesEmployerApp.structure.type">Type</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="parent.id">
+            <span jhiTranslate="gesEmployerApp.structure.parent">Parent</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -47,6 +50,11 @@
           </td>
           <td>{{ structure.nom }}</td>
           <td jhiTranslate="{{ 'gesEmployerApp.Type.' + structure.type }}">{{ structure.type }}</td>
+          <td>
+            <div *ngIf="structure.parent">
+              <a [routerLink]="['/structure', structure.parent?.id, 'view']">{{ structure.parent?.id }}</a>
+            </div>
+          </td>
           <td class="text-end">
             <div class="btn-group">
               <button

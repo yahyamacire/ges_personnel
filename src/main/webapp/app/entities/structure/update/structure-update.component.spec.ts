@@ -42,13 +42,34 @@ describe('Structure Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
+    it('Should call parent query and add missing value', () => {
+      const structure: IStructure = { id: 456 };
+      const parent: IStructure = { id: 1878 };
+      structure.parent = parent;
+
+      const parentCollection: IStructure[] = [{ id: 7986 }];
+      jest.spyOn(structureService, 'query').mockReturnValue(of(new HttpResponse({ body: parentCollection })));
+      const expectedCollection: IStructure[] = [parent, ...parentCollection];
+      jest.spyOn(structureService, 'addStructureToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ structure });
+      comp.ngOnInit();
+
+      expect(structureService.query).toHaveBeenCalled();
+      expect(structureService.addStructureToCollectionIfMissing).toHaveBeenCalledWith(parentCollection, parent);
+      expect(comp.parentsCollection).toEqual(expectedCollection);
+    });
+
     it('Should update editForm', () => {
       const structure: IStructure = { id: 456 };
+      const parent: IStructure = { id: 40651 };
+      structure.parent = parent;
 
       activatedRoute.data = of({ structure });
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(structure));
+      expect(comp.parentsCollection).toContain(parent);
     });
   });
 
@@ -113,6 +134,16 @@ describe('Structure Management Update Component', () => {
       expect(structureService.update).toHaveBeenCalledWith(structure);
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Tracking relationships identifiers', () => {
+    describe('trackStructureById', () => {
+      it('Should return tracked Structure primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackStructureById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
     });
   });
 });

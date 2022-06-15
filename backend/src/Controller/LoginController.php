@@ -22,7 +22,6 @@ class LoginController extends AbstractFOSRestController
         $parameters = json_decode($request->getContent(), true);
 
         
-
         $username = $parameters['login'];
         $password = $parameters['password'];
         $email = $parameters['email'];

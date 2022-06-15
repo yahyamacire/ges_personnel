@@ -104,4 +104,20 @@ class ProjetController extends AbstractFOSRestController
 
         return $this->handleView($this->view($projet));
     }
+
+    #[Rest\Delete('projets/{id}', name: 'api_delete_project', )]
+    public function delete(Projet $projet, ProjetRepository $projetRepository): Response
+    {
+       // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
+        $projetRepository->remove($projet, true);
+        
+
+        return new JsonResponse(
+            '{"sttaus": "ok"}',
+            Response::HTTP_OK,
+            ['content-type' => 'application/json']
+        );
+    }
 }
+
+

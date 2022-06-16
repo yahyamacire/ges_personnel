@@ -20,7 +20,7 @@ class Experience
     private $dateDebut;
 
     #[ORM\Column(type: 'date', nullable: true)]
-    private $datefin;
+    private $dateFin;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $description;
@@ -56,12 +56,12 @@ class Experience
 
     public function getDatefin(): ?\DateTimeInterface
     {
-        return $this->datefin;
+        return $this->dateFin;
     }
 
-    public function setDatefin(?\DateTimeInterface $datefin): self
+    public function setDatefin(?\DateTimeInterface $dateFin): self
     {
-        $this->datefin = $datefin;
+        $this->dateFin = $dateFin;
 
         return $this;
     }

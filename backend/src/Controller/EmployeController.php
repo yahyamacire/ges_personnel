@@ -43,8 +43,8 @@ class EmployeController extends AbstractFOSRestController
         $telephone = $parameters['telephone'];
         $dateRecrutement = $parameters['dateRecrutement'];
         $fonction = $parameters['fonction'];
-        $status = isset($parameters['status']) ? $parameters['photo'] : null ;
-        $domaine = isset($parameters['domaine']) ? $parameters['photo'] : null ;
+        $status = isset($parameters['status']) ? $parameters['status'] : null ;
+        $domaine = isset($parameters['domaine']) ? $parameters['domaine'] : null ;
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;

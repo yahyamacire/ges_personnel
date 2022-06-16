@@ -6,6 +6,7 @@ import { IStructure } from '../structure.model';
 @Component({
   selector: 'jhi-structure-detail',
   templateUrl: './structure-detail.component.html',
+  styleUrls: ['./structure-detail.scss'],
 })
 export class StructureDetailComponent implements OnInit {
   structure: IStructure | null = null;

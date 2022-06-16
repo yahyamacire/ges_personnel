@@ -34,7 +34,7 @@
               [ngValue]="structureOption.id === editForm.get('parent')!.value?.id ? editForm.get('parent')!.value : structureOption"
               *ngFor="let structureOption of parentsCollection; trackBy: trackStructureById"
             >
-              {{ structureOption.id }}
+              {{ structureOption.nom }}
             </option>
           </select>
         </div>

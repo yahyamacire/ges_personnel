@@ -26,7 +26,7 @@ class StructureController extends AbstractFOSRestController
     }
 
     #[Rest\Post('structures', name: 'api_new_structures', )]
-    public function new(Request $request, ManagerRegistry  $doctrine)
+    public function new(Request $request, ManagerRegistry  $doctrine, StructureRepository $structureRepository)
     {
 
         $parameters = json_decode($request->getContent(), true);
@@ -34,13 +34,24 @@ class StructureController extends AbstractFOSRestController
 
         $nom = $parameters['nom'];
         $type= $parameters['type'];
-        
+
+
+
+
 
         $structure = new Structure();
 
         $structure->setNom($nom);
         $structure->setType($type);
 
+
+        if(isset($parameters['parent'])){
+            $parent= $parameters['parent'];
+
+            $structureParente = $structureRepository->find($parent['id']);
+            $structure->setParent($structureParente);
+
+        }
        
 
 

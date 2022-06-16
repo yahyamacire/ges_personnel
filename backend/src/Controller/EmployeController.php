@@ -93,6 +93,8 @@ class EmployeController extends AbstractFOSRestController
     #[Rest\Get('employes/{id}', name: 'api_get_employe')]
     public function getFacture(Employe $employe)
     {
+
+        $employe->setPhoto(base64_encode(stream_get_contents($employe->getPhoto())));
         return $this->handleView($this->view($employe));
     }
 
@@ -112,8 +114,8 @@ class EmployeController extends AbstractFOSRestController
         $telephone = $parameters['telephone'];
         $dateRecrutement = $parameters['dateRecrutement'];
         $fonction = $parameters['fonction'];
-        $status = isset($parameters['status']) ? $parameters['photo'] : null ;
-        $domaine = isset($parameters['domaine']) ? $parameters['photo'] : null ;
+        $status = isset($parameters['status']) ? $parameters['status'] : null ;
+        $domaine = isset($parameters['domaine']) ? $parameters['domaine'] : null ;
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;

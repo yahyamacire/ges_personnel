@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ExperienceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
 class Experience
@@ -15,12 +16,14 @@ class Experience
 
     #[ORM\Column(type: 'string', length: 255)]
     private $entreprise;
-
     #[ORM\Column(type: 'date')]
+    #[Serializer\SerializedName("dateDebut")]
     private $dateDebut;
 
     #[ORM\Column(type: 'date', nullable: true)]
+   #[Serializer\SerializedName("dateFin")]
     private $dateFin;
+
 
     #[ORM\Column(type: 'string', length: 255)]
     private $description;
@@ -58,7 +61,7 @@ class Experience
     {
         return $this->dateFin;
     }
-
+   
     public function setDatefin(?\DateTimeInterface $dateFin): self
     {
         $this->dateFin = $dateFin;

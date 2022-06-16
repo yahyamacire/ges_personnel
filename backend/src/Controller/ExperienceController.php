@@ -2,49 +2,47 @@
 
 namespace App\Controller;
 
-use App\Entity\Projet;
-use App\Repository\DivisionRepository;
-use App\Repository\ProjetRepository;
+use App\Entity\Experience;
+use App\Repository\ExperienceRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Division;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 
 
-
 #[Route('/api/')]
-class ProjetController extends AbstractFOSRestController
+class ExperienceController extends AbstractFOSRestController
 {
-    #[Rest\Get('projets', name: 'api_list_projets')]
-    public function list(ProjetRepository $projetRepository)
+    #[Rest\Get('experiences', name: 'api_list_experiences')]
+    public function list(ExperienceRepository $experienceRepository)
     {
-        $list = $projetRepository->findAll();
+        $list = $experienceRepository->findAll();
         return $this->handleView($this->view($list));
     }
 
-    #[Rest\Post('projets', name: 'api_new_project', )]
+    #[Rest\Post('experiences', name: 'api_new_experience', )]
     public function new(Request $request, ManagerRegistry  $doctrine)
     {
 
         $parameters = json_decode($request->getContent(), true);
 
 
-        $nom = $parameters['nom'];
+        
+        $entreprise = $parameters['entreprise'];
         $dateDebut= $parameters['dateDebut'];
         $dateFin = $parameters['dateFin'];
         $description = $parameters['description'];
 
 
-        $projet = new Projet();
+        $experience = new Experience();
 
-        $projet->setNom($nom);
-        $projet->setDescription($description);
+        $experience->setEntreprise($entreprise);
+        $experience->setDescription($description);
 
         if($dateDebut != null) {
             $dateDebut = new DateTime($parameters['dateDebut']);
@@ -53,39 +51,40 @@ class ProjetController extends AbstractFOSRestController
             $dateFin = new DateTime($parameters['dateFin']);
         }
 
-        $projet->setDateDebut($dateDebut);
-        $projet->setDateFin($dateFin);
+        $experience->setDateDebut($dateDebut);
+        $experience->setDateFin($dateFin);
 
 
         $em = $doctrine->getManager();
 
-        $em->persist($projet);
+        $em->persist($experience);
         $em->flush();
 
-        return $this->handleView($this->view($projet));
+        return $this->handleView($this->view($experience));
     }
 
-    #[Rest\Get('projets/{id}', name: 'api_get_projet')]
-    public function getFacture(Projet $projet)
+    #[Rest\Get('experiences/{id}', name: 'api_get_experience')]
+    public function getFacture(Experience $experience)
     {
-        return $this->handleView($this->view($projet));
+        return $this->handleView($this->view($experience));
     }
 
-    #[Rest\Put('projets/{id}', name: 'api_edit_project', )]
-    public function edit(Request $request, ManagerRegistry  $doctrine, Projet $projet)
+    #[Rest\Put('experiences/{id}', name: 'api_edit_experience', )]
+    public function edit(Request $request, ManagerRegistry  $doctrine, Experience $experience)
     {
 
         $parameters = json_decode($request->getContent(), true);
 
 
-        $nom = $parameters['nom'];
+        
+        $entreprise = $parameters['entreprise'];
         $dateDebut= $parameters['dateDebut'];
         $dateFin = $parameters['dateFin'];
         $description = $parameters['description'];
 
 
-        $projet->setNom($nom);
-        $projet->setDescription($description);
+        $experience->setEntreprise($entreprise);
+        $experience->setDescription($description);
 
         if($dateDebut != null) {
             $dateDebut = new DateTime($parameters['dateDebut']);
@@ -94,23 +93,24 @@ class ProjetController extends AbstractFOSRestController
             $dateFin = new DateTime($parameters['dateFin']);
         }
 
-        $projet->setDateDebut($dateDebut);
-        $projet->setDateFin($dateFin);
+        $experience->setDateDebut($dateDebut);
+        $experience->setDateFin($dateFin);
+       
 
 
         $em = $doctrine->getManager();
 
-        $em->persist($projet);
+        $em->persist($experience);
         $em->flush();
 
-        return $this->handleView($this->view($projet));
+        return $this->handleView($this->view($experience));
     }
 
-    #[Rest\Delete('projets/{id}', name: 'api_delete_project', )]
-    public function delete(Projet $projet, ProjetRepository $projetRepository): Response
+    #[Rest\Delete('experiences/{id}', name: 'api_delete_experience', )]
+    public function delete(Experience $experience, ExperienceRepository $experienceRepository): Response
     {
        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
-        $projetRepository->remove($projet, true);
+        $experienceRepository->remove($experience, true);
         
 
         return new JsonResponse(
@@ -120,5 +120,7 @@ class ProjetController extends AbstractFOSRestController
         );
     }
 }
+
+
 
 

@@ -50,7 +50,6 @@ class EmployeController extends AbstractFOSRestController
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;
 
 
-
         $employe = new Employe();
         $employe->setNni($nni);
         $employe->setNom($nom);

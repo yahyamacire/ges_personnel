@@ -66,10 +66,14 @@ class Employe
     #[Serializer\SerializedName("user")]
     private $compte;
 
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: CompetenceLinguistique::class)]
+    private $competenceLinguistique;
+
 
     public function __construct()
     {
         $this->diplome = new ArrayCollection();
+        $this->competenceLinguistique = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -283,6 +287,36 @@ class Employe
     public function setCompte(?User $compte): self
     {
         $this->compte = $compte;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompetenceLinguistique>
+     */
+    public function getCompetenceLinguistique(): Collection
+    {
+        return $this->competenceLinguistique;
+    }
+
+    public function addCompetenceLinguistique(CompetenceLinguistique $competenceLinguistique): self
+    {
+        if (!$this->competenceLinguistique->contains($competenceLinguistique)) {
+            $this->competenceLinguistique[] = $competenceLinguistique;
+            $competenceLinguistique->setEmploye($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetenceLinguistique(CompetenceLinguistique $competenceLinguistique): self
+    {
+        if ($this->competenceLinguistique->removeElement($competenceLinguistique)) {
+            // set the owning side to null (unless already changed)
+            if ($competenceLinguistique->getEmploye() === $this) {
+                $competenceLinguistique->setEmploye(null);
+            }
+        }
 
         return $this;
     }

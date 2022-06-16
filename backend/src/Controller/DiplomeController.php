@@ -13,6 +13,8 @@ use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Entity\Employe;
+use App\Repository\EmployeRepository;
 
 
 #[Route('/api/')]
@@ -26,8 +28,8 @@ class DiplomeController extends AbstractFOSRestController
         $list = [];
 
         $user = $this->getUser();
-        if($user != null){
-            $list = $diplomeRepository->findBy(['employe' => $user->getEmployer()->getId()]);
+        if($user != null && $user->getEmploye() != null){
+            $list = $diplomeRepository->findBy(['employe' => $user->getEmploye()->getId()]);
         }
 
         return $this->handleView($this->view($list));
@@ -95,7 +97,7 @@ class DiplomeController extends AbstractFOSRestController
         $dp = isset($parameters['diplome']) ? $parameters['diplome'] : null;
 
 
-        $diplome = new Diplome();
+        
 
         $diplome->setLibelle($libelle);
         $diplome->setUniversite($universite);

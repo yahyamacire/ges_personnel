@@ -69,11 +69,26 @@ class Employe
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: CompetenceLinguistique::class)]
     private $competenceLinguistique;
 
+    #[ORM\ManyToMany(targetEntity: Projet::class, inversedBy: 'employes')]
+    private $projet;
+
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Competence::class)]
+    private $competence;
+
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Experience::class)]
+    private $experience;
+
+    #[ORM\ManyToOne(targetEntity: Structure::class, inversedBy: 'employes')]
+    private $structure;
+
 
     public function __construct()
     {
         $this->diplome = new ArrayCollection();
         $this->competenceLinguistique = new ArrayCollection();
+        $this->projet = new ArrayCollection();
+        $this->competence = new ArrayCollection();
+        $this->experience = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -317,6 +332,102 @@ class Employe
                 $competenceLinguistique->setEmploye(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjet(): Collection
+    {
+        return $this->projet;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projet->contains($projet)) {
+            $this->projet[] = $projet;
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        $this->projet->removeElement($projet);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Competence>
+     */
+    public function getCompetence(): Collection
+    {
+        return $this->competence;
+    }
+
+    public function addCompetence(Competence $competence): self
+    {
+        if (!$this->competence->contains($competence)) {
+            $this->competence[] = $competence;
+            $competence->setEmploye($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetence(Competence $competence): self
+    {
+        if ($this->competence->removeElement($competence)) {
+            // set the owning side to null (unless already changed)
+            if ($competence->getEmploye() === $this) {
+                $competence->setEmploye(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperience(): Collection
+    {
+        return $this->experience;
+    }
+
+    public function addExperience(Experience $experience): self
+    {
+        if (!$this->experience->contains($experience)) {
+            $this->experience[] = $experience;
+            $experience->setEmploye($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): self
+    {
+        if ($this->experience->removeElement($experience)) {
+            // set the owning side to null (unless already changed)
+            if ($experience->getEmploye() === $this) {
+                $experience->setEmploye(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getStructure(): ?Structure
+    {
+        return $this->structure;
+    }
+
+    public function setStructure(?Structure $structure): self
+    {
+        $this->structure = $structure;
 
         return $this;
     }

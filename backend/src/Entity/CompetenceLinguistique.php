@@ -19,6 +19,9 @@ class CompetenceLinguistique
     #[ORM\ManyToOne(targetEntity: Employe::class, inversedBy: 'competenceLinguistique')]
     private $employe;
 
+    #[ORM\ManyToOne(targetEntity: Langue::class, inversedBy: 'competencelinguistique')]
+    private $langue;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class CompetenceLinguistique
     public function setEmploye(?Employe $employe): self
     {
         $this->employe = $employe;
+
+        return $this;
+    }
+
+    public function getLangue(): ?Langue
+    {
+        return $this->langue;
+    }
+
+    public function setLangue(?Langue $langue): self
+    {
+        $this->langue = $langue;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjetRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -27,6 +29,14 @@ class Projet
 
     #[ORM\Column(type: 'text')]
     private $description;
+
+    #[ORM\ManyToMany(targetEntity: Employe::class, mappedBy: 'projet')]
+    private $employes;
+
+    public function __construct()
+    {
+        $this->employes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -77,6 +87,33 @@ class Projet
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Employe>
+     */
+    public function getEmployes(): Collection
+    {
+        return $this->employes;
+    }
+
+    public function addEmploye(Employe $employe): self
+    {
+        if (!$this->employes->contains($employe)) {
+            $this->employes[] = $employe;
+            $employe->addProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmploye(Employe $employe): self
+    {
+        if ($this->employes->removeElement($employe)) {
+            $employe->removeProjet($this);
+        }
 
         return $this;
     }

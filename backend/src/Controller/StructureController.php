@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Structure;
+use App\Entity\Employe;
+use App\Entity\User;
 use App\Repository\EmployeRepository;
 use App\Repository\StructureRepository;
 use DateTime;
@@ -143,6 +145,9 @@ class StructureController extends AbstractFOSRestController
     {
 
         $user = $this->getUser();
+        $employe = $user->getEmploye();
+        $structure =$employe->getStructure();
+
 
         // Recuperer employer par user
 

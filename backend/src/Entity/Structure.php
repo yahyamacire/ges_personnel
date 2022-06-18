@@ -123,6 +123,11 @@ class Structure
         return $this->employes;
     }
 
+    public function getEmploye(): ?Employe
+    {
+        return $this->employe;
+    }
+
     public function addEmploye(Employe $employe): self
     {
         if (!$this->employes->contains($employe)) {

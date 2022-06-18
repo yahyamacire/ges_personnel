@@ -27,8 +27,12 @@ class Structure
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private $structures;
 
+    #[ORM\OneToMany(mappedBy: 'structure', targetEntity: Employe::class)]
+    private $employes;
+
     public function __construct()
     {
+        $this->employes = new ArrayCollection();
         $this->structures = new ArrayCollection();
     }
 
@@ -86,6 +90,24 @@ class Structure
         if (!$this->structures->contains($structure)) {
             $this->structures[] = $structure;
             $structure->setParent($this);
+
+        }
+
+    }
+
+    /**
+     * @return Collection<int, Employe>
+     */
+    public function getEmployes(): Collection
+    {
+        return $this->employes;
+    }
+
+    public function addEmploye(Employe $employe): self
+    {
+        if (!$this->employes->contains($employe)) {
+            $this->employes[] = $employe;
+            $employe->setStructure($this);
         }
 
         return $this;
@@ -97,6 +119,18 @@ class Structure
             // set the owning side to null (unless already changed)
             if ($structure->getParent() === $this) {
                 $structure->setParent(null);
+            }
+
+        }
+
+    }
+
+    public function removeEmploye(Employe $employe): self
+    {
+        if ($this->employes->removeElement($employe)) {
+            // set the owning side to null (unless already changed)
+            if ($employe->getStructure() === $this) {
+                $employe->setStructure(null);
             }
         }
 

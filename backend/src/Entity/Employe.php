@@ -56,10 +56,10 @@ class Employe
     private $domaine;
 
     #[ORM\Column(type: 'blob', nullable: true)]
-    #[Serializer\SerializedName("photoStream")]
+    #[Serializer\SerializedName("photo")]
     private $photo;
 
-    #[Serializer\SerializedName("photo")]
+    #[Serializer\SerializedName("photoUrl")]
     private $photoUrl;
 
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Diplome::class)]

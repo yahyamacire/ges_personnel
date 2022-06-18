@@ -9,18 +9,20 @@
       src="../../../content/images/page/ghghgh-min-25.jpg"
     />
     <div class="u-align-left u-container-style u-group u-palette-1-dark-1 u-radius-25 u-shape-round u-group-1">
-      <div class="u-container-layout u-valign-bottom u-container-layout-1">
-        <h5 class="u-text u-text-default u-text-2">LISTES DES</h5>
-        <h1 class="u-text u-text-3">Employés de la structure</h1>
-        <p class="u-text u-text-body-alt-color u-text-4">
-          cliquez ici pour consulter les&nbsp;&nbsp;<a
-            href="https://www.freepik.com/photos/people"
-            class="u-border-1 u-border-active-palette-1-light-1 u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-border-white u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-link u-button-style u-none u-radius-0 u-text-body-alt-color u-top-left-radius-0 u-top-right-radius-0 u-btn-1"
-            target="_blank"
-            >profils<br />
-          </a>
-        </p>
-      </div>
+      <a [routerLink]="['/structure', structure.id, 'employes']">
+        <div class="u-container-layout u-valign-bottom u-container-layout-1">
+          <h5 class="u-text u-text-default u-text-2">LISTES DES</h5>
+          <h1 class="u-text u-text-3">Employés de la structure</h1>
+          <p class="u-text u-text-body-alt-color u-text-4">
+            cliquez ici pour consulter les&nbsp;&nbsp;<a
+              href="https://www.freepik.com/photos/people"
+              class="u-border-1 u-border-active-palette-1-light-1 u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-border-white u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-link u-button-style u-none u-radius-0 u-text-body-alt-color u-top-left-radius-0 u-top-right-radius-0 u-btn-1"
+              target="_blank"
+              >profils<br />
+            </a>
+          </p>
+        </div>
+      </a>
     </div>
     <div class="u-list u-list-1">
       <div class="u-repeater u-repeater-1">

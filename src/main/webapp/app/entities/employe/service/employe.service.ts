@@ -15,6 +15,7 @@ export type EntityArrayResponseType = HttpResponse<IEmploye[]>;
 @Injectable({ providedIn: 'root' })
 export class EmployeService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/employes');
+  protected resourceEmploesUrl = this.applicationConfigService.getEndpointFor('api/structures/employes');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -49,6 +50,12 @@ export class EmployeService {
     const options = createRequestOption(req);
     return this.http
       .get<IEmploye[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  listEmployes(structureId: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IEmploye[]>(`${this.resourceEmploesUrl}/${structureId}`, { observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

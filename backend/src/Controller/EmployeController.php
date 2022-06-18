@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Projet;
+use App\Entity\Structure;
 use App\Repository\EmployeRepository;
 use App\Repository\ProjetRepository;
 use DateTime;
@@ -21,10 +22,46 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 #[Route('/api/')]
 class EmployeController extends AbstractFOSRestController
 {
-    #[Rest\Get('employes', name: 'api_list_employes')]
+       #[Rest\Get('employes', name: 'api_list_employes')]
     public function list(EmployeRepository $employeRepository)
     {
         $list = $employeRepository->findAll();
+
+        foreach ($list as $employe){
+            if($employe->getPhoto() != null){
+
+
+                $content = '';
+                while(!feof($employe->getPhoto())){
+                    $content.= fread($employe->getPhoto(), 1024);
+                }
+                rewind($employe->getPhoto());
+
+                $employe->setPhoto($content);
+            }
+        }
+        return $this->handleView($this->view($list));
+    }
+
+    #[Rest\Get('structures/employes/{id}', name: 'api_list_structure_employes')]
+    public function listEmployerStructure(Structure $structure , EmployeRepository $employeRepository)
+    {
+
+        $list = $employeRepository->findBy(['structure' => $structure->getId()]);
+
+        foreach ($list as $employe){
+            if($employe->getPhoto() != null){
+
+
+                $content = '';
+                while(!feof($employe->getPhoto())){
+                    $content.= fread($employe->getPhoto(), 1024);
+                }
+                rewind($employe->getPhoto());
+
+                $employe->setPhoto($content);
+            }
+        }
         return $this->handleView($this->view($list));
     }
 
@@ -90,7 +127,7 @@ class EmployeController extends AbstractFOSRestController
     }
 
     #[Rest\Get('employes/{id}', name: 'api_get_employe')]
-    public function getFacture(Employe $employe)
+    public function getEmployes(Employe $employe)
     {
 
         if($employe->getPhoto() != null){
@@ -102,7 +139,7 @@ class EmployeController extends AbstractFOSRestController
             }
             rewind($employe->getPhoto());
                         
-            $employe->setPhotoUrl($content);
+            $employe->setPhoto($content);
         }
         return $this->handleView($this->view($employe));
     }

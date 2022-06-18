@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Structure;
+use App\Repository\EmployeRepository;
 use App\Repository\StructureRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
@@ -102,6 +103,50 @@ class StructureController extends AbstractFOSRestController
     #[Rest\Get('structures/{id}', name: 'api_get_structure')]
     public function getStructure(Structure $structure)
     {
+
+        if($structure->getImage() != null){
+
+
+            $content = '';
+            while(!feof($structure->getImage())){
+                $content.= fread($structure->getImage(), 1024);
+            }
+            rewind($structure->getImage());
+
+            $structure->setImage($content);
+        }
+
+        $structures = $structure->getStructures();
+
+        foreach ($structures as $sousStructures){
+            if($sousStructures->getImage() != null){
+
+
+                $content = '';
+                while(!feof($sousStructures->getImage())){
+                    $content.= fread($sousStructures->getImage(), 1024);
+                }
+                rewind($sousStructures->getImage());
+
+                $sousStructures->setImage($content);
+            }
+        }
+
+        $structure->setStructures($structures);
+
+        return $this->handleView($this->view($structure));
+    }
+
+
+    #[Rest\Get('structures-user', name: 'api_get_structure_user')]
+    public function structureUser(EmployeRepository $employeRepository)
+    {
+
+        $user = $this->getUser();
+
+        // Recuperer employer par user
+
+        // structure = emp->getStructure()
 
         if($structure->getImage() != null){
 

@@ -9,6 +9,8 @@ import { StructureRoutingResolveService } from './structure-routing-resolve.serv
 import { HomeDirecteurComponent } from '../../../home/home-directeur/home-directeur.component';
 import { DirectionsComponent } from '../../../home/directions/directions.component';
 import { DetailStructureComponent } from '../../../home/detail-structure/detail-structure.component';
+import { EmployeComponent } from '../../employe/list/employe.component';
+import { EmployesComponent } from '../../../home/employes/employes.component';
 
 const structureRoute: Routes = [
   {
@@ -30,6 +32,15 @@ const structureRoute: Routes = [
   {
     path: ':id/details',
     component: DetailStructureComponent,
+    resolve: {
+      structure: StructureRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+
+  {
+    path: ':id/employes',
+    component: EmployesComponent,
     resolve: {
       structure: StructureRoutingResolveService,
     },

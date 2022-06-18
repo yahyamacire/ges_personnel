@@ -8,9 +8,17 @@ import { HomeMinistreComponent } from './home-ministre/home-ministre.component';
 import { HomeDirecteurComponent } from './home-directeur/home-directeur.component';
 import { DirectionsComponent } from './directions/directions.component';
 import { DetailStructureComponent } from './detail-structure/detail-structure.component';
+import { EmployesComponent } from './employes/employes.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([HOME_ROUTE])],
-  declarations: [HomeComponent, HomeMinistreComponent, HomeDirecteurComponent, DirectionsComponent, DetailStructureComponent],
+  declarations: [
+    HomeComponent,
+    HomeMinistreComponent,
+    HomeDirecteurComponent,
+    DirectionsComponent,
+    DetailStructureComponent,
+    EmployesComponent,
+  ],
 })
 export class HomeModule {}

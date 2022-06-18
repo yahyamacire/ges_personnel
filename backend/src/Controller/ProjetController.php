@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Projet;
-use App\Repository\DivisionRepository;
 use App\Repository\ProjetRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,7 +10,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Division;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 

@@ -15,6 +15,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 
 
+
 #[Route('/api/')]
 class ProjetController extends AbstractFOSRestController
 {

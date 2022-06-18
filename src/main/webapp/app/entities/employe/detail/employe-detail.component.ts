@@ -48,4 +48,8 @@ export class EmployeDetailComponent implements OnInit {
       }
     });
   }
+
+  bypassSecurityTrust(photo: string): string {
+    return `data:image/png;base64,` + photo;
+  }
 }

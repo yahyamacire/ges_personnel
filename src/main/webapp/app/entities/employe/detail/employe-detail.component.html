@@ -69,9 +69,7 @@
         <dt><span jhiTranslate="gesEmployerApp.employe.photo">Photo</span></dt>
         <dd>
           <div *ngIf="employe.photo">
-            <img src="data:image/png;base64,{{ employe.photo }}" />
-            <a (click)="openFile(employe.photo, employe.photoContentType)" jhiTranslate="entity.action.open">open</a>
-            {{ employe.photoContentType }}, {{ byteSize(employe.photo) }}
+            <img [src]="bypassSecurityTrust(employe.photo)" />
           </div>
         </dd>
         <dt><span jhiTranslate="gesEmployerApp.employe.user">User</span></dt>

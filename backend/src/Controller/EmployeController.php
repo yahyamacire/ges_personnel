@@ -93,7 +93,17 @@ class EmployeController extends AbstractFOSRestController
     public function getFacture(Employe $employe)
     {
 
-        $employe->setPhoto(base64_encode(stream_get_contents($employe->getPhoto())));
+        if($employe->getPhoto() != null){
+
+
+            $content = '';
+            while(!feof($employe->getPhoto())){
+                $content.= fread($employe->getPhoto(), 1024);
+            }
+            rewind($employe->getPhoto());
+                        
+            $employe->setPhotoUrl($content);
+        }
         return $this->handleView($this->view($employe));
     }
 

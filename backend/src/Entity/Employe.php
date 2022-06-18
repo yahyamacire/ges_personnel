@@ -56,7 +56,11 @@ class Employe
     private $domaine;
 
     #[ORM\Column(type: 'blob', nullable: true)]
+    #[Serializer\SerializedName("photoStream")]
     private $photo;
+
+    #[Serializer\SerializedName("photo")]
+    private $photoUrl;
 
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Diplome::class)]
     #[Serializer\SerializedName("diplomes")]
@@ -320,4 +324,22 @@ class Employe
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoUrl()
+    {
+        return $this->photoUrl;
+    }
+
+    /**
+     * @param mixed $photoUrl
+     */
+    public function setPhotoUrl($photoUrl)
+    {
+        $this->photoUrl = $photoUrl;
+    }
+
+
 }

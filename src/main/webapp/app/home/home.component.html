@@ -37,13 +37,11 @@
 
 <div [ngSwitch]="account !== null">
   <div *ngSwitchCase="true">
-    <!--
     <jhi-home-ministre *jhiHasAnyAuthority="'ROLE_MINISTRE'"></jhi-home-ministre>
--->
 
-    <jhi-directions *jhiHasAnyAuthority="'ROLE_MINISTRE'"></jhi-directions>
+    <jhi-detail-structure *jhiHasAnyAuthority="'ROLE_MINISTRE'"></jhi-detail-structure>
 
-    <jhi-home-directeur *jhiHasAnyAuthority="'ROLE_DIRECTEUR'"></jhi-home-directeur>
+    <jhi-home-directeur *jhiHasAnyAuthority="'ROLE_DIRCTEUR'"></jhi-home-directeur>
   </div>
 
   <div class="home-page" *ngSwitchCase="false">

@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IStructure } from '../structure.model';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
   selector: 'jhi-structure-detail',
   templateUrl: './structure-detail.component.html',
-  styleUrls: ['./nicepage.css', './structure-detail.css'],
 })
 export class StructureDetailComponent implements OnInit {
   structure: IStructure | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ structure }) => {
@@ -19,7 +19,23 @@ export class StructureDetailComponent implements OnInit {
     });
   }
 
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    this.dataUtils.openFile(base64String, contentType);
+  }
+
   previousState(): void {
     window.history.back();
+  }
+
+  trackId(_index: number, item: IStructure): number {
+    return item.id!;
+  }
+
+  bypassSecurityTrust(image: string): string {
+    return `data:image/png;base64,` + image;
   }
 }

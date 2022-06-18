@@ -37,6 +37,9 @@
           <th scope="col" jhiSortBy="type">
             <span jhiTranslate="gesEmployerApp.structure.type">Type</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="image">
+            <span jhiTranslate="gesEmployerApp.structure.image">Image</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="parent.id">
             <span jhiTranslate="gesEmployerApp.structure.parent">Parent</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -50,6 +53,12 @@
           </td>
           <td>{{ structure.nom }}</td>
           <td jhiTranslate="{{ 'gesEmployerApp.Type.' + structure.type }}">{{ structure.type }}</td>
+          <td>
+            <a *ngIf="structure.image" (click)="openFile(structure.image, structure.imageContentType)" jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="structure.image">{{ structure.imageContentType }}, {{ byteSize(structure.image) }}</span>
+          </td>
           <td>
             <div *ngIf="structure.parent">
               <a [routerLink]="['/structure', structure.parent?.id, 'view']">{{ structure.parent?.nom }}</a>

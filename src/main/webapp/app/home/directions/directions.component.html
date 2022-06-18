@@ -15,44 +15,16 @@
     </div>
     <div class="u-list u-list-1">
       <div class="u-repeater u-repeater-1">
-        <div class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1">
-          <div class="u-container-layout u-similar-container u-container-layout-2">
-            <span class="u-file-icon u-icon u-icon-1"><img src=" ../../../content/images/page/1556231.png" alt="" /></span>
-            <h4 class="u-text u-text-default u-text-3">La direction des affaires juridiques</h4>
-          </div>
-        </div>
-
-        <div class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1">
-          <div class="u-container-layout u-similar-container u-container-layout-2">
-            <span class="u-file-icon u-icon u-icon-1"><img src=" ../../../content/images/page/1556231.png" alt="" /></span>
-            <h4 class="u-text u-text-default u-text-3">La direction des affaires juridiques</h4>
-          </div>
-        </div>
-        <div class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1">
-          <div class="u-container-layout u-similar-container u-container-layout-2">
-            <span class="u-file-icon u-icon u-icon-1"><img src=" ../../../content/images/page/1556231.png" alt="" /></span>
-            <h4 class="u-text u-text-default u-text-3">La direction des affaires juridiques</h4>
-          </div>
-        </div>
-
-        <div class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1">
-          <div class="u-container-layout u-similar-container u-container-layout-2">
-            <span class="u-file-icon u-icon u-icon-1"><img src=" ../../../content/images/page/1556231.png" alt="" /></span>
-            <h4 class="u-text u-text-default u-text-3">La direction des affaires juridiques</h4>
-          </div>
-        </div>
-        <div class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1">
-          <div class="u-container-layout u-similar-container u-container-layout-2">
-            <span class="u-file-icon u-icon u-icon-1"><img src=" ../../../content/images/page/1556231.png" alt="" /></span>
-            <h4 class="u-text u-text-default u-text-3">La direction des affaires juridiques</h4>
-          </div>
-        </div>
-
-        <div class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1">
-          <div class="u-container-layout u-similar-container u-container-layout-2">
-            <span class="u-file-icon u-icon u-icon-1"><img src=" ../../../content/images/page/1556231.png" alt="" /></span>
-            <h4 class="u-text u-text-default u-text-3">La direction des affaires juridiques</h4>
-          </div>
+        <div
+          *ngFor="let structure of structures; trackBy: trackId"
+          class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1"
+        >
+          <a [routerLink]="['/structure', structure.id, 'details']">
+            <div class="u-container-layout u-similar-container u-container-layout-2">
+              <span class="u-file-icon u-icon u-icon-1"><img *ngIf="structure.image" [src]="bypassSecurityTrust(structure.image)" /></span>
+              <h4 class="u-text u-text-default u-text-3">{{ structure.nom }}</h4>
+            </div>
+          </a>
         </div>
       </div>
     </div>

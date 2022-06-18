@@ -6,6 +6,9 @@ import { StructureComponent } from '../list/structure.component';
 import { StructureDetailComponent } from '../detail/structure-detail.component';
 import { StructureUpdateComponent } from '../update/structure-update.component';
 import { StructureRoutingResolveService } from './structure-routing-resolve.service';
+import { HomeDirecteurComponent } from '../../../home/home-directeur/home-directeur.component';
+import { DirectionsComponent } from '../../../home/directions/directions.component';
+import { DetailStructureComponent } from '../../../home/detail-structure/detail-structure.component';
 
 const structureRoute: Routes = [
   {
@@ -25,6 +28,14 @@ const structureRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
+    path: ':id/details',
+    component: DetailStructureComponent,
+    resolve: {
+      structure: StructureRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
     path: 'new',
     component: StructureUpdateComponent,
     resolve: {
@@ -38,6 +49,11 @@ const structureRoute: Routes = [
     resolve: {
       structure: StructureRoutingResolveService,
     },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'directions',
+    component: DirectionsComponent,
     canActivate: [UserRouteAccessService],
   },
 ];

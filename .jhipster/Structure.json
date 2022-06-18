@@ -13,6 +13,11 @@
       "fieldName": "type",
       "fieldType": "Type",
       "fieldValues": "Division,Service,Direction,Cabinet,Secretariat_Generale"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
     }
   ],
   "fluentMethods": true,

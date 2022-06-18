@@ -9,6 +9,7 @@ import { IStructure } from '../structure.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { StructureService } from '../service/structure.service';
 import { StructureDeleteDialogComponent } from '../delete/structure-delete-dialog.component';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
   selector: 'jhi-structure',
@@ -27,6 +28,7 @@ export class StructureComponent implements OnInit {
   constructor(
     protected structureService: StructureService,
     protected activatedRoute: ActivatedRoute,
+    protected dataUtils: DataUtils,
     protected router: Router,
     protected modalService: NgbModal
   ) {}
@@ -59,6 +61,14 @@ export class StructureComponent implements OnInit {
 
   trackId(_index: number, item: IStructure): number {
     return item.id!;
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    return this.dataUtils.openFile(base64String, contentType);
   }
 
   delete(structure: IStructure): void {

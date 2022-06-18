@@ -13,6 +13,7 @@ export type EntityArrayResponseType = HttpResponse<IStructure[]>;
 @Injectable({ providedIn: 'root' })
 export class StructureService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/structures');
+  protected resourceUrlDirections = this.applicationConfigService.getEndpointFor('api/directions');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -39,6 +40,11 @@ export class StructureService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IStructure[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  directions(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IStructure[]>(this.resourceUrlDirections, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

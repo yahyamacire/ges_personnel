@@ -24,6 +24,8 @@ describe('Structure Service', () => {
       id: 0,
       nom: 'AAAAAAA',
       type: Type.Division,
+      imageContentType: 'image/png',
+      image: 'AAAAAAA',
     };
   });
 
@@ -61,6 +63,7 @@ describe('Structure Service', () => {
           id: 1,
           nom: 'BBBBBB',
           type: 'BBBBBB',
+          image: 'BBBBBB',
         },
         elemDefault
       );
@@ -75,7 +78,12 @@ describe('Structure Service', () => {
     });
 
     it('should partial update a Structure', () => {
-      const patchObject = Object.assign({}, new Structure());
+      const patchObject = Object.assign(
+        {
+          image: 'BBBBBB',
+        },
+        new Structure()
+      );
 
       const returnedFromService = Object.assign(patchObject, elemDefault);
 
@@ -94,6 +102,7 @@ describe('Structure Service', () => {
           id: 1,
           nom: 'BBBBBB',
           type: 'BBBBBB',
+          image: 'BBBBBB',
         },
         elemDefault
       );
@@ -145,7 +154,7 @@ describe('Structure Service', () => {
       });
 
       it('should add only unique Structure to an array', () => {
-        const structureArray: IStructure[] = [{ id: 123 }, { id: 456 }, { id: 98923 }];
+        const structureArray: IStructure[] = [{ id: 123 }, { id: 456 }, { id: 97327 }];
         const structureCollection: IStructure[] = [{ id: 123 }];
         expectedResult = service.addStructureToCollectionIfMissing(structureCollection, ...structureArray);
         expect(expectedResult).toHaveLength(3);

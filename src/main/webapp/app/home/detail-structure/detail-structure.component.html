@@ -1,0 +1,48 @@
+<div class="detail-structure" *ngIf="structure">
+  <section class="u-clearfix u-grey-5 u-section-1" id="carousel_86f6">
+    <h2 class="u-text u-text-1">{{ structure.nom }}</h2>
+    <div class="u-bottom-right-radius-25 u-palette-5-light-2 u-shape u-shape-round u-shape-1"></div>
+    <img
+      class="u-image u-image-round u-radius-25 u-image-1"
+      data-image-width="1620"
+      data-image-height="1080"
+      src="../../../content/images/page/ghghgh-min-25.jpg"
+    />
+    <div class="u-align-left u-container-style u-group u-palette-1-dark-1 u-radius-25 u-shape-round u-group-1">
+      <div class="u-container-layout u-valign-bottom u-container-layout-1">
+        <h5 class="u-text u-text-default u-text-2">LISTES DES</h5>
+        <h1 class="u-text u-text-3">Employés de la structure</h1>
+        <p class="u-text u-text-body-alt-color u-text-4">
+          cliquez ici pour consulter les&nbsp;&nbsp;<a
+            href="https://www.freepik.com/photos/people"
+            class="u-border-1 u-border-active-palette-1-light-1 u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-border-white u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-link u-button-style u-none u-radius-0 u-text-body-alt-color u-top-left-radius-0 u-top-right-radius-0 u-btn-1"
+            target="_blank"
+            >profils<br />
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="u-list u-list-1">
+      <div class="u-repeater u-repeater-1">
+        <div
+          *ngFor="let sousStructures of structure.structures; trackBy: trackId"
+          class="u-align-left u-container-style u-list-item u-radius-25 u-repeater-item u-shape-round u-white u-list-item-1"
+        >
+          <a [routerLink]="['/structure', sousStructures.id, 'details']">
+            <div class="u-container-layout u-similar-container u-container-layout-2">
+              <span class="u-file-icon u-icon u-icon-1">
+                <img *ngIf="sousStructures.image" [src]="bypassSecurityTrust(sousStructures.image)" />
+              </span>
+              <h6 class="u-custom-font u-font-pt-sans u-text u-text-palette-1-base u-text-5">{{ sousStructures.nom }}</h6>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="u-container-style u-group u-palette-1-dark-2 u-radius-25 u-shape-round u-group-2">
+      <div class="u-container-layout u-valign-middle u-container-layout-6">
+        <h5 class="u-text u-text-9"><span style="font-size: 2.5rem">Chef de la structure</span>&nbsp;</h5>
+      </div>
+    </div>
+  </section>
+</div>

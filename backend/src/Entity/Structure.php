@@ -88,6 +88,11 @@ class Structure
         return $this->structures;
     }
 
+    public function setStructures($strctures): Collection
+    {
+        return $this->structures = $strctures;
+    }
+
     public function addStructure(self $structure): self
     {
         if (!$this->structures->contains($structure)) {
@@ -151,4 +156,6 @@ class Structure
 
         return $this;
     }
+
+
 }

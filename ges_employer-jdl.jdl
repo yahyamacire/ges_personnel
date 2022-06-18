@@ -60,6 +60,7 @@ entity Experience {
 entity Structure {
 	nom String
     type Type
+    image Blob
 }
 
 enum Type {

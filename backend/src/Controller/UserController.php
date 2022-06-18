@@ -12,21 +12,28 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('api/')]
+#[Route('/api/')]
 class UserController extends AbstractFOSRestController
 {
-    #[Route('admin/users')]
+    #[Rest\Get('admin/users', name: 'api_get_users')]
     public function users(UserRepository $userRepository)
     {
         $list = $userRepository->findAll();
         return $this->handleView($this->view($list));
     }
 
-    #[Route\Post('admin/users')]
+    #[Rest\Get('admin/users/{username}', name: 'api_get_user')]
+    public function user(User $user)
+    {
+        return $this->handleView($this->view($user));
+    }
+
+
+    #[Rest\Post('admin/users', name: 'api_create_user')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine)
     {
 
@@ -75,7 +82,7 @@ class UserController extends AbstractFOSRestController
 
     }
 
-    #[Route\Put('admin/users')]
+    #[Rest\Put('admin/users', name: 'api_edit_user')]
     public function update(Request $request, UserRepository $repository, ManagerRegistry $doctrine)
     {
 
@@ -119,13 +126,7 @@ class UserController extends AbstractFOSRestController
     }
 
 
-    /**
-     * @Rest\Post("/account/change-password")
-     *
-     * @return Response
-     * @throws \Exception
-     */
-
+    #[Rest\Post('account/change-password', name: 'api_user_change_pass')]
     public function change(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $em = $this->getDoctrine()->getManager();
@@ -164,7 +165,7 @@ class UserController extends AbstractFOSRestController
     }
 
 
-    #[Route('authorities')]
+    #[Rest\Get('authorities', name: 'api_authorities')]
     public function authorities(AuthorityRepository $repository)
     {
         $data = $repository->findAll();
@@ -175,17 +176,8 @@ class UserController extends AbstractFOSRestController
         return $this->handleView($this->view($authorities));
     }
 
-    #[Route\Get('admin/users/{username}')]
-    public function user(User $user)
-    {
-        return $this->handleView($this->view($user));
-    }
 
-    /**
-     * @Rest\Delete("/admin/users/{username}")
-     *
-     * @return Response
-     */
+    #[Rest\Delete('admin/users/{username}', name: 'api_delete_user')]
     public function delete(User $user)
     {
         $em = $this->getDoctrine()->getManager();

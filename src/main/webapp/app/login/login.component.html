@@ -1,3 +1,5 @@
+<!--
+
 <div>
   <div class="d-flex justify-content-center">
     <div class="col-lg-6 col-md-8 col-sm-10">
@@ -51,6 +53,56 @@
       <div class="alert alert-warning">
         <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
         <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="login-page">
+  <div class="container" id="container">
+    <div class="form-container sign-in-container">
+      <
+      <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
+        <h1>se connecter</h1>
+
+        <span>veuiller remplir vos données</span>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username"
+          placeholder="{{ 'global.form.username.placeholder' | translate }}"
+          formControlName="username"
+          #username
+          data-cy="username"
+        />
+
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          placeholder="{{ 'login.form.password.placeholder' | translate }}"
+          formControlName="password"
+          data-cy="password"
+        />
+
+        <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button" data-cy="submit">Sign in</button>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>veuiller remplir vos données</h1>
+          <p></p>
+          <button class="ghost" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>pas de compte actuel!</h1>
+          <p>créer un nouveau</p>
+          <button class="ghost" id="signUp">Sign Up</button>
+        </div>
       </div>
     </div>
   </div>

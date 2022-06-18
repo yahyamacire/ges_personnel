@@ -1,3 +1,4 @@
+<!--
 <div class="row">
   <div class="col-md-3">
     <span class="hipster img-fluid rounded"></span>
@@ -29,5 +30,66 @@
         <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
       </div>
     </div>
+  </div>
+</div>
+
+-->
+
+<div [ngSwitch]="account !== null">
+  <div *ngSwitchCase="true">
+    <!--
+    <jhi-home-ministre *jhiHasAnyAuthority="'ROLE_MINISTRE'"></jhi-home-ministre>
+-->
+
+    <jhi-directions *jhiHasAnyAuthority="'ROLE_MINISTRE'"></jhi-directions>
+
+    <jhi-home-directeur *jhiHasAnyAuthority="'ROLE_DIRECTEUR'"></jhi-home-directeur>
+  </div>
+
+  <div class="home-page" *ngSwitchCase="false">
+    <section class="u-align-center u-clearfix u-grey-5 u-valign-middle-sm u-section-1" id="carousel_e58b">
+      <div class="u-custom-color-2 u-shape u-shape-rectangle u-shape-1"></div>
+      <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
+        <div class="u-gutter-0 u-layout">
+          <div class="u-layout-col">
+            <div class="u-size-60">
+              <div class="u-layout-row">
+                <div
+                  class="u-align-center u-container-style u-layout-cell u-left-cell u-shape-rectangle u-size-26-xl u-size-27-lg u-size-27-md u-size-27-sm u-size-27-xs u-white u-layout-cell-1"
+                >
+                  <div class="u-container-layout u-container-layout-1">
+                    <h2 class="u-text u-text-1" data-animation-name="pulse" data-animation-duration="750" data-animation-direction="">
+                      BIENVENUE
+                    </h2>
+                    <p class="u-text u-text-2">
+                      Velit scelerisque in dictum non consectetur a erat. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper.
+                      Dictum sit amet justo donec enim diam vulputate ut. Velit egestas dui id ornare arcu odio. Tellus pellentesque eu
+                      tincidunt tortor aliquam.
+                    </p>
+                    <a
+                      (click)="login()"
+                      class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-palette-1-light-1 u-radius-50 u-btn-1"
+                      >SE CONNECTER<br />
+                    </a>
+                    <p class="u-text u-text-3"><a routerLink="account/register">S'INSCRIRE</a></p>
+                  </div>
+                </div>
+                <div
+                  class="u-container-style u-image u-image-default u-layout-cell u-right-cell u-size-33-lg u-size-33-md u-size-33-sm u-size-33-xs u-size-34-xl u-image-1"
+                  data-image-width="1200"
+                  data-image-height="1048"
+                  data-animation-name="pulse"
+                  data-animation-duration="1250"
+                  data-animation-direction=""
+                  data-animation-delay="0"
+                >
+                  <div class="u-container-layout u-valign-top u-container-layout-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>

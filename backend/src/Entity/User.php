@@ -19,6 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Serializer\SerializedName("login")]
     private $username;
 
     #[ORM\Column(type: 'json')]
@@ -33,6 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
+    #[Serializer\SerializedName("activated")]
     private $active;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

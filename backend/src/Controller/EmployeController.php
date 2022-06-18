@@ -161,6 +161,7 @@ class EmployeController extends AbstractFOSRestController
 
         return $this->handleView($this->view($employe));
     }
+
     #[Rest\Delete('employes/{id}', name: 'api_delete_employe', )]
     public function delete(Employe $employe, EmployeRepository $employeRepository): Response
     {

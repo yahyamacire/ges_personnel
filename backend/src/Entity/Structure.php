@@ -30,6 +30,9 @@ class Structure
     #[ORM\OneToMany(mappedBy: 'structure', targetEntity: Employe::class)]
     private $employes;
 
+    #[ORM\Column(type: 'blob', nullable: true)]
+    private $image;
+
     public function __construct()
     {
         $this->employes = new ArrayCollection();
@@ -95,6 +98,18 @@ class Structure
 
     }
 
+    public function removeStructure(self $structure): self
+    {
+        if ($this->structures->removeElement($structure)) {
+            // set the owning side to null (unless already changed)
+            if ($structure->getParent() === $this) {
+                $structure->setParent(null);
+            }
+
+        }
+
+    }
+
     /**
      * @return Collection<int, Employe>
      */
@@ -113,18 +128,6 @@ class Structure
         return $this;
     }
 
-    public function removeStructure(self $structure): self
-    {
-        if ($this->structures->removeElement($structure)) {
-            // set the owning side to null (unless already changed)
-            if ($structure->getParent() === $this) {
-                $structure->setParent(null);
-            }
-
-        }
-
-    }
-
     public function removeEmploye(Employe $employe): self
     {
         if ($this->employes->removeElement($employe)) {
@@ -133,6 +136,18 @@ class Structure
                 $employe->setStructure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

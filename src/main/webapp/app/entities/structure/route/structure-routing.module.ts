@@ -11,6 +11,8 @@ import { DirectionsComponent } from '../../../home/directions/directions.compone
 import { DetailStructureComponent } from '../../../home/detail-structure/detail-structure.component';
 import { EmployeComponent } from '../../employe/list/employe.component';
 import { EmployesComponent } from '../../../home/employes/employes.component';
+import { CabinetComponent } from 'app/home/cabinet/cabinet.component';
+import { SecretariatComponent } from 'app/home/secretariat/secretariat.component';
 
 const structureRoute: Routes = [
   {
@@ -65,6 +67,16 @@ const structureRoute: Routes = [
   {
     path: 'directions',
     component: DirectionsComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'cabinet',
+    component: CabinetComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'secretariat',
+    component: SecretariatComponent,
     canActivate: [UserRouteAccessService],
   },
 ];

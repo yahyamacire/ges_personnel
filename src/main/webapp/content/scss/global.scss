@@ -879,8 +879,8 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
 
   button {
     border-radius: 20px;
-    border: 1px solid #bae1a3;
-    background-color: #bae1a3;
+    border: 1px solid #e7e9f0;
+    background-color: #1332888c;
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
@@ -994,9 +994,9 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 
   .overlay {
-    background: #bae1a3;
-    background: -webkit-linear-gradient(to right, #bae1a3, #9fbe8d);
-    background: linear-gradient(to right, #bae1a3, #9fbe8d);
+    background: #090f1b;
+    background: -webkit-linear-gradient(to right, #9b9ad0, #7a76c7);
+    background: linear-gradient(to right, #04040c8c, #1332888c);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;

@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Structure;
+use App\Entity\Employe;
+use App\Entity\User;
 use App\Repository\EmployeRepository;
+use App\Repository\UserRepository;
 use App\Repository\StructureRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
@@ -138,11 +141,14 @@ class StructureController extends AbstractFOSRestController
     }
 
 
-    #[Rest\Get('structures-user', name: 'api_get_structure_user')]
+    #[Rest\Get('structureUser', name: 'api_get_structure_user')]
     public function structureUser(EmployeRepository $employeRepository)
     {
 
         $user = $this->getUser();
+        $employe = $user->$employeRepository->getEmploye();
+        $structure =$employe->getStructure();
+
 
         // Recuperer employer par user
 
@@ -180,7 +186,36 @@ class StructureController extends AbstractFOSRestController
 
         return $this->handleView($this->view($structure));
     }
+    
+    #[Rest\Get('structureSG', name: 'api_get_structure_sg')]
+    public function structureSG(StructureRepository $structureRepository)
+    {
 
+        $structure= $structureRepository->findBy([
+            'type' => 'Secretariat_Generale'
+        ]);
+       
+       
+
+
+        foreach ($structure as $structure){
+            if($structure->getImage() != null){
+
+
+                $content = '';
+                while(!feof($structure->getImage())){
+                    $content.= fread($structure->getImage(), 1024);
+                }
+                rewind($structure->getImage());
+
+                $structure->setImage($content);
+            }
+        }
+        return $this->handleView($this->view($structure));
+    }
+
+
+    
     #[Rest\Put('structures/{id}', name: 'api_edit_structure', )]
     public function edit(Request $request, ManagerRegistry  $doctrine, Structure $structure)
     {

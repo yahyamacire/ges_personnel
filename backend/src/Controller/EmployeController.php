@@ -85,6 +85,7 @@ class EmployeController extends AbstractFOSRestController
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;
+        
 
 
         $employe = new Employe();
@@ -100,6 +101,7 @@ class EmployeController extends AbstractFOSRestController
         $employe->setFonction($fonction);
         $employe->setDomaine($domaine);
         $employe->setPhoto($photo);
+        
 
 
         if($dateNaissance != null) {
@@ -114,8 +116,9 @@ class EmployeController extends AbstractFOSRestController
 
 
         $user = $this->getUser();
-
         $employe->setCompte($user);
+
+       
 
 
         $em = $doctrine->getManager();
@@ -165,6 +168,7 @@ class EmployeController extends AbstractFOSRestController
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;
+        
 
 
         $employe->setNni($nni);
@@ -179,6 +183,7 @@ class EmployeController extends AbstractFOSRestController
         $employe->setFonction($fonction);
         $employe->setDomaine($domaine);
         $employe->setPhoto($photo);
+       
 
         if($dateNaissance != null) {
             $dateNaissance = new DateTime($parameters['dateNaissance']);

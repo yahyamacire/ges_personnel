@@ -244,7 +244,7 @@
               [ngValue]="getSelectedProjet(projetOption, editForm.get('projets')!.value)"
               *ngFor="let projetOption of projetsSharedCollection; trackBy: trackProjetById"
             >
-              {{ projetOption.id }}
+              {{ projetOption.nom }}
             </option>
           </select>
         </div>
@@ -257,7 +257,7 @@
               [ngValue]="structureOption.id === editForm.get('structure')!.value?.id ? editForm.get('structure')!.value : structureOption"
               *ngFor="let structureOption of structuresSharedCollection; trackBy: trackStructureById"
             >
-              {{ structureOption.id }}
+              {{ structureOption.nom }}
             </option>
           </select>
         </div>

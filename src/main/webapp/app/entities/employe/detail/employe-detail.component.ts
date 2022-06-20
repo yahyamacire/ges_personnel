@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'jhi-employe-detail',
   templateUrl: './employe-detail.component.html',
+  styleUrls: ['./employe-detail.scss'],
 })
 export class EmployeDetailComponent implements OnInit {
   employe: IEmploye | null = null;

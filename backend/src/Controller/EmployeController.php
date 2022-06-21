@@ -137,6 +137,33 @@ class EmployeController extends AbstractFOSRestController
 
         return $this->handleView($this->view($employe));
     }
+    #[Rest\Get('employesss/{fonction}', name: 'api_get_employe_fonction')]
+    public function getEmployefonction(Employe $employe, EmployeRepository $employeRepository)
+    {
+            
+
+        
+        $employes=$employeRepository->findBy('fonction');
+        
+        $list = $employes;
+
+    foreach ($list as $employe){
+       if($employe->getPhoto() != null){
+
+
+            $content = '';
+            while(!feof($employe->getPhoto())){
+                $content.= fread($employe->getPhoto(), 1024);
+            }
+            rewind($employe->getPhoto());
+                        
+            $employe->setPhoto($content);
+        }
+        return $this->handleView($this->view($employes));
+    }
+
+}
+
 
     #[Rest\Get('employes/{id}', name: 'api_get_employe')]
     public function getEmployes(Employe $employe)
@@ -207,7 +234,10 @@ class EmployeController extends AbstractFOSRestController
         if(isset($parameters['structure'])){
             $structure= $parameters['structure'];
 
+            
+
             $structure = $structureRepository->find($structure['id']);
+
             $employe->setStructure($structure);
 
         }
@@ -217,8 +247,18 @@ class EmployeController extends AbstractFOSRestController
         $em->persist($employe);
         $em->flush();
 
+
+
         return $this->handleView($this->view($employe));
     }
+
+
+
+
+
+   
+
+
 
     #[Rest\Delete('employes/{id}', name: 'api_delete_employe', )]
     public function delete(Employe $employe, EmployeRepository $employeRepository): Response

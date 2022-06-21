@@ -17,14 +17,13 @@ export class SecretariatComponent implements OnInit {
   ngOnInit(): void {
     
     this.structureService.structureSG().subscribe({
-<<<<<<< HEAD
+
       next: (res: HttpResponse<IStructure>) => {
         this.structure= res.body;
         
-=======
-      next: (res: HttpResponse<IStructure[]>) => {
-        this.structures = res.body ?? [];
->>>>>>> 05a551c178118e44a4704264e78be580d80d1b19
+
+      
+
       },
     });
   }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\DivisionRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Division;
@@ -11,10 +12,10 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 
 class DefaultController extends AbstractFOSRestController
 {
-    #[Route('/api/divisions', name: 'app_divisions')]
-    public function list(DivisionRepository $divisionRepository)
+    #[Route('/management/info', name: 'app_divisions')]
+    public function info()
     {
-        $list = $divisionRepository->findAll();
-        return $this->handleView($this->view($list));
+
+        return new JsonResponse();
     }
 }

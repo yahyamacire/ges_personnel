@@ -56,8 +56,6 @@ export class EmployeUpdateComponent implements OnInit {
     domaine: [],
     photo: [],
     photoContentType: [],
-    user: [],
-    projets: [],
     structure: [],
   });
 
@@ -175,8 +173,6 @@ export class EmployeUpdateComponent implements OnInit {
       domaine: employe.domaine,
       photo: employe.photo,
       photoContentType: employe.photoContentType,
-      user: employe.user,
-      projets: employe.projets,
       structure: employe.structure,
     });
 
@@ -192,22 +188,6 @@ export class EmployeUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
-    this.userService
-      .query()
-      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
-      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value)))
-      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
-
-    this.projetService
-      .query()
-      .pipe(map((res: HttpResponse<IProjet[]>) => res.body ?? []))
-      .pipe(
-        map((projets: IProjet[]) =>
-          this.projetService.addProjetToCollectionIfMissing(projets, ...(this.editForm.get('projets')!.value ?? []))
-        )
-      )
-      .subscribe((projets: IProjet[]) => (this.projetsSharedCollection = projets));
-
     this.structureService
       .query()
       .pipe(map((res: HttpResponse<IStructure[]>) => res.body ?? []))
@@ -242,8 +222,6 @@ export class EmployeUpdateComponent implements OnInit {
       domaine: this.editForm.get(['domaine'])!.value,
       photoContentType: this.editForm.get(['photoContentType'])!.value,
       photo: this.editForm.get(['photo'])!.value,
-      user: this.editForm.get(['user'])!.value,
-      projets: this.editForm.get(['projets'])!.value,
       structure: this.editForm.get(['structure'])!.value,
     };
   }

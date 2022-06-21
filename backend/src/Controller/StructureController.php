@@ -26,14 +26,14 @@ class StructureController extends AbstractFOSRestController
     public function list(StructureRepository $structureRepository)
     {
         $structures = $structureRepository->findAll();
-        
-        foreach ($structures as $structure){
-            if($structure->getImage() != null){
+
+        foreach ($structures as $structure) {
+            if ($structure->getImage() != null) {
 
 
                 $content = '';
-                while(!feof($structure->getImage())){
-                    $content.= fread($structure->getImage(), 1024);
+                while (!feof($structure->getImage())) {
+                    $content .= fread($structure->getImage(), 1024);
                 }
                 rewind($structure->getImage());
 
@@ -44,17 +44,16 @@ class StructureController extends AbstractFOSRestController
     }
 
 
-    
     #[Rest\Post('structures', name: 'api_new_structures', )]
-    public function new(Request $request, ManagerRegistry  $doctrine, StructureRepository $structureRepository)
+    public function new(Request $request, ManagerRegistry $doctrine, StructureRepository $structureRepository)
     {
 
         $parameters = json_decode($request->getContent(), true);
 
 
         $nom = $parameters['nom'];
-        $type= isset($parameters['type']) ? $parameters['type'] : null;
-        $image= isset($parameters['image']) ? $parameters['image'] : null;
+        $type = isset($parameters['type']) ? $parameters['type'] : null;
+        $image = isset($parameters['image']) ? $parameters['image'] : null;
 
 
         $structure = new Structure();
@@ -64,14 +63,13 @@ class StructureController extends AbstractFOSRestController
         $structure->setImage($image);
 
 
-        if(isset($parameters['parent'])){
-            $parent= $parameters['parent'];
+        if (isset($parameters['parent'])) {
+            $parent = $parameters['parent'];
 
             $structureParente = $structureRepository->find($parent['id']);
             $structure->setParent($structureParente);
 
         }
-
 
 
         $em = $doctrine->getManager();
@@ -90,14 +88,14 @@ class StructureController extends AbstractFOSRestController
             'type' => 'Direction'
         ]);
 
-        foreach ($structures as $structure){
+        foreach ($structures as $structure) {
 
-            if($structure->getImage() != null){
+            if ($structure->getImage() != null) {
 
 
                 $content = '';
-                while(!feof($structure->getImage())){
-                    $content.= fread($structure->getImage(), 1024);
+                while (!feof($structure->getImage())) {
+                    $content .= fread($structure->getImage(), 1024);
                 }
                 rewind($structure->getImage());
 
@@ -112,49 +110,48 @@ class StructureController extends AbstractFOSRestController
     public function structureSG(StructureRepository $structureRepository, EmployeRepository $employeRepository)
     {
 
-        $structure= $structureRepository->findOneBy([
+        $structure = $structureRepository->findOneBy([
             'type' => 'Secretariat_Generale'
         ]);
-       
-       
-            if($structure->getImage() != null){
 
 
-                $content = '';
-                while(!feof($structure->getImage())){
-                    $content.= fread($structure->getImage(), 1024);
-                }
-                rewind($structure->getImage());
+        if ($structure->getImage() != null) {
 
-                $structure->setImage($content);
+
+            $content = '';
+            while (!feof($structure->getImage())) {
+                $content .= fread($structure->getImage(), 1024);
             }
-            $employe = null;
-       
-                $employe = $employeRepository -> findOneBy ([
-                    'structure'=>  $structure->getId(),
-                    'fonction' => 'SG' 
-                ]);
-                if($employe != null){
-                    $chef =$employe->getNom().' '.$employe->getPrenom();
-                    $structure->setChef($chef);
-            
-                }
-        
+            rewind($structure->getImage());
+
+            $structure->setImage($content);
+        }
+        $employe = null;
+
+        $employe = $employeRepository->findOneBy([
+            'structure' => $structure->getId(),
+            'fonction' => 'SG'
+        ]);
+        if ($employe != null) {
+            $chef = $employe->getNom() . ' ' . $employe->getPrenom();
+            $structure->setChef($chef);
+
+        }
+
         return $this->handleView($this->view($structure));
     }
-
 
 
     #[Rest\Get('structures/{id}', name: 'api_get_structure')]
     public function getStructure(Structure $structure, EmployeRepository $employeRepository)
     {
 
-        if($structure->getImage() != null){
+        if ($structure->getImage() != null) {
 
 
             $content = '';
-            while(!feof($structure->getImage())){
-                $content.= fread($structure->getImage(), 1024);
+            while (!feof($structure->getImage())) {
+                $content .= fread($structure->getImage(), 1024);
             }
             rewind($structure->getImage());
 
@@ -164,14 +161,13 @@ class StructureController extends AbstractFOSRestController
         $structures = $structure->getStructures();
 
 
-
-        foreach ($structures as $sousStructures){
-            if($sousStructures->getImage() != null){
+        foreach ($structures as $sousStructures) {
+            if ($sousStructures->getImage() != null) {
 
 
                 $content = '';
-                while(!feof($sousStructures->getImage())){
-                    $content.= fread($sousStructures->getImage(), 1024);
+                while (!feof($sousStructures->getImage())) {
+                    $content .= fread($sousStructures->getImage(), 1024);
                 }
                 rewind($sousStructures->getImage());
 
@@ -183,111 +179,155 @@ class StructureController extends AbstractFOSRestController
 
 
         $employe = null;
-       switch($structure->getType()) {
-            case 'Direction': 
-                $employe = $employeRepository -> findOneBy ([
-                    'structure'=>  $structure->getId(),
-                    'fonction' => 'DIRECTEUR' 
+        switch ($structure->getType()) {
+            case 'Direction':
+                $employe = $employeRepository->findOneBy([
+                    'structure' => $structure->getId(),
+                    'fonction' => 'DIRECTEUR'
                 ]);
-            Break;
-            case 'Secretariat_Generale': 
-                $employe = $employeRepository-> findOneBy([
-                    'structure'=> $structure->getId(),
-                    'fonction' => 'SG' 
+                Break;
+            case 'Secretariat_Generale':
+                $employe = $employeRepository->findOneBy([
+                    'structure' => $structure->getId(),
+                    'fonction' => 'SG'
                 ]);
-            Break;
-            case 'Service': 
-                $employe = $employeRepository-> findOneBy ([ 
-                    'structure'=> $structure->getId() ,
-                    'fonction' => 'CHEF_SERVICE' 
+                Break;
+            case 'Service':
+                $employe = $employeRepository->findOneBy([
+                    'structure' => $structure->getId(),
+                    'fonction' => 'CHEF_SERVICE'
                 ]);
-            Break;
-            case 'Division': 
-                $employe = $employeRepository-> findOneBy([
-                    'structure'=> $structure->getId(),
-                    'fonction' => 'CHEF_DIVISION' 
+                Break;
+            case 'Division':
+                $employe = $employeRepository->findOneBy([
+                    'structure' => $structure->getId(),
+                    'fonction' => 'CHEF_DIVISION'
                 ]);
+
+        }
+
+        if ($employe != null) {
+            $chef = $employe->getNom() . ' ' . $employe->getPrenom();
+            $structure->setChef($chef);
+
+        }
+
+        return $this->handleView($this->view($structure));
 
     }
 
-    if($employe != null){
-        $chef =$employe->getNom().' '.$employe->getPrenom();
-        $structure->setChef($chef);
-
-    }
-
-    return $this->handleView($this->view($structure));
-
-    }
-
-    
 
     #[Rest\Get('structureUser', name: 'api_get_structure_user')]
     public function structureUser(EmployeRepository $employeRepository)
     {
 
         $user = $this->getUser();
-        $employe = $user->$employeRepository->getEmploye();
-        $structure =$employe->getStructure();
+        $employe = $user->getEmploye();
+
+        $structure = null;
+
+        if($employe != null){
+            $structure = $employe->getStructure();
+
+            if($structure != null){
 
 
-        // Recuperer employer par user
+                $employeChef = null;
+                switch ($structure->getType()) {
+                    case 'Direction':
+                        $employeChef = $employeRepository->findOneBy([
+                            'structure' => $structure->getId(),
+                            'fonction' => 'DIRECTEUR'
+                        ]);
+                        Break;
+                    case 'Secretariat_Generale':
+                        $employeChef = $employeRepository->findOneBy([
+                            'structure' => $structure->getId(),
+                            'fonction' => 'SG'
+                        ]);
+                        Break;
+                    case 'Service':
+                        $employeChef = $employeRepository->findOneBy([
+                            'structure' => $structure->getId(),
+                            'fonction' => 'CHEF_SERVICE'
+                        ]);
+                        Break;
+                    case 'Division':
+                        $employeChef = $employeRepository->findOneBy([
+                            'structure' => $structure->getId(),
+                            'fonction' => 'CHEF_DIVISION'
+                        ]);
 
-        // structure = emp->getStructure()
-
-        if($structure->getImage() != null){
-
-
-            $content = '';
-            while(!feof($structure->getImage())){
-                $content.= fread($structure->getImage(), 1024);
-            }
-            rewind($structure->getImage());
-
-            $structure->setImage($content);
-        }
-
-        $structures = $structure->getStructures();
-
-        foreach ($structures as $sousStructures){
-            if($sousStructures->getImage() != null){
-
-
-                $content = '';
-                while(!feof($sousStructures->getImage())){
-                    $content.= fread($sousStructures->getImage(), 1024);
                 }
-                rewind($sousStructures->getImage());
 
-                $sousStructures->setImage($content);
+                if ($employeChef != null) {
+
+                    if($employeChef->getId() != $employe->getId()){
+                        return $this->handleView($this->view(null));
+                    }
+
+                    $chef = $employeChef->getNom() . ' ' . $employeChef->getPrenom();
+                    $structure->setChef($chef);
+
+                }else{
+                    return $this->handleView($this->view(null));
+                }
+
+                if ($structure->getImage() != null) {
+
+
+                    $content = '';
+                    while (!feof($structure->getImage())) {
+                        $content .= fread($structure->getImage(), 1024);
+                    }
+                    rewind($structure->getImage());
+
+                    $structure->setImage($content);
+                }
+
+
+
+                $structures = $structure->getStructures();
+
+                foreach ($structures as $sousStructures) {
+                    if ($sousStructures->getImage() != null) {
+
+
+                        $content = '';
+                        while (!feof($sousStructures->getImage())) {
+                            $content .= fread($sousStructures->getImage(), 1024);
+                        }
+                        rewind($sousStructures->getImage());
+
+                        $sousStructures->setImage($content);
+                    }
+                }
+
+                $structure->setStructures($structures);
             }
         }
 
-        $structure->setStructures($structures);
+
 
         return $this->handleView($this->view($structure));
     }
-    
-    
-    
+
+
     #[Rest\Put('structures/{id}', name: 'api_edit_structure', )]
-    public function edit(Request $request, ManagerRegistry  $doctrine, Structure $structure)
+    public function edit(Request $request, ManagerRegistry $doctrine, Structure $structure)
     {
 
         $parameters = json_decode($request->getContent(), true);
 
 
-
         $nom = $parameters['nom'];
-        $type= isset($parameters['type']) ? $parameters['type'] : null;
-        $image= isset($parameters['image']) ? $parameters['image'] : null;
+        $type = isset($parameters['type']) ? $parameters['type'] : null;
+        $image = isset($parameters['image']) ? $parameters['image'] : null;
 
 
         $structure->setNom($nom);
         $structure->setType($type);
         $structure->setImage($image);
-
-
 
 
         $em = $doctrine->getManager();
@@ -301,7 +341,7 @@ class StructureController extends AbstractFOSRestController
     #[Rest\Delete('structures/{id}', name: 'api_delete_structure', )]
     public function delete(Structure $structure, StructureRepository $structureRepository): Response
     {
-       // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
+        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
         $structureRepository->remove($structure, true);
 
 

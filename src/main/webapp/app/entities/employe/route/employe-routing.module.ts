@@ -6,6 +6,8 @@ import { EmployeComponent } from '../list/employe.component';
 import { EmployeDetailComponent } from '../detail/employe-detail.component';
 import { EmployeUpdateComponent } from '../update/employe-update.component';
 import { EmployeRoutingResolveService } from './employe-routing-resolve.service';
+import { EmployesTypeComponent } from '../../../home/employes-type/employes-type.component';
+import { ProfilComponent } from '../../../home/profil/profil.component';
 
 const employeRoute: Routes = [
   {
@@ -38,6 +40,16 @@ const employeRoute: Routes = [
     resolve: {
       employe: EmployeRoutingResolveService,
     },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':type/types',
+    component: EmployesTypeComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent,
     canActivate: [UserRouteAccessService],
   },
 ];

@@ -38,6 +38,10 @@ export class StructureService {
     return this.http.get<IStructure>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  getUserStructure(): Observable<EntityResponseType> {
+    return this.http.get<IStructure>(`${this.resourceUrlstructureUser}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IStructure[]>(this.resourceUrl, { params: options, observe: 'response' });

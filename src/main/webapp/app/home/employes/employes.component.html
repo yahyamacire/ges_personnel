@@ -4,30 +4,33 @@
       <h1 class="u-text u-text-default u-text-1">Les employés .....</h1>
       <div class="">
         <div class="">
-
           <div class="row">
-          <div *ngFor="let employe of employes; trackBy: trackId" class="col-md-6">
-            <div class="">
+            <div *ngFor="let employe of employes; trackBy: trackId" class="col-md-6">
               <div class="">
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                     <img *ngIf="employe.photo" [src]="bypassSecurityTrust(employe.photo)" />
+                <div class="">
+                  <div class="card">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img *ngIf="employe.photo" [src]="bypassSecurityTrust(employe.photo)" />
+                      </div>
+                      <div class="col-md-6">
+                        <h4 class="u-align-center u-custom-font u-font-montserrat u-text u-text-palette-1-dark-2 u-text-2">
+                          {{ employe.nom }} {{ employe.prenom }}
+                        </h4>
+                        <p class="u-align-center u-text u-text-3">{{ employe.fonction }}</p>
+                        <a
+                          [routerLink]="['/employe', employe.id, 'view']"
+                          class="u-border-none u-btn u-btn-round u-button-style u-gradient u-radius-9 u-text-body-alt-color u-btn-1"
+                          >PLUS</a
+                        >
+                      </div>
                     </div>
-                    <div class="col-md-6">
-
-                      <h4 class="u-align-center u-custom-font u-font-montserrat u-text u-text-palette-1-dark-2 u-text-2"> {{ employe.nom }} {{ employe.prenom }}</h4>
-                      <p class="u-align-center u-text u-text-3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat</p>
-                      <a href="https://nicepage.studio" class="u-border-none u-btn u-btn-round u-button-style u-gradient u-none u-radius-9 u-text-body-alt-color u-btn-1">PLUS</a>
-                </div>
                   </div>
-                   </div>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
-      </div>
       </div>
     </div>
   </section>

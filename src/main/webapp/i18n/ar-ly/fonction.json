@@ -12,7 +12,8 @@
       "CHEF_SERVICE": "CHEF_SERVICE",
       "CHEF_DIVISION": "CHEF_DIVISION",
       "CADRE": "CADRE",
-      "AUTRE": "AUTRE"
+      "AUTRE": "AUTRE",
+      "ATTACHE": "ملحق"
     }
   }
 }

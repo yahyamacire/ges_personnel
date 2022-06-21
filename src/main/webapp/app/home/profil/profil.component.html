@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="employe">
+      <h2 data-cy="employeDetailsHeading">
+        <span>Infos Personel</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ employe.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.nni">Nni</span></dt>
+        <dd>
+          <span>{{ employe.nni }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.nom">Nom</span></dt>
+        <dd>
+          <span>{{ employe.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ employe.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.sexe">Sexe</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'gesEmployerApp.Genre.' + employe.sexe }}">{{ employe.sexe }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.dateNaissance">Date Naissance</span></dt>
+        <dd>
+          <span>{{ employe.dateNaissance | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.email">Email</span></dt>
+        <dd>
+          <span>{{ employe.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ employe.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.dateRecrutement">Date Recrutement</span></dt>
+        <dd>
+          <span>{{ employe.dateRecrutement | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ employe.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.fonction">Fonction</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'gesEmployerApp.Fonction.' + employe.fonction }}">{{ employe.fonction }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ employe.adresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'gesEmployerApp.Status.' + employe.status }}">{{ employe.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.domaine">Domaine</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'gesEmployerApp.Domaine.' + employe.domaine }}">{{ employe.domaine }}</span>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.photo">Photo</span></dt>
+        <dd>
+          <div *ngIf="employe.photo">
+            <img [src]="bypassSecurityTrust(employe.photo)" />
+          </div>
+        </dd>
+        <dt><span jhiTranslate="gesEmployerApp.employe.user">User</span></dt>
+        <dd>
+          <span>{{ employe.user?.id }}</span>
+        </dd>
+
+        <dt><span jhiTranslate="gesEmployerApp.employe.structure">Structure</span></dt>
+        <dd>
+          <div *ngIf="employe.structure">
+            <a [routerLink]="['/structure', employe.structure?.id, 'view']">{{ employe.structure?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="button" [routerLink]="['/employe', employe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+
+      <button type="button" [routerLink]="['/employe', employe.id, 'view']" class="btn btn-success">
+        <fa-icon icon="user"></fa-icon>&nbsp;<span>CV</span>
+      </button>
+    </div>
+  </div>
+</div>

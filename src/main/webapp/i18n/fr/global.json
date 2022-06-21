@@ -6,15 +6,15 @@
       "home": "Accueil",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Entités",
+        "main": "Mon Profil",
         "employe": "Employe",
         "langue": "Langue",
         "competence": "Competence",
         "competenceLinguistique": "Competence Linguistique",
-        "experience": "Experience",
+        "experience": "Experiences",
         "structure": "Structure",
         "projet": "Projet",
-        "diplome": "Diplome",
+        "diplome": "Diplômes",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

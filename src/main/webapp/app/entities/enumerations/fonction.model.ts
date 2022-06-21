@@ -15,6 +15,8 @@ export enum Fonction {
 
   CHEF_SERVICE = 'CHEF_SERVICE',
 
+  ATTACHE = 'ATTACHE',
+
   CHEF_DIVISION = 'CHEF_DIVISION',
 
   CADRE = 'CADRE',

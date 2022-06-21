@@ -18,6 +18,8 @@ export type EntityArrayResponseType = HttpResponse<IEmploye[]>;
 export class EmployeService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/employes');
   protected resourceEmploesUrl = this.applicationConfigService.getEndpointFor('api/structures/employes');
+  protected resourceEmploesTypeUrl = this.applicationConfigService.getEndpointFor('api/employes-fonctions');
+  protected resourceEmploesConnecteUrl = this.applicationConfigService.getEndpointFor('api/employer-connecte');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -48,6 +50,12 @@ export class EmployeService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  employeConnecte(): Observable<EntityResponseType> {
+    return this.http
+      .get<IEmploye>(`${this.resourceEmploesConnecteUrl}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
@@ -55,9 +63,16 @@ export class EmployeService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
-  listEmployes(structureId: number): Observable<EntityArrayResponseType> {
+  listEmployes(structureId: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
     return this.http
-      .get<IEmploye[]>(`${this.resourceEmploesUrl}/${structureId}`, { observe: 'response' })
+      .get<IEmploye[]>(`${this.resourceEmploesUrl}/${structureId}`, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  listEmployesType(type: string): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IEmploye[]>(`${this.resourceEmploesTypeUrl}/${type}`, { observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

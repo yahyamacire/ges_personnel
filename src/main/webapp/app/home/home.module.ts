@@ -11,6 +11,8 @@ import { DetailStructureComponent } from './detail-structure/detail-structure.co
 import { EmployesComponent } from './employes/employes.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
 import { SecretariatComponent } from './secretariat/secretariat.component';
+import { EmployesTypeComponent } from './employes-type/employes-type.component';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([HOME_ROUTE])],
@@ -23,6 +25,8 @@ import { SecretariatComponent } from './secretariat/secretariat.component';
     EmployesComponent,
     CabinetComponent,
     SecretariatComponent,
+    EmployesTypeComponent,
+    ProfilComponent,
   ],
 })
 export class HomeModule {}

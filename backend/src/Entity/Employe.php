@@ -63,7 +63,7 @@ class Employe
     #[Serializer\SerializedName("photoUrl")]
     private $photoUrl;
 
-    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Diplome::class)]
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Diplome::class, cascade: ['remove'])]
     #[Serializer\SerializedName("diplomes")]
     private $diplome;
 
@@ -71,7 +71,7 @@ class Employe
     #[Serializer\SerializedName("user")]
     private $compte;
 
-    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: CompetenceLinguistique::class)]
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: CompetenceLinguistique::class, cascade: ['remove'])]
     #[Serializer\SerializedName("competenceLinguistiques")]
     private $competenceLinguistique;
 
@@ -79,11 +79,11 @@ class Employe
     #[Serializer\SerializedName("projets")]
     private $projet;
 
-    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Competence::class)]
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Competence::class, cascade: ['remove'])]
     #[Serializer\SerializedName("competences")]
     private $competence;
 
-    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Experience::class)]
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Experience::class, cascade: ['remove'])]
     #[Serializer\SerializedName("experiences")]
     private $experience;
 

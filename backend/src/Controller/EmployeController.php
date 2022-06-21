@@ -133,21 +133,28 @@ class EmployeController extends AbstractFOSRestController
         $em->persist($employe);
         $em->flush();
 
-        dd($structure);
 
         return $this->handleView($this->view($employe));
     }
-    #[Rest\Get('employesss/{fonction}', name: 'api_get_employe_fonction')]
-    public function getEmployefonction(Employe $employe, EmployeRepository $employeRepository)
+
+
+    #[Rest\Get('employes-fonctions/{fonction}', name: 'api_get_employe_fonction')]
+    public function getEmployefonction($fonction, EmployeRepository $employeRepository)
     {
             
 
-        
-        $employes=$employeRepository->findBy('fonction');
-        
-        $list = $employes;
+        if($fonction == 'AUTRE'){
+            $employes=$employeRepository->autresEmployers();
+        }else{
+            $employes=$employeRepository->findBy([
+                'fonction' => $fonction
+            ]);
 
-    foreach ($list as $employe){
+        }
+        
+
+
+    foreach ($employes as $employe){
        if($employe->getPhoto() != null){
 
 
@@ -159,8 +166,10 @@ class EmployeController extends AbstractFOSRestController
                         
             $employe->setPhoto($content);
         }
-        return $this->handleView($this->view($employes));
+
     }
+
+        return $this->handleView($this->view($employes));
 
 }
 
@@ -178,6 +187,26 @@ class EmployeController extends AbstractFOSRestController
             }
             rewind($employe->getPhoto());
                         
+            $employe->setPhoto($content);
+        }
+        return $this->handleView($this->view($employe));
+    }
+
+    #[Rest\Get('employer-connecte', name: 'api_get_employe_actif')]
+    public function getEmployeConnecte()
+    {
+
+        $employe = $this->getUser()->getEmploye();
+
+        if($employe != null && $employe->getPhoto() != null){
+
+
+            $content = '';
+            while(!feof($employe->getPhoto())){
+                $content.= fread($employe->getPhoto(), 1024);
+            }
+            rewind($employe->getPhoto());
+
             $employe->setPhoto($content);
         }
         return $this->handleView($this->view($employe));

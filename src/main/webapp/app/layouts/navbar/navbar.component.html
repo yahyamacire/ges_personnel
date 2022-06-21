@@ -2,9 +2,11 @@
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
-      <span  jhiTranslate="global.title"  class="navbar-title">MINISTERE DE LA TRANSITION NUMERIQUE, DE<br>
-                L'INNOVATION ET DE LA. MODERNISATION DE L'ADMINISTRATION</span>
-      
+      <span jhiTranslate="global.title" class="navbar-title"
+        >MINISTERE DE LA TRANSITION NUMERIQUE, DE<br />
+        L'INNOVATION ET DE LA. MODERNISATION DE L'ADMINISTRATION</span
+      >
+
       <span class="navbar-version"></span>
     </a>
     <a
@@ -31,7 +33,7 @@
         </li>
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         <li
-          *ngSwitchCase="true"
+          *jhiHasAnyAuthority="'ROLE_USER'"
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
@@ -48,16 +50,17 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="employe"
+                routerLink="employe/profil"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
               >
-                <span jhiTranslate="global.menu.entities.employe">Employe</span>
+                <span>Infos Personel</span>
               </a>
             </li>
             <li>
               <a
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 class="dropdown-item"
                 routerLink="langue"
                 routerLinkActive="active"
@@ -106,6 +109,7 @@
             </li>
             <li>
               <a
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 class="dropdown-item"
                 routerLink="structure"
                 routerLinkActive="active"
@@ -162,6 +166,20 @@
               <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+              </a>
+            </li>
+
+            <li>
+              <a
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                class="dropdown-item"
+                routerLink="employe"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.employe"></span>
               </a>
             </li>
           </ul>

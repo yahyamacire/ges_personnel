@@ -39,6 +39,17 @@ class EmployeRepository extends ServiceEntityRepository
         }
     }
 
+    public function autresEmployers(): array
+    {
+        $qb =  $this->createQueryBuilder('e');
+
+        $expression1 = $qb->expr()->in('e.fonction', ["INSPECTEUR","AUTRE"]);
+        return $qb ->andWhere($expression1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Employe[] Returns an array of Employe objects
 //     */

@@ -225,31 +225,6 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gesEmployerApp.employe.user" for="field_user">User</label>
-          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
-              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
-            >
-              {{ userOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label jhiTranslate="gesEmployerApp.employe.projet" for="field_projets">Projet</label>
-          <select class="form-control" id="field_projets" data-cy="projet" multiple name="projets" formControlName="projets">
-            <option
-              [ngValue]="getSelectedProjet(projetOption, editForm.get('projets')!.value)"
-              *ngFor="let projetOption of projetsSharedCollection; trackBy: trackProjetById"
-            >
-              {{ projetOption.nom }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" jhiTranslate="gesEmployerApp.employe.structure" for="field_structure">Structure</label>
           <select class="form-control" id="field_structure" data-cy="structure" name="structure" formControlName="structure">
             <option [ngValue]="null"></option>

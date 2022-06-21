@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Employe;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +44,22 @@ class LoginController extends AbstractFOSRestController
         $em = $doctrine->getManager();
 
         $em->persist($user);
+
+        // Création Employer
+
+        $employer = new Employe();
+        $employer->setNom('');
+        $employer->setPrenom('');
+        $employer->setNni(0);
+        $employer->setSexe('HOMME');
+        $employer->setEmail('');
+        $employer->setDateNaissance(new \DateTime());
+        $employer->setTelephone(0);
+        $employer->setFonction('AUTRE');
+
+        $employer->setCompte($user);
+        $em->persist($employer);
+
         $em->flush();
 
         return new JsonResponse(

@@ -4,7 +4,6 @@ import { StructureService } from '../../entities/structure/service/structure.ser
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'jhi-secretariat',
   templateUrl: './secretariat.component.html',
@@ -15,13 +14,17 @@ export class SecretariatComponent implements OnInit {
 
   constructor(protected structureService: StructureService,protected activatedRoute: ActivatedRoute ) {}
 
-  
   ngOnInit(): void {
     
     this.structureService.structureSG().subscribe({
+<<<<<<< HEAD
       next: (res: HttpResponse<IStructure>) => {
         this.structure= res.body;
         
+=======
+      next: (res: HttpResponse<IStructure[]>) => {
+        this.structures = res.body ?? [];
+>>>>>>> 05a551c178118e44a4704264e78be580d80d1b19
       },
     });
   }
@@ -34,4 +37,3 @@ export class SecretariatComponent implements OnInit {
     return `data:image/png;base64,` + image;
   }
 }
-

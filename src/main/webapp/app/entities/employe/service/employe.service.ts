@@ -8,6 +8,8 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IEmploye, getEmployeIdentifier } from '../employe.model';
+import { IDiplome, getDiplomeIdentifier } from '../../diplome/diplome.model';
+import { IExperience, getExperienceIdentifier } from '../../experience/experience.model';
 
 export type EntityResponseType = HttpResponse<IEmploye>;
 export type EntityArrayResponseType = HttpResponse<IEmploye[]>;
@@ -91,6 +93,19 @@ export class EmployeService {
     if (res.body) {
       res.body.dateNaissance = res.body.dateNaissance ? dayjs(res.body.dateNaissance) : undefined;
       res.body.dateRecrutement = res.body.dateRecrutement ? dayjs(res.body.dateRecrutement) : undefined;
+
+      if (res.body.diplomes) {
+        res.body.diplomes.forEach((diplome: IDiplome) => {
+          diplome.date = diplome.date ? dayjs(diplome.date) : undefined;
+        });
+      }
+
+      if (res.body.experiences) {
+        res.body.experiences.forEach((experience: IExperience) => {
+          experience.dateDebut = experience.dateDebut ? dayjs(experience.dateDebut) : undefined;
+          experience.dateFin = experience.dateFin ? dayjs(experience.dateFin) : undefined;
+        });
+      }
     }
     return res;
   }

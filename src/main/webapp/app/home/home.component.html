@@ -39,6 +39,7 @@
   <div *ngSwitchCase="true">
     <jhi-home-ministre *jhiHasAnyAuthority="'ROLE_MINISTRE'"></jhi-home-ministre>
 
+<<<<<<< HEAD
     
 
 
@@ -47,7 +48,11 @@
 
    
     
+=======
+    <jhi-home-ministre *jhiHasAnyAuthority="'ROLE_SG'"></jhi-home-ministre>
+>>>>>>> 05a551c178118e44a4704264e78be580d80d1b19
 
+    <jhi-detail-structure *jhiHasAnyAuthority="'ROLE_DIRECTEUR'"></jhi-detail-structure>
   </div>
 
   <div class="home-page" *ngSwitchCase="false">
@@ -66,7 +71,8 @@
                       BIENVENUE
                     </h2>
                     <p class="u-text u-text-2">
-                     Dans l'application de gestion du personnel qui vous permet de consulter les directions et les employés du Ministère de la Transition Numérique de l'Innovation et de la Modernisation 
+                      Dans l'application de gestion du personnel qui vous permet de consulter les directions et les employés du Ministère de
+                      la Transition Numérique de l'Innovation et de la Modernisation
                     </p>
                     <a
                       (click)="login()"

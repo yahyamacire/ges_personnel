@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IStructure } from '../../entities/structure/structure.model';
 import { StructureService } from '../../entities/structure/service/structure.service';
 import { HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,15 +11,17 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./secretariat.component.scss', '../../../content/css/nicepage.css'],
 })
 export class SecretariatComponent implements OnInit {
-  structures?: IStructure[];
+  structure: IStructure | null = null;
 
-  constructor(protected structureService: StructureService) {}
+  constructor(protected structureService: StructureService,protected activatedRoute: ActivatedRoute ) {}
 
   
   ngOnInit(): void {
+    
     this.structureService.structureSG().subscribe({
-      next: (res: HttpResponse<IStructure[]>) => {
-        this.structures= res.body ?? [];
+      next: (res: HttpResponse<IStructure>) => {
+        this.structure= res.body;
+        
       },
     });
   }

@@ -9,6 +9,7 @@ use App\Repository\EmployeRepository;
 use App\Repository\UserRepository;
 use App\Repository\StructureRepository;
 use DateTime;
+use Doctrine\ORM\Mapping\Id;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,8 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-
-
+use PhpParser\Node\Stmt\Break_;
 
 #[Route('/api/')]
 class StructureController extends AbstractFOSRestController
@@ -26,7 +26,7 @@ class StructureController extends AbstractFOSRestController
     public function list(StructureRepository $structureRepository)
     {
         $structures = $structureRepository->findAll();
-
+        
         foreach ($structures as $structure){
             if($structure->getImage() != null){
 
@@ -43,29 +43,8 @@ class StructureController extends AbstractFOSRestController
         return $this->handleView($this->view($structures));
     }
 
-    #[Rest\Get('directions', name: 'api_list_directions')]
-    public function directions(StructureRepository $structureRepository)
-    {
-        $structures = $structureRepository->findBy([
-            'type' => 'Direction'
-        ]);
 
-        foreach ($structures as $structure){
-            if($structure->getImage() != null){
-
-
-                $content = '';
-                while(!feof($structure->getImage())){
-                    $content.= fread($structure->getImage(), 1024);
-                }
-                rewind($structure->getImage());
-
-                $structure->setImage($content);
-            }
-        }
-        return $this->handleView($this->view($structures));
-    }
-
+    
     #[Rest\Post('structures', name: 'api_new_structures', )]
     public function new(Request $request, ManagerRegistry  $doctrine, StructureRepository $structureRepository)
     {
@@ -103,8 +82,71 @@ class StructureController extends AbstractFOSRestController
         return $this->handleView($this->view($structure));
     }
 
+
+    #[Rest\Get('structures/directions', name: 'api_list_directions')]
+    public function directions(StructureRepository $structureRepository)
+    {
+        $structures = $structureRepository->findBy([
+            'type' => 'Direction'
+        ]);
+
+        foreach ($structures as $structure){
+
+            if($structure->getImage() != null){
+
+
+                $content = '';
+                while(!feof($structure->getImage())){
+                    $content.= fread($structure->getImage(), 1024);
+                }
+                rewind($structure->getImage());
+
+                $structure->setImage($content);
+            }
+        }
+        return $this->handleView($this->view($structures));
+    }
+
+
+    #[Rest\Get('structures/structureSG', name: 'api_get_structure_sg')]
+    public function structureSG(StructureRepository $structureRepository, EmployeRepository $employeRepository)
+    {
+
+        $structure= $structureRepository->findOneBy([
+            'type' => 'Secretariat_Generale'
+        ]);
+       
+       
+            if($structure->getImage() != null){
+
+
+                $content = '';
+                while(!feof($structure->getImage())){
+                    $content.= fread($structure->getImage(), 1024);
+                }
+                rewind($structure->getImage());
+
+                $structure->setImage($content);
+            }
+            $employe = null;
+       
+                $employe = $employeRepository -> findOneBy ([
+                    'structure'=>  $structure->getId(),
+                    'fonction' => 'SG' 
+                ]);
+                if($employe != null){
+                    $chef =$employe->getNom().' '.$employe->getPrenom();
+                    $structure->setChef($chef);
+            
+                }
+        
+        return $this->handleView($this->view($structure));
+    }
+
+
+
     #[Rest\Get('structures/{id}', name: 'api_get_structure')]
-    public function getStructure(Structure $structure)
+    public function getStructure(Structure $structure, EmployeRepository $employeRepository)
     {
 
         if($structure->getImage() != null){
@@ -120,6 +162,8 @@ class StructureController extends AbstractFOSRestController
         }
 
         $structures = $structure->getStructures();
+
+
 
         foreach ($structures as $sousStructures){
             if($sousStructures->getImage() != null){
@@ -137,9 +181,46 @@ class StructureController extends AbstractFOSRestController
 
         $structure->setStructures($structures);
 
-        return $this->handleView($this->view($structure));
+
+        $employe = null;
+       switch($structure->getType()) {
+            case 'Direction': 
+                $employe = $employeRepository -> findOneBy ([
+                    'structure'=>  $structure->getId(),
+                    'fonction' => 'DIRECTEUR' 
+                ]);
+            Break;
+            case 'Secretariat_Generale': 
+                $employe = $employeRepository-> findOneBy([
+                    'structure'=> $structure->getId(),
+                    'fonction' => 'SG' 
+                ]);
+            Break;
+            case 'Service': 
+                $employe = $employeRepository-> findOneBy ([ 
+                    'structure'=> $structure->getId() ,
+                    'fonction' => 'CHEF_SERVICE' 
+                ]);
+            Break;
+            case 'Division': 
+                $employe = $employeRepository-> findOneBy([
+                    'structure'=> $structure->getId(),
+                    'fonction' => 'CHEF_DIVISION' 
+                ]);
+
     }
 
+    if($employe != null){
+        $chef =$employe->getNom().' '.$employe->getPrenom();
+        $structure->setChef($chef);
+
+    }
+
+    return $this->handleView($this->view($structure));
+
+    }
+
+    
 
     #[Rest\Get('structureUser', name: 'api_get_structure_user')]
     public function structureUser(EmployeRepository $employeRepository)
@@ -187,34 +268,7 @@ class StructureController extends AbstractFOSRestController
         return $this->handleView($this->view($structure));
     }
     
-    #[Rest\Get('structureSG', name: 'api_get_structure_sg')]
-    public function structureSG(StructureRepository $structureRepository)
-    {
-
-        $structure= $structureRepository->findBy([
-            'type' => 'Secretariat_Generale'
-        ]);
-       
-       
-
-
-        foreach ($structure as $structure){
-            if($structure->getImage() != null){
-
-
-                $content = '';
-                while(!feof($structure->getImage())){
-                    $content.= fread($structure->getImage(), 1024);
-                }
-                rewind($structure->getImage());
-
-                $structure->setImage($content);
-            }
-        }
-        return $this->handleView($this->view($structure));
-    }
-
-
+    
     
     #[Rest\Put('structures/{id}', name: 'api_edit_structure', )]
     public function edit(Request $request, ManagerRegistry  $doctrine, Structure $structure)

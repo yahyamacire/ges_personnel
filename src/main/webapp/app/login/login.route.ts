@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-
+import { RegisterComponent } from './../../app/account/register/register.component';
 import { LoginComponent } from './login.component';
 
 export const LOGIN_ROUTE: Route = {
@@ -8,4 +8,7 @@ export const LOGIN_ROUTE: Route = {
   data: {
     pageTitle: 'login.title',
   },
+  
+  
 };
+

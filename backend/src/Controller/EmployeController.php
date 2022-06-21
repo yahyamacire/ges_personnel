@@ -6,6 +6,7 @@ use App\Entity\Projet;
 use App\Entity\Structure;
 use App\Repository\EmployeRepository;
 use App\Repository\ProjetRepository;
+use App\Repository\StructureRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -66,7 +67,7 @@ class EmployeController extends AbstractFOSRestController
     }
 
     #[Rest\Post('employes', name: 'api_new_employe', )]
-    public function new(Request $request, ManagerRegistry  $doctrine)
+    public function new(Request $request, ManagerRegistry  $doctrine, StructureRepository $structureRepository)
     {
 
         $parameters = json_decode($request->getContent(), true);
@@ -118,13 +119,21 @@ class EmployeController extends AbstractFOSRestController
         $user = $this->getUser();
         $employe->setCompte($user);
 
-       
+        if(isset($parameters['structure'])){
+            $structure= $parameters['structure'];
+
+            $structure = $structureRepository->find($structure['id']);
+            $employe->setStructure($structure);
+
+        }
 
 
         $em = $doctrine->getManager();
 
         $em->persist($employe);
         $em->flush();
+
+        dd($structure);
 
         return $this->handleView($this->view($employe));
     }
@@ -148,7 +157,7 @@ class EmployeController extends AbstractFOSRestController
     }
 
     #[Rest\Put('employes/{id}', name: 'api_edit_employe', )]
-    public function edit(Request $request, ManagerRegistry  $doctrine, Employe $employe)
+    public function edit(Request $request, ManagerRegistry  $doctrine, Employe $employe , StructureRepository $structureRepository)
     {
 
         $parameters = json_decode($request->getContent(), true);
@@ -195,6 +204,13 @@ class EmployeController extends AbstractFOSRestController
         $employe->setDateNaissance($dateNaissance);
         $employe->setDateRecrutement($dateRecrutement);
 
+        if(isset($parameters['structure'])){
+            $structure= $parameters['structure'];
+
+            $structure = $structureRepository->find($structure['id']);
+            $employe->setStructure($structure);
+
+        }
 
         $em = $doctrine->getManager();
 

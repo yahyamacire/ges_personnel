@@ -27,7 +27,7 @@ class Employe
 
     #[ORM\Column(type: 'string', length: 255)]
     private $sexe;
-
+    #[Serializer\SerializedName("dateNaissance")]
     #[ORM\Column(type: 'date')]
     private $dateNaissance;
 
@@ -36,7 +36,7 @@ class Employe
 
     #[ORM\Column(type: 'integer')]
     private $telephone;
-
+    #[Serializer\SerializedName("dateRecrutement")]
     #[ORM\Column(type: 'date', nullable: true)]
     private $dateRecrutement;
 

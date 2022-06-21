@@ -32,6 +32,9 @@ class Structure
 
     #[ORM\Column(type: 'blob', nullable: true)]
     private $image;
+    
+    private $chef;
+ 
 
     public function __construct()
     {
@@ -64,6 +67,17 @@ class Structure
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+    public function getChef(): ?string
+    {
+        return $this->chef;
+    }
+
+    public function setChef(string $chef): self
+    {
+        $this->chef = $chef;
 
         return $this;
     }

@@ -89,7 +89,7 @@ class StructureController extends AbstractFOSRestController
             $structure->setParent($structureParente);
 
         }
-       
+
 
 
         $em = $doctrine->getManager();
@@ -188,7 +188,7 @@ class StructureController extends AbstractFOSRestController
         $parameters = json_decode($request->getContent(), true);
 
 
-        
+
         $nom = $parameters['nom'];
         $type= isset($parameters['type']) ? $parameters['type'] : null;
         $image= isset($parameters['image']) ? $parameters['image'] : null;
@@ -198,7 +198,7 @@ class StructureController extends AbstractFOSRestController
         $structure->setType($type);
         $structure->setImage($image);
 
-       
+
 
 
         $em = $doctrine->getManager();
@@ -214,7 +214,7 @@ class StructureController extends AbstractFOSRestController
     {
        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
         $structureRepository->remove($structure, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',

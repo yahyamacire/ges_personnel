@@ -39,9 +39,20 @@
   <div *ngSwitchCase="true">
     <jhi-home-ministre *jhiHasAnyAuthority="'ROLE_MINISTRE'"></jhi-home-ministre>
 
-    <jhi-home-ministre *jhiHasAnyAuthority="'ROLE_SG'"></jhi-home-ministre>
+<<<<<<< HEAD
+    
 
-    <jhi-home-directeur *jhiHasAnyAuthority="'ROLE_DIRCTEUR'"></jhi-home-directeur>
+
+    
+    <jhi-detail-structure *jhiHasAnyAuthority="'ROLE_DIRECTEUR'"></jhi-detail-structure>
+
+   
+    
+=======
+    <jhi-home-ministre *jhiHasAnyAuthority="'ROLE_SG'"></jhi-home-ministre>
+>>>>>>> 05a551c178118e44a4704264e78be580d80d1b19
+
+    <jhi-detail-structure *jhiHasAnyAuthority="'ROLE_DIRECTEUR'"></jhi-detail-structure>
   </div>
 
   <div class="home-page" *ngSwitchCase="false">
@@ -60,9 +71,8 @@
                       BIENVENUE
                     </h2>
                     <p class="u-text u-text-2">
-                      Velit scelerisque in dictum non consectetur a erat. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper.
-                      Dictum sit amet justo donec enim diam vulputate ut. Velit egestas dui id ornare arcu odio. Tellus pellentesque eu
-                      tincidunt tortor aliquam.
+                      Dans l'application de gestion du personnel qui vous permet de consulter les directions et les employés du Ministère de
+                      la Transition Numérique de l'Innovation et de la Modernisation
                     </p>
                     <a
                       (click)="login()"

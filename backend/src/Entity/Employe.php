@@ -27,8 +27,8 @@ class Employe
 
     #[ORM\Column(type: 'string', length: 255)]
     private $sexe;
-
     #[ORM\Column(type: 'date')]
+    #[Serializer\SerializedName("dateNaissance")]
     private $dateNaissance;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -36,8 +36,9 @@ class Employe
 
     #[ORM\Column(type: 'integer')]
     private $telephone;
-
+    
     #[ORM\Column(type: 'date', nullable: true)]
+    #[Serializer\SerializedName("dateRecrutement")]
     private $dateRecrutement;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -71,18 +72,23 @@ class Employe
     private $compte;
 
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: CompetenceLinguistique::class)]
+    #[Serializer\SerializedName("competenceLinguistiques")]
     private $competenceLinguistique;
 
     #[ORM\ManyToMany(targetEntity: Projet::class, inversedBy: 'employes')]
+    #[Serializer\SerializedName("projets")]
     private $projet;
 
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Competence::class)]
+    #[Serializer\SerializedName("competences")]
     private $competence;
 
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Experience::class)]
+    #[Serializer\SerializedName("experiences")]
     private $experience;
 
     #[ORM\ManyToOne(targetEntity: Structure::class, inversedBy: 'employes')]
+    #[Serializer\SerializedName("structure")]
     private $structure;
 
 

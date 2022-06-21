@@ -6,6 +6,7 @@ use App\Entity\Projet;
 use App\Entity\Structure;
 use App\Repository\EmployeRepository;
 use App\Repository\ProjetRepository;
+use App\Repository\StructureRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -66,7 +67,7 @@ class EmployeController extends AbstractFOSRestController
     }
 
     #[Rest\Post('employes', name: 'api_new_employe', )]
-    public function new(Request $request, ManagerRegistry  $doctrine)
+    public function new(Request $request, ManagerRegistry  $doctrine, StructureRepository $structureRepository)
     {
 
         $parameters = json_decode($request->getContent(), true);
@@ -85,6 +86,7 @@ class EmployeController extends AbstractFOSRestController
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;
+        
 
 
         $employe = new Employe();
@@ -100,6 +102,7 @@ class EmployeController extends AbstractFOSRestController
         $employe->setFonction($fonction);
         $employe->setDomaine($domaine);
         $employe->setPhoto($photo);
+        
 
 
         if($dateNaissance != null) {
@@ -114,8 +117,15 @@ class EmployeController extends AbstractFOSRestController
 
 
         $user = $this->getUser();
-
         $employe->setCompte($user);
+
+        if(isset($parameters['structure'])){
+            $structure= $parameters['structure'];
+
+            $structure = $structureRepository->find($structure['id']);
+            $employe->setStructure($structure);
+
+        }
 
 
         $em = $doctrine->getManager();
@@ -123,8 +133,37 @@ class EmployeController extends AbstractFOSRestController
         $em->persist($employe);
         $em->flush();
 
+        dd($structure);
+
         return $this->handleView($this->view($employe));
     }
+    #[Rest\Get('employesss/{fonction}', name: 'api_get_employe_fonction')]
+    public function getEmployefonction(Employe $employe, EmployeRepository $employeRepository)
+    {
+            
+
+        
+        $employes=$employeRepository->findBy('fonction');
+        
+        $list = $employes;
+
+    foreach ($list as $employe){
+       if($employe->getPhoto() != null){
+
+
+            $content = '';
+            while(!feof($employe->getPhoto())){
+                $content.= fread($employe->getPhoto(), 1024);
+            }
+            rewind($employe->getPhoto());
+                        
+            $employe->setPhoto($content);
+        }
+        return $this->handleView($this->view($employes));
+    }
+
+}
+
 
     #[Rest\Get('employes/{id}', name: 'api_get_employe')]
     public function getEmployes(Employe $employe)
@@ -145,7 +184,7 @@ class EmployeController extends AbstractFOSRestController
     }
 
     #[Rest\Put('employes/{id}', name: 'api_edit_employe', )]
-    public function edit(Request $request, ManagerRegistry  $doctrine, Employe $employe)
+    public function edit(Request $request, ManagerRegistry  $doctrine, Employe $employe , StructureRepository $structureRepository)
     {
 
         $parameters = json_decode($request->getContent(), true);
@@ -165,6 +204,7 @@ class EmployeController extends AbstractFOSRestController
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;
+        
 
 
         $employe->setNni($nni);
@@ -179,6 +219,7 @@ class EmployeController extends AbstractFOSRestController
         $employe->setFonction($fonction);
         $employe->setDomaine($domaine);
         $employe->setPhoto($photo);
+       
 
         if($dateNaissance != null) {
             $dateNaissance = new DateTime($parameters['dateNaissance']);
@@ -190,14 +231,34 @@ class EmployeController extends AbstractFOSRestController
         $employe->setDateNaissance($dateNaissance);
         $employe->setDateRecrutement($dateRecrutement);
 
+        if(isset($parameters['structure'])){
+            $structure= $parameters['structure'];
+
+            
+
+            $structure = $structureRepository->find($structure['id']);
+
+            $employe->setStructure($structure);
+
+        }
 
         $em = $doctrine->getManager();
 
         $em->persist($employe);
         $em->flush();
 
+
+
         return $this->handleView($this->view($employe));
     }
+
+
+
+
+
+   
+
+
 
     #[Rest\Delete('employes/{id}', name: 'api_delete_employe', )]
     public function delete(Employe $employe, EmployeRepository $employeRepository): Response

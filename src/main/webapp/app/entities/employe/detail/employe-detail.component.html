@@ -1,4 +1,5 @@
-<div class="d-flex justify-content-center">
+<!--
+  <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="employe">
       <h2 data-cy="employeDetailsHeading"><span jhiTranslate="gesEmployerApp.employe.detail.title">Employe</span></h2>
@@ -170,6 +171,219 @@
         <button type="button" [routerLink]="['/employe', employe.id, 'edit']" class="btn btn-primary">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+<div class="cv">
+  <div class="d-flex justify-content-center">
+    <div class="col-8">
+      <div *ngIf="employe">
+        <div class="resume-box">
+          <div class="left-section">
+            <div class="profile">
+              <dd>
+                <div *ngIf="employe.photo">
+                  <img [src]="bypassSecurityTrust(employe.photo)" class="profile-img" />
+                </div>
+              </dd>
+
+              <div class="blue-box"></div>
+            </div>
+            <h2 class="name">
+              <dd>
+                <span>{{ employe.nom }}</span>
+              </dd>
+              <br />
+
+              <dd>
+                <span>{{ employe.prenom }}</span>
+              </dd>
+            </h2>
+            <p class="n-p">
+              <dt><span jhiTranslate="gesEmployerApp.employe.fonction">Fonction</span></dt>
+              <dd>
+                <span jhiTranslate="{{ 'gesEmployerApp.Fonction.' + employe.fonction }}">{{ employe.fonction }}</span>
+              </dd>
+            </p>
+
+            <div class="info">
+              <p class="heading">Information</p>
+              <p class="p1">
+                <span class="span1"><img src=" ../../../content/images/page/location.png" /></span>
+                <dt><span jhiTranslate="gesEmployerApp.employe.adresse">Adresse</span></dt>
+                <dd>
+                  <span>{{ employe.adresse }}</span>
+                </dd>
+              </p>
+
+              <p class="p1">
+                <span class="span1"><img src=" ../../../content/images/page/call.png" /></span>
+                <dt><span jhiTranslate="gesEmployerApp.employe.telephone">telephone</span></dt>
+                <dd>
+                  <span>{{ employe.telephone }}</span>
+
+                  <p class="p1">
+                    <span class="span1"><img src=" ../../../content/images/page/status.png" /></span
+                    ><span>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.status">Status</span></dt>
+                      <dd>
+                        <span>{{ employe.status }}</span>
+                      </dd>
+                    </span>
+                  </p>
+
+                  <p class="p1">
+                    <span class="span1"><img src=" ../../../content/images/page/mail.png" /></span
+                    ><span>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.email">Email</span></dt>
+                      <dd>
+                        <span>{{ employe.email }}</span>
+                      </dd></span
+                    >
+                  </p>
+                  <p class="p1">
+                    <span class="span1"><img src=" ../../../content/images/page/pen.jpg" /></span
+                    ><span>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.nni">Nni</span></dt>
+                      <dd>
+                        <span>{{ employe.nni }}</span>
+                      </dd>
+                    </span>
+                  </p>
+
+                  <p class="p1">
+                    <span class="span1"><img src=" ../../../content/images/page/gender.png" /></span
+                    ><span>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.sexe">Sexe</span></dt>
+                      <dd>
+                        <span jhiTranslate="{{ 'gesEmployerApp.Genre.' + employe.sexe }}">{{ employe.sexe }}</span>
+                      </dd>
+                    </span>
+                  </p>
+
+                  <p class="p1">
+                    <span class="span1"><img src=" ../../../content/images/page/agenda.png" /></span
+                    ><span>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.dateNaissance">Date Naissance</span></dt>
+                      <dd>
+                        <span>{{ employe.dateNaissance | formatMediumDatetime }}</span>
+                      </dd>
+                    </span>
+                  </p>
+
+                  <p class="p1">
+                    <span class="span1"><img src=" ../../../content/images/page/agenda.png" /></span
+                    ><span>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.dateRecrutement">Date Recrutement</span></dt>
+                      <dd>
+                        <span>{{ employe.dateRecrutement | formatMediumDatetime }}</span>
+                      </dd>
+                    </span>
+                  </p>
+
+                  <p class="p1">
+                    <span class="span1"><img src=" ../../../content/images/page/book.png" /></span
+                    ><span>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.matricule">Matricule</span></dt>
+                      <dd>
+                        <span>{{ employe.matricule }}</span>
+                      </dd>
+                    </span>
+                  </p>
+                </dd>
+              </p>
+            </div>
+          </div>
+
+          <div class="right-section">
+            <div class="right-heading">
+              <img src="../../../content/images/page/pencil.png" />
+              <p class="p2">diplome</p>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="lr-box" *ngFor="let diplome of employe.diplomes; trackBy: trackId" data-cy="entityTable">
+              <div class="left">
+                <p class="p4">{{ diplome.date | formatMediumDate }}</p>
+              </div>
+
+              <div class="right">
+                <p class="p4">{{ diplome.libelle }}</p>
+                <p class="p5">{{ diplome.description }}.</p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="clearfix"></div>
+            <br /><br />
+            <div class="right-heading">
+              <img src="../../../content/images/page/edu.png" />
+              <p class="p2">Experience</p>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="lr-box" *ngFor="let experience of employe.experiences; trackBy: trackId" data-cy="entityTable">
+              <div class="left">
+                <p class="p4">{{ experience.dateDebut | formatMediumDate }}</p>
+                <p class="p4">{{ experience.dateFin | formatMediumDate }}</p>
+              </div>
+
+              <div class="right">
+                <p class="p4">{{ experience.entreprise }}</p>
+                <p class="p5">{{ experience.description }}.</p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="clearfix"></div>
+            <br /><br />
+
+            <br />
+            <div class="right-heading">
+              <img src="../../../content/images/page/add-user-xl.png" />
+              <p class="p2">Competence</p>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="lr-box" *ngFor="let competence of employe.competences; trackBy: trackId" data-cy="entityTable">
+              <div class="left">
+                <p class="p4">{{ competence.nom }}</p>
+              </div>
+
+              <div class="right">
+                <p class="p4">{{ competence.description }}</p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="clearfix"></div>
+            <br /><br />
+
+            <br />
+            <div class="right-heading">
+              <img src="../../../content/images/page/globe-4-xl.png" />
+              <p class="p2">Competence Linguistique</p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="s-box">
+              <p class="p6">Arab</p>
+              <div id="progress"></div>
+              <p class="p6">espagnol</p>
+              <div id="progress1"></div>
+            </div>
+            <div class="s-box">
+              <p class="p6">Francais</p>
+              <div id="progress2"></div>
+              <p class="p6">Anglais</p>
+              <div id="progress3"></div>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

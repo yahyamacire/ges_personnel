@@ -9,6 +9,8 @@ import { HomeDirecteurComponent } from './home-directeur/home-directeur.componen
 import { DirectionsComponent } from './directions/directions.component';
 import { DetailStructureComponent } from './detail-structure/detail-structure.component';
 import { EmployesComponent } from './employes/employes.component';
+import { CabinetComponent } from './cabinet/cabinet.component';
+import { SecretariatComponent } from './secretariat/secretariat.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([HOME_ROUTE])],
@@ -19,6 +21,8 @@ import { EmployesComponent } from './employes/employes.component';
     DirectionsComponent,
     DetailStructureComponent,
     EmployesComponent,
+    CabinetComponent,
+    SecretariatComponent,
   ],
 })
 export class HomeModule {}

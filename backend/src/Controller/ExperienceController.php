@@ -21,6 +21,12 @@ class ExperienceController extends AbstractFOSRestController
     #[Rest\Get('experiences', name: 'api_list_experiences')]
     public function list(ExperienceRepository $experienceRepository)
     {
+        $list = [];
+
+        $user = $this->getUser();
+        if($user != null && $user->getEmploye() != null){
+            $list = $experienceRepository->findBy(['employe' => $user->getEmploye()->getId()]);
+        }
         $list = $experienceRepository->findAll();
         return $this->handleView($this->view($list));
     }
@@ -53,6 +59,12 @@ class ExperienceController extends AbstractFOSRestController
 
         $experience->setDateDebut($dateDebut);
         $experience->setDateFin($dateFin);
+
+        $user = $this->getUser();
+        if($user != null){
+            $experience->setEmploye($user->getEmploye());
+        }
+
 
 
         $em = $doctrine->getManager();
@@ -96,7 +108,10 @@ class ExperienceController extends AbstractFOSRestController
         $experience->setDateDebut($dateDebut);
         $experience->setDateFin($dateFin);
        
-
+        $user = $this->getUser();
+        if($user != null){
+            $experience->setEmploye($user->getEmploye());
+        }
 
         $em = $doctrine->getManager();
 

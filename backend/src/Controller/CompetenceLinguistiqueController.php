@@ -18,6 +18,12 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
     #[Rest\Get('competence-linguistiques', name: 'api_list_CompetenceLinguistiques')]
     public function list(CompetenceLinguistiqueRepository $CompentenceLinguistiqueRepository)
     {
+        $list = [];
+
+        $user = $this->getUser();
+        if($user != null && $user->getEmploye() != null){
+            $list = $CompentenceLinguistiqueRepository->findBy(['employe' => $user->getEmploye()->getId()]);
+        }
         $list = $CompentenceLinguistiqueRepository->findAll();
         return $this->handleView($this->view($list));
     }
@@ -33,6 +39,12 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
         $CompetenceLinguistique = new CompetenceLinguistique();
 
         $CompetenceLinguistique->setniveau($niveau);
+
+        $user = $this->getUser();
+        if($user != null){
+            $CompetenceLinguistique->setEmploye($user->getEmploye());
+        }
+
         $em = $doctrine->getManager();
 
         $em->persist($CompetenceLinguistique);
@@ -51,7 +63,13 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
 
         $parameters = json_decode($request->getContent(), true);
         $niveau = $parameters['niveau'];
-        $niveau->setDateDebut($niveau);
+        $niveau->setniveau($niveau);
+
+        $user = $this->getUser();
+        if($user != null){
+            $CompetenceLinguistique->setEmploye($user->getEmploye());
+        }
+
         $em = $doctrine->getManager();
 
         $em->persist($CompetenceLinguistique);

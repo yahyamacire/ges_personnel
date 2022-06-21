@@ -62,7 +62,6 @@
 <div class="login-page">
   <div class="container" id="container">
     <div class="form-container sign-in-container">
-      <
       <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
         <h1>se connecter</h1>
 
@@ -101,7 +100,9 @@
         <div class="overlay-panel overlay-right">
           <h1>pas de compte actuel!</h1>
           <p>créer un nouveau</p>
+          <a routerLink="/account/register">
           <button class="ghost" id="signUp">Sign Up</button>
+        </a>
         </div>
       </div>
     </div>

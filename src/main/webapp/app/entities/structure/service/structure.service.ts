@@ -13,8 +13,9 @@ export type EntityArrayResponseType = HttpResponse<IStructure[]>;
 @Injectable({ providedIn: 'root' })
 export class StructureService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/structures');
-  protected resourceUrlDirections = this.applicationConfigService.getEndpointFor('api/directions');
-
+  protected resourceUrlstructuresDirections = this.applicationConfigService.getEndpointFor('api/directions');
+  protected resourceUrlstructuresstructureSG = this.applicationConfigService.getEndpointFor('api/structureSG');
+  protected resourceUrlstructureUser = this.applicationConfigService.getEndpointFor('api/structureUser');
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   create(structure: IStructure): Observable<EntityResponseType> {
@@ -42,9 +43,17 @@ export class StructureService {
     return this.http.get<IStructure[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  structureSG(req?: any): Observable<EntityResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IStructure>(`${this.resourceUrl}/structureSG`, { params: options, observe: 'response' });
+  }
+  structureUser(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IStructure[]>(`${this.resourceUrl}/directions`, { params: options, observe: 'response' });
+  }
   directions(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IStructure[]>(this.resourceUrlDirections, { params: options, observe: 'response' });
+    return this.http.get<IStructure[]>(`${this.resourceUrl}/directions`, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

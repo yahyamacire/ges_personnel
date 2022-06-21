@@ -20,9 +20,15 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 #[Route('/api/')]
 class CompetenceController extends AbstractFOSRestController
 {
-    #[Rest\Get('projets', name: 'api_list_projets')]
+    #[Rest\Get('competences', name: 'api_list_competences')]
     public function list(CompetenceRepository $competenceRepository)
     {
+        $list = [];
+
+        $user = $this->getUser();
+        if($user != null && $user->getEmploye() != null){
+            $list = $competenceRepository->findBy(['employe' => $user->getEmploye()->getId()]);
+        }
         $list = $competenceRepository->findAll();
         return $this->handleView($this->view($list));
     }
@@ -43,7 +49,11 @@ class CompetenceController extends AbstractFOSRestController
         $competence->setNom($nom);
         $competence->setDescription($description);
 
-        
+        $user = $this->getUser();
+          if($user != null){
+              $competence->setEmploye($user->getEmploye());
+    }
+
 
 
         $em = $doctrine->getManager();
@@ -69,14 +79,14 @@ class CompetenceController extends AbstractFOSRestController
 
         $nom = $parameters['nom'];
         $description = $parameters['description'];
-       
-        
-
 
         $competence->setNom($nom);
         $competence->setDescription($description);
 
-        
+        $user = $this->getUser();
+        if($user != null){
+            $competence->setEmploye($user->getEmploye());
+        }
 
         $em = $doctrine->getManager();
 

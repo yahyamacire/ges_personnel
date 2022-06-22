@@ -12,24 +12,16 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ competenceLinguistique.id }}</span>
-        </dd>
+
         <dt><span jhiTranslate="gesEmployerApp.competenceLinguistique.niveau">Niveau</span></dt>
         <dd>
           <span jhiTranslate="{{ 'gesEmployerApp.Niveau.' + competenceLinguistique.niveau }}">{{ competenceLinguistique.niveau }}</span>
         </dd>
-        <dt><span jhiTranslate="gesEmployerApp.competenceLinguistique.employe">Employe</span></dt>
-        <dd>
-          <div *ngIf="competenceLinguistique.employe">
-            <a [routerLink]="['/employe', competenceLinguistique.employe?.id, 'view']">{{ competenceLinguistique.employe?.id }}</a>
-          </div>
-        </dd>
+
         <dt><span jhiTranslate="gesEmployerApp.competenceLinguistique.langue">Langue</span></dt>
         <dd>
           <div *ngIf="competenceLinguistique.langue">
-            <a [routerLink]="['/langue', competenceLinguistique.langue?.id, 'view']">{{ competenceLinguistique.langue?.id }}</a>
+           {{ competenceLinguistique.langue?.nom }}
           </div>
         </dd>
       </dl>

@@ -46,7 +46,7 @@
 
           <td>
             <div *ngIf="competenceLinguistique.langue">
-              <a [routerLink]="['/langue', competenceLinguistique.langue?.id, 'view']">{{ competenceLinguistique.langue?.nom }}</a>
+             {{ competenceLinguistique.langue?.nom }}
             </div>
           </td>
           <td class="text-end">

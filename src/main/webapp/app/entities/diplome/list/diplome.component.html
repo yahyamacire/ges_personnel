@@ -32,36 +32,22 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.libelle">Libelle</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.universite">Universite</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.date">Date</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.description">Description</span></th>
-          <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.diplome">Diplome</span></th>
-          <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.employe">Employe</span></th>
+
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let diplome of diplomes; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/diplome', diplome.id, 'view']">{{ diplome.id }}</a>
-          </td>
           <td>{{ diplome.libelle }}</td>
           <td>{{ diplome.universite }}</td>
           <td>{{ diplome.date | formatMediumDatetime }}</td>
           <td>{{ diplome.description }}</td>
-          <td>
-            <a *ngIf="diplome.diplome" (click)="openFile(diplome.diplome, diplome.diplomeContentType)" jhiTranslate="entity.action.open"
-              >open</a
-            >
-            <span *ngIf="diplome.diplome">{{ diplome.diplomeContentType }}, {{ byteSize(diplome.diplome) }}</span>
-          </td>
-          <td>
-            <div *ngIf="diplome.employe">
-              <a [routerLink]="['/employe', diplome.employe?.id, 'view']">{{ diplome.employe?.id }}</a>
-            </div>
-          </td>
+
+          <td></td>
           <td class="text-end">
             <div class="btn-group">
               <button

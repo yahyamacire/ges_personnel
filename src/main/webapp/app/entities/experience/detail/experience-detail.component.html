@@ -10,10 +10,6 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ experience.id }}</span>
-        </dd>
         <dt><span jhiTranslate="gesEmployerApp.experience.entreprise">Entreprise</span></dt>
         <dd>
           <span>{{ experience.entreprise }}</span>
@@ -29,12 +25,6 @@
         <dt><span jhiTranslate="gesEmployerApp.experience.description">Description</span></dt>
         <dd>
           <span>{{ experience.description }}</span>
-        </dd>
-        <dt><span jhiTranslate="gesEmployerApp.experience.employe">Employe</span></dt>
-        <dd>
-          <div *ngIf="experience.employe">
-            <a [routerLink]="['/employe', experience.employe?.id, 'view']">{{ experience.employe?.id }}</a>
-          </div>
         </dd>
       </dl>
 

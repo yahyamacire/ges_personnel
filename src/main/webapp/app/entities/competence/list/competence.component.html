@@ -32,25 +32,17 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.competence.nom">Nom</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.competence.description">Description</span></th>
-          <th scope="col"><span jhiTranslate="gesEmployerApp.competence.employe">Employe</span></th>
+
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let competence of competences; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/competence', competence.id, 'view']">{{ competence.id }}</a>
-          </td>
           <td>{{ competence.nom }}</td>
           <td>{{ competence.description }}</td>
-          <td>
-            <div *ngIf="competence.employe">
-              <a [routerLink]="['/employe', competence.employe?.id, 'view']">{{ competence.employe?.id }}</a>
-            </div>
-          </td>
+
           <td class="text-end">
             <div class="btn-group">
               <button

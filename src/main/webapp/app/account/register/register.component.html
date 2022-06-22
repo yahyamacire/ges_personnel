@@ -237,80 +237,59 @@
 </div>
 -->
 
-
-
-
-
-
-
 <div class="login-page">
-  
   <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
-
     <strong>Registration saved!</strong> Please check your email for confirmation.
   </div>
-  <div  *ngIf="success"class="mt-3 alert alert-warning">
-   
+  <div *ngIf="success" class="mt-3 alert alert-warning">
     <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-    <a class="alert-link" routerLink="/login" jhiTranslate="global.messages.info.authenticated.link">sign in</a
-    >
-    </div>
+    <a class="alert-link" routerLink="/login" jhiTranslate="global.messages.info.authenticated.link">sign in</a>
+  </div>
   <div *ngIf="!success" class="container" id="container">
     <div class="form-container sign-in-container">
-      
-     
+      <form *ngIf="!success" class="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm">
+        <h1>S'inscrire</h1>
 
-      <form  *ngIf="!success" class="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm">
-        <h1>se connecter</h1>
-
-        <span>veuiller remplir vos données</span>
         <input
-        type="text"
-        class="form-control"
-        id="login"
-        name="login"
-        placeholder="{{ 'global.form.username.placeholder' | translate }}"
-        formControlName="login"
-        data-cy="username"
-        #login
-      />
-      <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="{{ 'global.form.email.placeholder' | translate }}"
-            formControlName="email"
-            data-cy="email"
-          />		
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password"
-            placeholder="{{ 'global.form.newpassword.placeholder' | translate }}"
-            formControlName="password"
-            data-cy="firstPassword"
-          />
-          <input
-            type="password"
-            class="form-control"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="{{ 'global.form.confirmpassword.placeholder' | translate }}"
-            formControlName="confirmPassword"
-            data-cy="secondPassword"
-          />
+          type="text"
+          class="form-control"
+          id="login"
+          name="login"
+          placeholder="{{ 'global.form.username.placeholder' | translate }}"
+          formControlName="login"
+          data-cy="username"
+          #login
+        />
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="{{ 'global.form.email.placeholder' | translate }}"
+          formControlName="email"
+          data-cy="email"
+        />
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="{{ 'global.form.newpassword.placeholder' | translate }}"
+          formControlName="password"
+          data-cy="firstPassword"
+        />
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="{{ 'global.form.confirmpassword.placeholder' | translate }}"
+          formControlName="confirmPassword"
+          data-cy="secondPassword"
+        />
 
-        <button type="submit"
-        [disabled]="registerForm.invalid"
-        class="btn btn-primary"
-        jhiTranslate="register.form.button"
-        data-cy="submit">Sign in</button>
+        <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary" data-cy="submit">S'inscrire</button>
       </form>
-     
-        
-      
     </div>
     <div class="overlay-container">
       <div class="overlay">
@@ -320,19 +299,13 @@
           <button class="ghost" id="signIn">Sign In</button>
         </div>
         <div class="overlay-panel overlay-right">
-          <h1>pas de compte actuel!</h1>
-          <p>créer un nouveau</p>
-          <button class="ghost" id="signUp">Sign Up</button>
+          <h1>veuiller remplir vos données</h1>
+
+          <a routerLink="/login">
+            <button class="ghost" id="signUp">Se connecter</button>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-

@@ -2,7 +2,7 @@
   <div class="col-8">
     <div *ngIf="employe">
       <h2 data-cy="employeDetailsHeading">
-        <span>Infos Personel</span>
+        <span>Informations personnelles</span>
       </h2>
 
       <hr />
@@ -12,10 +12,6 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ employe.id }}</span>
-        </dd>
         <dt><span jhiTranslate="gesEmployerApp.employe.nni">Nni</span></dt>
         <dd>
           <span>{{ employe.nni }}</span>
@@ -73,10 +69,6 @@
           <div *ngIf="employe.photo">
             <img [src]="bypassSecurityTrust(employe.photo)" />
           </div>
-        </dd>
-        <dt><span jhiTranslate="gesEmployerApp.employe.user">User</span></dt>
-        <dd>
-          <span>{{ employe.user?.id }}</span>
         </dd>
 
         <dt><span jhiTranslate="gesEmployerApp.employe.structure">Structure</span></dt>

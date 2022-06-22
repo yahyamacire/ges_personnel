@@ -1,12 +1,8 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-competence-linguistique-heading"
-        data-cy="CompetenceLinguistiqueCreateUpdateHeading"
-        jhiTranslate="gesEmployerApp.competenceLinguistique.home.createOrEditLabel"
-      >
-        Create or edit a Competence Linguistique
+      <h2 id="jhi-competence-linguistique-heading" data-cy="CompetenceLinguistiqueCreateUpdateHeading">
+        Creer ou editer une Competence Linguistique
       </h2>
 
       <div>
@@ -22,19 +18,6 @@
           <select class="form-control" name="niveau" formControlName="niveau" id="field_niveau" data-cy="niveau">
             <option [ngValue]="null">{{ 'gesEmployerApp.Niveau.null' | translate }}</option>
             <option *ngFor="let niveau of niveauValues" [value]="niveau">{{ 'gesEmployerApp.Niveau.' + niveau | translate }}</option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gesEmployerApp.competenceLinguistique.employe" for="field_employe">Employe</label>
-          <select class="form-control" id="field_employe" data-cy="employe" name="employe" formControlName="employe">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="employeOption.id === editForm.get('employe')!.value?.id ? editForm.get('employe')!.value : employeOption"
-              *ngFor="let employeOption of employesSharedCollection; trackBy: trackEmployeById"
-            >
-              {{ employeOption.id }}
-            </option>
           </select>
         </div>
 

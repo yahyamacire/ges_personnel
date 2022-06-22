@@ -35,7 +35,7 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
 
 
         $niveau = $parameters['niveau'];
-       
+
         $CompetenceLinguistique = new CompetenceLinguistique();
 
         $CompetenceLinguistique->setniveau($niveau);
@@ -80,11 +80,11 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
     }
 
     #[Rest\Delete('competence-linguistiques/{id}', name: 'api_delete_CompetenceLinguistique', )]
-    public function delete(CompetenceLinguistique $CompetenceLinguistique, CompetenceLinguistiqueRepository $CompetenceLinguistiqueRepository): Response
+   public function delete(CompetenceLinguistique $CompetenceLinguistique, CompetenceLinguistiqueRepository $CompetenceLinguistiqueRepository): Response
     {
-      
+
         $CompetenceLinguistiqueRepository->remove($CompetenceLinguistique, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',

@@ -1,17 +1,10 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-diplome-heading" data-cy="DiplomeCreateUpdateHeading" jhiTranslate="gesEmployerApp.diplome.home.createOrEditLabel">
-        Create or edit a Diplome
-      </h2>
+      <h2 id="jhi-diplome-heading" data-cy="DiplomeCreateUpdateHeading">Creer ou editer un Diplome</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
-
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gesEmployerApp.diplome.libelle" for="field_libelle">Libelle</label>
@@ -19,7 +12,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.universite" for="field_universite">Universite</label>
+          <label class="form-label" for="field_universite">Etablissement</label>
           <input
             type="text"
             class="form-control"
@@ -94,19 +87,6 @@
             id="field_diplomeContentType"
             formControlName="diplomeContentType"
           />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gesEmployerApp.diplome.employe" for="field_employe">Employe</label>
-          <select class="form-control" id="field_employe" data-cy="employe" name="employe" formControlName="employe">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="employeOption.id === editForm.get('employe')!.value?.id ? editForm.get('employe')!.value : employeOption"
-              *ngFor="let employeOption of employesSharedCollection; trackBy: trackEmployeById"
-            >
-              {{ employeOption.id }}
-            </option>
-          </select>
         </div>
       </div>
 

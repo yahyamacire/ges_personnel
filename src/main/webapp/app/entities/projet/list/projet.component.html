@@ -32,7 +32,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.projet.nom">Nom</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.projet.dateDebut">Date Debut</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.projet.dateFin">Date Fin</span></th>
@@ -42,9 +41,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let projet of projets; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/projet', projet.id, 'view']">{{ projet.id }}</a>
-          </td>
           <td>{{ projet.nom }}</td>
           <td>{{ projet.dateDebut | formatMediumDatetime }}</td>
           <td>{{ projet.dateFin | formatMediumDatetime }}</td>

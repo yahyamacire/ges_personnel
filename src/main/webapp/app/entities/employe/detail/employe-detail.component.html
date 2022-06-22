@@ -187,6 +187,15 @@
                 <div *ngIf="employe.photo">
                   <img [src]="bypassSecurityTrust(employe.photo)" class="profile-img" />
                 </div>
+
+                <ng-container *ngIf="!employe.photo">
+                  <div *ngIf="employe.sexe == 'HOMME'">
+                    <img src="../../../../content/images/jhipster_family_member_0_head-256.png" class="profile-img" />
+                  </div>
+                  <div *ngIf="employe.sexe == 'FEMME'">
+                    <img src="../../../../content/images/jhipster_family_member_2_head-192.png" class="profile-img" />
+                  </div>
+                </ng-container>
               </dd>
 
               <div class="blue-box"></div>

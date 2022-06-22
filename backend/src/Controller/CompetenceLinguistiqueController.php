@@ -53,11 +53,12 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
         return $this->handleView($this->view($CompetenceLinguistique));
     }
 
-    #[Rest\Get('CompetenceLinguistiques/{id}', name: 'api_get_CompetenceLinguistique')]
+    #[Rest\Get('competence-linguistiques/{id}', name: 'api_get_CompetenceLinguistique')]
     public function getFacture(CompetenceLinguistique $CompetenceLinguistique){
         return $this->handleView($this->view($CompetenceLinguistique));
     }
-    #[Rest\Put('projets/{id}', name: 'api_edit_project', )]
+
+    #[Rest\Put('competence-linguistiques/{id}', name: 'api_edit_project', )]
     public function edit(Request $request, ManagerRegistry  $doctrine, CompetenceLinguistique $CompetenceLinguistique)
     {
 
@@ -78,7 +79,7 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
         return $this->handleView($this->view($CompetenceLinguistique));
     }
 
-    #[Rest\Delete('CompetenceLinguistiques/{id}', name: 'api_delete_CompetenceLinguistique', )]
+    #[Rest\Delete('competence-linguistiques/{id}', name: 'api_delete_CompetenceLinguistique', )]
     public function delete(CompetenceLinguistique $CompetenceLinguistique, CompetenceLinguistiqueRepository $CompetenceLinguistiqueRepository): Response
     {
       

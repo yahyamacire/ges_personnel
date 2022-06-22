@@ -13,6 +13,7 @@ import { CabinetComponent } from './cabinet/cabinet.component';
 import { SecretariatComponent } from './secretariat/secretariat.component';
 import { EmployesTypeComponent } from './employes-type/employes-type.component';
 import { ProfilComponent } from './profil/profil.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([HOME_ROUTE])],
@@ -27,6 +28,7 @@ import { ProfilComponent } from './profil/profil.component';
     SecretariatComponent,
     EmployesTypeComponent,
     ProfilComponent,
+    SearchFilterPipe,
   ],
 })
 export class HomeModule {}

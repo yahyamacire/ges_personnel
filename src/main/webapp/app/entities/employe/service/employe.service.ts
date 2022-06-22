@@ -63,10 +63,9 @@ export class EmployeService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
-  listEmployes(structureId: number, req?: any): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
+  listEmployes(structureId: number): Observable<EntityArrayResponseType> {
     return this.http
-      .get<IEmploye[]>(`${this.resourceEmploesUrl}/${structureId}`, { params: options, observe: 'response' })
+      .get<IEmploye[]>(`${this.resourceEmploesUrl}/${structureId}`, { observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

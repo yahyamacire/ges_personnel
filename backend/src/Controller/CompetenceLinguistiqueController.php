@@ -35,7 +35,7 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
 
 
         $niveau = $parameters['niveau'];
-       
+
         $CompetenceLinguistique = new CompetenceLinguistique();
 
         $CompetenceLinguistique->setniveau($niveau);
@@ -78,12 +78,22 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
         return $this->handleView($this->view($CompetenceLinguistique));
     }
 
+    #[Rest\Get('competenceLinguistiques/langues/{id}', name: 'api_list_competencelinguistiques_langues')]
+    public function listEmployerStructure(Langue $langue , LangueRepository $langueRepository)
+    {
+
+        $list = $langueRepository->findBy(['competencelinguistiques' => $langue->getId()]);
+
+
+        return $this->handleView($this->view($list));
+    }
+
     #[Rest\Delete('CompetenceLinguistiques/{id}', name: 'api_delete_CompetenceLinguistique', )]
     public function delete(CompetenceLinguistique $CompetenceLinguistique, CompetenceLinguistiqueRepository $CompetenceLinguistiqueRepository): Response
     {
-      
+
         $CompetenceLinguistiqueRepository->remove($CompetenceLinguistique, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',

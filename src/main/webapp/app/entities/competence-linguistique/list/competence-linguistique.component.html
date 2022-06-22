@@ -32,27 +32,21 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+
           <th scope="col"><span jhiTranslate="gesEmployerApp.competenceLinguistique.niveau">Niveau</span></th>
-          <th scope="col"><span jhiTranslate="gesEmployerApp.competenceLinguistique.employe">Employe</span></th>
+
           <th scope="col"><span jhiTranslate="gesEmployerApp.competenceLinguistique.langue">Langue</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let competenceLinguistique of competenceLinguistiques; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/competence-linguistique', competenceLinguistique.id, 'view']">{{ competenceLinguistique.id }}</a>
-          </td>
+
           <td jhiTranslate="{{ 'gesEmployerApp.Niveau.' + competenceLinguistique.niveau }}">{{ competenceLinguistique.niveau }}</td>
-          <td>
-            <div *ngIf="competenceLinguistique.employe">
-              <a [routerLink]="['/employe', competenceLinguistique.employe?.id, 'view']">{{ competenceLinguistique.employe?.id }}</a>
-            </div>
-          </td>
+
           <td>
             <div *ngIf="competenceLinguistique.langue">
-              <a [routerLink]="['/langue', competenceLinguistique.langue?.id, 'view']">{{ competenceLinguistique.langue?.id }}</a>
+              <a [routerLink]="['/langue', competenceLinguistique.langue?.id, 'view']">{{ competenceLinguistique.langue?.nom }}</a>
             </div>
           </td>
           <td class="text-end">

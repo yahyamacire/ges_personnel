@@ -10,10 +10,7 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ competence.id }}</span>
-        </dd>
+
         <dt><span jhiTranslate="gesEmployerApp.competence.nom">Nom</span></dt>
         <dd>
           <span>{{ competence.nom }}</span>
@@ -22,12 +19,7 @@
         <dd>
           <span>{{ competence.description }}</span>
         </dd>
-        <dt><span jhiTranslate="gesEmployerApp.competence.employe">Employe</span></dt>
-        <dd>
-          <div *ngIf="competence.employe">
-            <a [routerLink]="['/employe', competence.employe?.id, 'view']">{{ competence.employe?.id }}</a>
-          </div>
-        </dd>
+
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

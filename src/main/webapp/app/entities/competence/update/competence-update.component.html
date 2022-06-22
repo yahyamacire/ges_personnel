@@ -4,18 +4,15 @@
       <h2
         id="jhi-competence-heading"
         data-cy="CompetenceCreateUpdateHeading"
-        jhiTranslate="gesEmployerApp.competence.home.createOrEditLabel"
+
       >
-        Create or edit a Competence
+        Creer ou editer une Competence
       </h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gesEmployerApp.competence.nom" for="field_nom">Nom</label>
@@ -34,18 +31,7 @@
           />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="gesEmployerApp.competence.employe" for="field_employe">Employe</label>
-          <select class="form-control" id="field_employe" data-cy="employe" name="employe" formControlName="employe">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="employeOption.id === editForm.get('employe')!.value?.id ? editForm.get('employe')!.value : employeOption"
-              *ngFor="let employeOption of employesSharedCollection; trackBy: trackEmployeById"
-            >
-              {{ employeOption.id }}
-            </option>
-          </select>
-        </div>
+
       </div>
 
       <div>

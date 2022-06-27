@@ -52,7 +52,7 @@
             <a [routerLink]="['/structure', structure.id, 'view']">{{ structure.id }}</a>
           </td>
           <td>{{ structure.nom }}</td>
-          <td jhiTranslate="{{ 'gesEmployerApp.Type.' + structure.type }}">{{ structure.type }}</td>
+          <td>{{ structure.type }}</td>
           <td>
             <a *ngIf="structure.image" (click)="openFile(structure.image, structure.imageContentType)" jhiTranslate="entity.action.open"
               >open</a

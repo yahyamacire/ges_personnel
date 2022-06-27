@@ -15,7 +15,7 @@
         [routerLink]="['/competence-linguistique/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="gesEmployerApp.competenceLinguistique.home.createLabel"> Create a new Competence Linguistique </span>
+        <span > Créer une nouvelle compétence linguistique  </span>
       </button>
     </div>
   </h2>
@@ -32,7 +32,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-
           <th scope="col"><span jhiTranslate="gesEmployerApp.competenceLinguistique.niveau">Niveau</span></th>
 
           <th scope="col"><span jhiTranslate="gesEmployerApp.competenceLinguistique.langue">Langue</span></th>
@@ -41,7 +40,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let competenceLinguistique of competenceLinguistiques; trackBy: trackId" data-cy="entityTable">
-
           <td jhiTranslate="{{ 'gesEmployerApp.Niveau.' + competenceLinguistique.niveau }}">{{ competenceLinguistique.niveau }}</td>
 
           <td>

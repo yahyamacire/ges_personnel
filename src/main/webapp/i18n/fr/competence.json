@@ -2,17 +2,17 @@
   "gesEmployerApp": {
     "competence": {
       "home": {
-        "title": "Competences",
+        "title": "Compétences",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Competence",
-        "createOrEditLabel": "Créer ou éditer un Competence",
-        "notFound": "Aucun Competence trouvé"
+        "createLabel": "Créer une nouvelle Compétence",
+        "createOrEditLabel": "Créer ou éditer une nouvelle Compétence",
+        "notFound": "Aucune Competence trouvée"
       },
-      "created": "Un nouveau Competence a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Competence avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Competence avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Compétence a été créé avec l'identifiant {{ param }}",
+      "updated": "La Compétence avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Compétence avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Competence {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Competence  ?"
       },
       "detail": {
         "title": "Competence"

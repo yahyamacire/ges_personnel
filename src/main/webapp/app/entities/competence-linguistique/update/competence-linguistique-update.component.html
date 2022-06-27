@@ -1,11 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-competence-linguistique-heading"
-        data-cy="CompetenceLinguistiqueCreateUpdateHeading"
-
-      >
+      <h2 id="jhi-competence-linguistique-heading" data-cy="CompetenceLinguistiqueCreateUpdateHeading">
         Creer ou editer une Competence Linguistique
       </h2>
 
@@ -21,8 +17,6 @@
             <option *ngFor="let niveau of niveauValues" [value]="niveau">{{ 'gesEmployerApp.Niveau.' + niveau | translate }}</option>
           </select>
         </div>
-
-
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gesEmployerApp.competenceLinguistique.langue" for="field_langue">Langue</label>

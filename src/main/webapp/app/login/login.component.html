@@ -63,8 +63,7 @@
   <div class="container" id="container">
     <div class="form-container sign-in-container">
       <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
-        <h1>se connecter</h1>
-
+       <h1 jhiTranslate="home.connecter">se connecter</h1>
 
         <input
           type="text"
@@ -87,22 +86,22 @@
           data-cy="password"
         />
 
-        <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button" data-cy="submit">Sign in</button>
+        <button type="submit" class="btn btn-primary" jhiTranslate="home.connecter" data-cy="submit">Sign in</button>
       </form>
     </div>
     <div class="overlay-container">
       <div class="overlay">
         <div class="overlay-panel overlay-left">
-          <h1>veuiller remplir vos données</h1>
+          <h1> <span jhiTranslate="home."> veuiller remplir vos données </span></h1>
           <p></p>
           <button class="ghost" id="signIn">Sign In</button>
         </div>
         <div class="overlay-panel overlay-right">
-          <h1>pas de compte actuel!</h1>
-          <p>créer un nouveau</p>
+          <h1 jhiTranslate="home.compte">pas de compte actuel!</h1>
+          <p><span jhiTranslate="home.ins">créer un nouveau</span></p>
           <a routerLink="/account/register">
-          <button class="ghost" id="signUp">S'inscrire</button>
-        </a>
+            <button class="ghost" id="signUp"><span jhiTranslate="home.inscrire">S'inscrire</span></button>
+          </a>
         </div>
       </div>
     </div>

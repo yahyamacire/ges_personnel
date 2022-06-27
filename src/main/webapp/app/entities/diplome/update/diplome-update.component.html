@@ -1,14 +1,10 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-diplome-heading" data-cy="DiplomeCreateUpdateHeading" >
-        Creer ou editer un Diplome
-      </h2>
+      <h2 id="jhi-diplome-heading" data-cy="DiplomeCreateUpdateHeading">Creer ou editer un Diplome</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
-
-
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gesEmployerApp.diplome.libelle" for="field_libelle">Libelle</label>
@@ -16,7 +12,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label"  for="field_universite">Etablissement</label>
+          <label class="form-label" for="field_universite">Etablissement</label>
           <input
             type="text"
             class="form-control"
@@ -92,8 +88,6 @@
             formControlName="diplomeContentType"
           />
         </div>
-
-
       </div>
 
       <div>

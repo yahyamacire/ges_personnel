@@ -32,27 +32,25 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.libelle">Libelle</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.universite">Universite</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.date">Date</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.diplome.description">Description</span></th>
-
 
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let diplome of diplomes; trackBy: trackId" data-cy="entityTable">
-
           <td>{{ diplome.libelle }}</td>
           <td>{{ diplome.universite }}</td>
           <td>{{ diplome.date | formatMediumDatetime }}</td>
           <td>{{ diplome.description }}</td>
 
-          <td>
 
-          </td>
+
+
+          <td></td>
           <td class="text-end">
             <div class="btn-group">
               <button

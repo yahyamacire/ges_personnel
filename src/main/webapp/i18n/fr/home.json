@@ -4,6 +4,8 @@
     "subtitle": "BIENVENUE",
     "connecter": "Se Connecter",
     "inscrire": "S'inscrire",
+    "compte": "pas de compte actuel",
+    "ins": "créer un nouveau",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     },

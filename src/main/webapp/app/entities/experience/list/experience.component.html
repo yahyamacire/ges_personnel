@@ -32,7 +32,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-
           <th scope="col"><span jhiTranslate="gesEmployerApp.experience.entreprise">Entreprise</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.experience.dateDebut">Date Debut</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.experience.dateFin">Date Fin</span></th>
@@ -43,7 +42,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let experience of experiences; trackBy: trackId" data-cy="entityTable">
-
           <td>{{ experience.entreprise }}</td>
           <td>{{ experience.dateDebut | formatMediumDatetime }}</td>
           <td>{{ experience.dateFin | formatMediumDatetime }}</td>

@@ -15,6 +15,8 @@ import { IStructure } from '../../entities/structure/structure.model';
 export class EmployesComponent implements OnInit {
   structure: IStructure | null = null;
   employes?: IEmploye[];
+  searchTerm = '';
+  employesRecherche?: IEmploye[];
   query = null;
 
   constructor(protected employeService: EmployeService, protected activatedRoute: ActivatedRoute) {}
@@ -27,15 +29,12 @@ export class EmployesComponent implements OnInit {
       console.log(this.structure);
 
       if (this.structure) {
-        this.employeService
-          .listEmployes(this.structure.id!, {
-            query: this.query,
-          })
-          .subscribe({
-            next: (res: HttpResponse<IEmploye[]>) => {
-              this.employes = res.body ?? [];
-            },
-          });
+        this.employeService.listEmployes(this.structure.id!).subscribe({
+          next: (res: HttpResponse<IEmploye[]>) => {
+            this.employes = res.body ?? [];
+            this.employesRecherche = this.employes;
+          },
+        });
       }
     });
   }
@@ -46,5 +45,11 @@ export class EmployesComponent implements OnInit {
 
   bypassSecurityTrust(image: string): string {
     return `data:image/png;base64,` + image;
+  }
+
+  search(value: string): void {
+    if (this.employes) {
+      this.employesRecherche = this.employes.filter(val => val.nom!.toLowerCase().includes(value));
+    }
   }
 }

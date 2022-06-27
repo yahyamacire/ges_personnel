@@ -15,24 +15,22 @@ export class SecretariatComponent implements OnInit {
   constructor(protected structureService: StructureService,protected activatedRoute: ActivatedRoute ) {}
 
   ngOnInit(): void {
-    
+
     this.structureService.structureSG().subscribe({
 
       next: (res: HttpResponse<IStructure>) => {
         this.structure= res.body;
-        
-
-      
 
       },
     });
+  }
+  bypassSecurityTrust(image: string): string {
+    return `data:image/png;base64,` + image;
   }
 
   trackId(_index: number, item: IStructure): number {
     return item.id!;
   }
 
-  bypassSecurityTrust(image: string): string {
-    return `data:image/png;base64,` + image;
-  }
+
 }

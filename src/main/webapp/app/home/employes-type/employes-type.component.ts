@@ -15,6 +15,9 @@ export class EmployesTypeComponent implements OnInit {
   structure: IStructure | null = null;
   employes?: IEmploye[];
 
+  searchTerm = '';
+  employesRecherche?: IEmploye[];
+
   constructor(protected route: ActivatedRoute, protected employeService: EmployeService, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -34,5 +37,11 @@ export class EmployesTypeComponent implements OnInit {
 
   bypassSecurityTrust(image: string): string {
     return `data:image/png;base64,` + image;
+  }
+
+  search(value: string): void {
+    if (this.employes) {
+      this.employesRecherche = this.employes.filter(val => val.nom!.toLowerCase().includes(value));
+    }
   }
 }

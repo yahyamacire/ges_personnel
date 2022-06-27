@@ -115,17 +115,26 @@ class StructureController extends AbstractFOSRestController
         ]);
 
 
-        if ($structure->getImage() != null) {
+        $structures = $structure->getStructures();
 
 
-            $content = '';
-            while (!feof($structure->getImage())) {
-                $content .= fread($structure->getImage(), 1024);
+        foreach ($structures as $sousStructures) {
+            if ($sousStructures->getImage() != null) {
+
+
+                $content = '';
+                while (!feof($sousStructures->getImage())) {
+                    $content .= fread($sousStructures->getImage(), 1024);
+                }
+                rewind($sousStructures->getImage());
+
+                $sousStructures->setImage($content);
             }
-            rewind($structure->getImage());
-
-            $structure->setImage($content);
         }
+
+        $structure->setStructures($structures);
+
+
         $employe = null;
 
         $employe = $employeRepository->findOneBy([
@@ -135,6 +144,7 @@ class StructureController extends AbstractFOSRestController
         if ($employe != null) {
             $chef = $employe->getNom() . ' ' . $employe->getPrenom();
             $structure->setChef($chef);
+            $structure->setIdChef($employe->getId());
 
         }
 
@@ -209,7 +219,7 @@ class StructureController extends AbstractFOSRestController
         if ($employe != null) {
             $chef = $employe->getNom() . ' ' . $employe->getPrenom();
             $structure->setChef($chef);
-
+            $structure->setIdChef($employe->getId());
         }
 
         return $this->handleView($this->view($structure));
@@ -268,6 +278,7 @@ class StructureController extends AbstractFOSRestController
 
                     $chef = $employeChef->getNom() . ' ' . $employeChef->getPrenom();
                     $structure->setChef($chef);
+                    $structure->setIdChef($employe->getId());
 
                 }else{
                     return $this->handleView($this->view(null));

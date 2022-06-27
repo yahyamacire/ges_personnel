@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Competence;
 use App\Repository\CompetenceRepository;
+use App\Repository\EmployeRepository;
 use App\Repository\ProjetRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,7 +30,7 @@ class CompetenceController extends AbstractFOSRestController
         if($user != null && $user->getEmploye() != null){
             $list = $competenceRepository->findBy(['employe' => $user->getEmploye()->getId()]);
         }
-        $list = $competenceRepository->findAll();
+       // $list = $competenceRepository->findAll();
         return $this->handleView($this->view($list));
     }
 
@@ -101,7 +102,7 @@ class CompetenceController extends AbstractFOSRestController
     {
        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
         $competenceRepository->remove($competence, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',
@@ -109,6 +110,9 @@ class CompetenceController extends AbstractFOSRestController
             ['content-type' => 'application/json']
         );
     }
+
+
+
 }
 
 

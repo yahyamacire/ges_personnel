@@ -32,7 +32,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-
           <th scope="col"><span jhiTranslate="gesEmployerApp.competence.nom">Nom</span></th>
           <th scope="col"><span jhiTranslate="gesEmployerApp.competence.description">Description</span></th>
 
@@ -41,7 +40,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let competence of competences; trackBy: trackId" data-cy="entityTable">
-
           <td>{{ competence.nom }}</td>
           <td>{{ competence.description }}</td>
 

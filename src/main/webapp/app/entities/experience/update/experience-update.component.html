@@ -1,18 +1,10 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-experience-heading"
-        data-cy="ExperienceCreateUpdateHeading"
-
-      >
-        Creer ou editer une Experience
-      </h2>
+      <h2 id="jhi-experience-heading" data-cy="ExperienceCreateUpdateHeading">Creer ou editer une Experience</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
-
-
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="gesEmployerApp.experience.entreprise" for="field_entreprise">Entreprise</label>
@@ -101,8 +93,6 @@
             </small>
           </div>
         </div>
-
-
       </div>
 
       <div>

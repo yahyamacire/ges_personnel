@@ -2,29 +2,29 @@
   "gesEmployerApp": {
     "employe": {
       "home": {
-        "title": "Employes",
+        "title": "Employés",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Employe",
+        "createLabel": "Créer un nouvel Employe",
         "createOrEditLabel": "Créer ou éditer un Employe",
-        "notFound": "Aucun Employe trouvé"
+        "notFound": "Aucun Employé trouvé"
       },
-      "created": "Un nouveau Employe a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Employe avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Employe avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouvel Employé a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Employé avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Employé avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Employe {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'employe  ?"
       },
       "detail": {
-        "title": "Employe"
+        "title": "Employé"
       },
       "id": "ID",
-      "nni": "Nni",
+      "nni": "NNI",
       "nom": "Nom",
       "prenom": "Prenom",
       "sexe": "Sexe",
       "dateNaissance": "Date Naissance",
       "email": "Email",
-      "telephone": "Telephone",
+      "telephone": "Téléphone",
       "dateRecrutement": "Date Recrutement",
       "matricule": "Matricule",
       "fonction": "Fonction",
@@ -33,10 +33,10 @@
       "domaine": "Domaine",
       "photo": "Photo",
       "user": "User",
-      "diplome": "Diplome",
-      "competence": "Competence",
+      "diplome": "Diplôme",
+      "competence": "Compétence",
       "competenceLinguistique": "Competence Linguistique",
-      "experience": "Experience",
+      "experience": "Expérience",
       "projet": "Projet",
       "structure": "Structure"
     }

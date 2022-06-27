@@ -6,6 +6,7 @@ use App\Repository\StructureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
 class Structure
@@ -32,9 +33,11 @@ class Structure
 
     #[ORM\Column(type: 'blob', nullable: true)]
     private $image;
-    
+
     private $chef;
- 
+    #[Serializer\SerializedName("idChef")]
+    private $idChef;
+
 
     public function __construct()
     {
@@ -175,6 +178,23 @@ class Structure
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdChef()
+    {
+        return $this->idChef;
+    }
+
+    /**
+     * @param mixed $idChef
+     */
+    public function setIdChef($idChef): void
+    {
+        $this->idChef = $idChef;
+    }
+
 
 
 }

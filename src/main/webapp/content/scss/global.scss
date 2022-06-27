@@ -1065,7 +1065,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
 
   .u-section-1 .u-text-1 {
     letter-spacing: 2px;
-    font-weight: 300;
+    font-weight: 700;
     font-size: 3.5rem;
     text-shadow: 6px -2px 13px rgba(133, 142, 153, 1);
     margin: 0 30px 0 -30px;
@@ -1438,7 +1438,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 
   .u-section-1 .u-list-item-2 {
-    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 5px 20px 0 rgb(0, 0, 0);
   }
 
   .u-section-1 .u-container-layout-3 {
@@ -1757,21 +1757,22 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 
   .u-text-3 {
-    color: #0f0f0f !important;
+    color: #000000 !important;
   }
 }
 
 .detail-structure {
   .u-section-1 {
     background-image: none;
-    min-height: 1196px;
+    min-height: 1270px;
   }
 
   .u-section-1 .u-text-1 {
     font-size: 4.5rem;
     font-weight: 700;
-    text-shadow: 2px 6px 9px rgba(119, 170, 217, 1);
-    margin: 50px calc(((100% - 1140px) / 2) + 197px) 0 calc(((100% - 1140px) / 2) + 248px);
+    text-shadow: 2px 6px 9px rgb(67, 88, 109);
+    margin: 50px 0 0 0;
+    text-align: center;
   }
 
   .u-section-1 .u-shape-1 {
@@ -1856,7 +1857,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 
   .u-section-1 .u-list-item-2 {
-    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 5px 20px 0 rgb(5, 5, 5);
   }
 
   .u-section-1 .u-container-layout-3 {
@@ -2169,6 +2170,10 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
     border-color: #3e87cf;
     border: 5px solid;
     padding: 21px;
+
+    img {
+      width: 160px;
+    }
   }
 
   .u-btn,
@@ -2465,8 +2470,9 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   .u-section-1 .u-text-1 {
     font-size: 4.5rem;
     font-weight: 700;
-    text-shadow: 2px 6px 9px rgba(119, 170, 217, 1);
-    margin: 50px calc(((100% - 1140px) / 2) + 197px) 0 calc(((100% - 1140px) / 2) + 248px);
+    text-shadow: 2px 6px 9px rgb(67, 88, 109);
+    margin: 50px 0 0 0;
+    text-align: center;
   }
 
   .u-section-1 .u-shape-1 {
@@ -3064,7 +3070,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
     content: '';
     display: block;
     background: var(--blue);
-    width: 40%;
+    width: 90%;
     height: 100%;
     border-radius: 9px;
   }
@@ -3079,7 +3085,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
     content: '';
     display: block;
     background: var(--blue);
-    width: 80%;
+    width: 70%;
     height: 100%;
     border-radius: 9px;
   }
@@ -3095,7 +3101,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
     content: '';
     display: block;
     background: var(--blue);
-    width: 90%;
+    width: 40%;
     height: 100%;
     border-radius: 9px;
   }

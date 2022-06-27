@@ -4,18 +4,18 @@
       "home": {
         "title": "CompetenceLinguistiques",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Competence Linguistique",
+        "createLabel": "Créer une nouvelle Competence Linguistique",
         "createOrEditLabel": "Créer ou éditer un Competence Linguistique",
-        "notFound": "Aucun Competence Linguistique trouvé"
+        "notFound": "Aucune Competence Linguistique trouvée"
       },
-      "created": "Un nouveau Competence Linguistique a été créé avec l'identifiant {{ param }}",
+      "created": "Une nouvelle Competence Linguistique a été créé avec l'identifiant {{ param }}",
       "updated": "Le Competence Linguistique avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Competence Linguistique avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Competence Linguistique {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Competence Linguistique  ?"
       },
       "detail": {
-        "title": "Competence Linguistique"
+        "title": "Compétence Linguistique"
       },
       "id": "ID",
       "niveau": "Niveau",

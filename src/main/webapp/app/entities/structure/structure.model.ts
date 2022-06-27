@@ -3,6 +3,7 @@ import { Type } from 'app/entities/enumerations/type.model';
 
 export interface IStructure {
   id?: number;
+  idChef?: number;
   nom?: string | null;
   chef?: string | null;
   type?: Type | null;
@@ -16,6 +17,7 @@ export interface IStructure {
 export class Structure implements IStructure {
   constructor(
     public id?: number,
+    public idChef?: number,
     public nom?: string | null,
     public type?: Type | null,
     public imageContentType?: string | null,

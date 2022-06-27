@@ -14,6 +14,7 @@ export type EntityArrayResponseType = HttpResponse<ICompetence[]>;
 export class CompetenceService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/competences');
 
+
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   create(competence: ICompetence): Observable<EntityResponseType> {
@@ -40,6 +41,7 @@ export class CompetenceService {
     const options = createRequestOption(req);
     return this.http.get<ICompetence[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });

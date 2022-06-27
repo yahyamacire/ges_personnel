@@ -86,7 +86,8 @@ class EmployeController extends AbstractFOSRestController
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;
-        
+        $description = isset($parameters['description']) ? $parameters['description'] : null ;
+
 
 
         $employe = new Employe();
@@ -102,7 +103,8 @@ class EmployeController extends AbstractFOSRestController
         $employe->setFonction($fonction);
         $employe->setDomaine($domaine);
         $employe->setPhoto($photo);
-        
+        $employe->setDescription($description);
+
 
 
         if($dateNaissance != null) {
@@ -141,7 +143,7 @@ class EmployeController extends AbstractFOSRestController
     #[Rest\Get('employes-fonctions/{fonction}', name: 'api_get_employe_fonction')]
     public function getEmployefonction($fonction, EmployeRepository $employeRepository)
     {
-            
+
 
         if($fonction == 'AUTRE'){
             $employes=$employeRepository->autresEmployers();
@@ -151,7 +153,7 @@ class EmployeController extends AbstractFOSRestController
             ]);
 
         }
-        
+
 
 
     foreach ($employes as $employe){
@@ -163,7 +165,7 @@ class EmployeController extends AbstractFOSRestController
                 $content.= fread($employe->getPhoto(), 1024);
             }
             rewind($employe->getPhoto());
-                        
+
             $employe->setPhoto($content);
         }
 
@@ -186,7 +188,7 @@ class EmployeController extends AbstractFOSRestController
                 $content.= fread($employe->getPhoto(), 1024);
             }
             rewind($employe->getPhoto());
-                        
+
             $employe->setPhoto($content);
         }
         return $this->handleView($this->view($employe));
@@ -233,7 +235,8 @@ class EmployeController extends AbstractFOSRestController
         $photo = isset($parameters['photo']) ? $parameters['photo'] : null ;
         $adresse = isset($parameters['adresse']) ? $parameters['adresse'] : null ;
         $matricule = isset($parameters['matricule']) ? $parameters['matricule'] : null ;
-        
+        $description = isset($parameters['description']) ? $parameters['description'] : null ;
+
 
 
         $employe->setNni($nni);
@@ -248,7 +251,8 @@ class EmployeController extends AbstractFOSRestController
         $employe->setFonction($fonction);
         $employe->setDomaine($domaine);
         $employe->setPhoto($photo);
-       
+        $employe->setDescription($description);
+
 
         if($dateNaissance != null) {
             $dateNaissance = new DateTime($parameters['dateNaissance']);
@@ -263,7 +267,7 @@ class EmployeController extends AbstractFOSRestController
         if(isset($parameters['structure'])){
             $structure= $parameters['structure'];
 
-            
+
 
             $structure = $structureRepository->find($structure['id']);
 
@@ -285,7 +289,7 @@ class EmployeController extends AbstractFOSRestController
 
 
 
-   
+
 
 
 

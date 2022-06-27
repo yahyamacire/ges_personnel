@@ -187,6 +187,15 @@
                 <div *ngIf="employe.photo">
                   <img [src]="bypassSecurityTrust(employe.photo)" class="profile-img" />
                 </div>
+
+                <ng-container *ngIf="!employe.photo">
+                  <div *ngIf="employe.sexe == 'HOMME'">
+                    <img src="../../../../content/images/jhipster_family_member_0_head-256.png" class="profile-img" />
+                  </div>
+                  <div *ngIf="employe.sexe == 'FEMME'">
+                    <img src="../../../../content/images/jhipster_family_member_2_head-192.png" class="profile-img" />
+                  </div>
+                </ng-container>
               </dd>
 
               <div class="blue-box"></div>
@@ -220,14 +229,14 @@
 
               <p class="p1">
                 <span class="span1"><img src=" ../../../content/images/page/call.png" /></span>
-                <dt><span jhiTranslate="gesEmployerApp.employe.telephone">telephone</span></dt>
+                <dt><span jhiTranslate="gesEmployerApp.employe.telephone">téléphone</span></dt>
                 <dd>
                   <span>{{ employe.telephone }}</span>
 
                   <p class="p1">
                     <span class="span1"><img src=" ../../../content/images/page/status.png" /></span
                     ><span>
-                      <dt><span jhiTranslate="gesEmployerApp.employe.status">Status</span></dt>
+                      <dt><span >Statut</span></dt>
                       <dd>
                         <span>{{ employe.status }}</span>
                       </dd>
@@ -246,7 +255,7 @@
                   <p class="p1">
                     <span class="span1"><img src=" ../../../content/images/page/pen.jpg" /></span
                     ><span>
-                      <dt><span jhiTranslate="gesEmployerApp.employe.nni">Nni</span></dt>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.nni">NNI</span></dt>
                       <dd>
                         <span>{{ employe.nni }}</span>
                       </dd>
@@ -276,7 +285,7 @@
                   <p class="p1">
                     <span class="span1"><img src=" ../../../content/images/page/agenda.png" /></span
                     ><span>
-                      <dt><span jhiTranslate="gesEmployerApp.employe.dateRecrutement">Date Recrutement</span></dt>
+                      <dt><span jhiTranslate="gesEmployerApp.employe.dateRecrutement">Date Récrutement</span></dt>
                       <dd>
                         <span>{{ employe.dateRecrutement | formatMediumDatetime }}</span>
                       </dd>
@@ -300,7 +309,7 @@
           <div class="right-section">
             <div class="right-heading">
               <img src="../../../content/images/page/pencil.png" />
-              <p class="p2">diplome</p>
+              <p class="p2">DIPLÔME</p>
             </div>
 
             <div class="clearfix"></div>
@@ -321,7 +330,7 @@
             <br /><br />
             <div class="right-heading">
               <img src="../../../content/images/page/edu.png" />
-              <p class="p2">Experience</p>
+              <p class="p2">Expérience</p>
             </div>
             <div class="clearfix"></div>
 
@@ -344,7 +353,7 @@
             <br />
             <div class="right-heading">
               <img src="../../../content/images/page/add-user-xl.png" />
-              <p class="p2">Competence</p>
+              <p class="p2">Compétence</p>
             </div>
             <div class="clearfix"></div>
 
@@ -365,21 +374,25 @@
             <br />
             <div class="right-heading">
               <img src="../../../content/images/page/globe-4-xl.png" />
-              <p class="p2">Competence Linguistique</p>
+              <p class="p2">Compétence Linguistique</p>
             </div>
             <div class="clearfix"></div>
-            <div class="s-box">
-              <p class="p6">Arab</p>
-              <div id="progress"></div>
-              <p class="p6">espagnol</p>
-              <div id="progress1"></div>
+            <div class="">
+
+              <div class="row">
+
+
+              <div class="col-6" style="padding: 10px;" *ngFor="let competenceLinguistique of employe.competenceLinguistiques;">
+                <p class="p6">{{ competenceLinguistique.langue?.nom }}</p>
+                <div *ngIf="competenceLinguistique.niveau == 'TRES_BIEN'" id="progress1"></div>
+                <div *ngIf="competenceLinguistique.niveau == 'BIEN'" id="progress2"></div>
+                <div *ngIf="competenceLinguistique.niveau == 'ASSEZ_BIEN'" id="progress3"></div>
+
+              </div>
+
+              </div>
             </div>
-            <div class="s-box">
-              <p class="p6">Francais</p>
-              <div id="progress2"></div>
-              <p class="p6">Anglais</p>
-              <div id="progress3"></div>
-            </div>
+
 
             <div class="clearfix"></div>
           </div>

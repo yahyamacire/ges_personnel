@@ -36,7 +36,7 @@ class Employe
 
     #[ORM\Column(type: 'integer')]
     private $telephone;
-    
+
     #[ORM\Column(type: 'date', nullable: true)]
     #[Serializer\SerializedName("dateRecrutement")]
     private $dateRecrutement;
@@ -63,7 +63,7 @@ class Employe
     #[Serializer\SerializedName("photoUrl")]
     private $photoUrl;
 
-    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Diplome::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Diplome::class, cascade: ['persist','remove'])]
     #[Serializer\SerializedName("diplomes")]
     private $diplome;
 
@@ -71,7 +71,7 @@ class Employe
     #[Serializer\SerializedName("user")]
     private $compte;
 
-    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: CompetenceLinguistique::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'employe', targetEntity: CompetenceLinguistique::class, cascade: ['persist','remove'])]
     #[Serializer\SerializedName("competenceLinguistiques")]
     private $competenceLinguistique;
 
@@ -90,6 +90,9 @@ class Employe
     #[ORM\ManyToOne(targetEntity: Structure::class, inversedBy: 'employes')]
     #[Serializer\SerializedName("structure")]
     private $structure;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $description;
 
 
     public function __construct()
@@ -129,6 +132,10 @@ class Employe
 
         return $this;
     }
+
+
+
+
 
     public function getPrenom(): ?string
     {
@@ -455,6 +462,18 @@ class Employe
     public function setStructure(?Structure $structure): self
     {
         $this->structure = $structure;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

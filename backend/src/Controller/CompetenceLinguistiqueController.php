@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CompetenceLinguistique;
-
+use App\Entity\User;
 use Doctrine\Inflector\Language;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +27,7 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
         if($user != null && $user->getEmploye() != null){
             $list = $CompentenceLinguistiqueRepository->findBy(['employe' => $user->getEmploye()->getId()]);
         }
-        $list = $CompentenceLinguistiqueRepository->findAll();
+
         return $this->handleView($this->view($list));
     }
     #[Rest\Post('competence-linguistiques', name: 'api_new_CompetenceLinguistique', )]
@@ -68,13 +68,18 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
     public function getFacture(CompetenceLinguistique $CompetenceLinguistique){
         return $this->handleView($this->view($CompetenceLinguistique));
     }
+
+
+
+
     #[Rest\Put('competence-linguistiques/{id}', name: 'api_edit_CompetenceLinguistique', )]
     public function edit(Request $request, ManagerRegistry  $doctrine, CompetenceLinguistique $CompetenceLinguistique, LangueRepository $langueRepository)
+
     {
 
         $parameters = json_decode($request->getContent(), true);
         $niveau = $parameters['niveau'];
-        $niveau->setNiveau($niveau);
+        $CompetenceLinguistique->setNiveau($niveau);
 
         $user = $this->getUser();
         if($user != null){
@@ -98,8 +103,10 @@ class CompetenceLinguistiqueController extends AbstractFOSRestController
 
 
 
+
     #[Rest\Delete('competence-linguistiques/{id}', name: 'api_delete_CompetenceLinguistique', )]
-    public function delete(CompetenceLinguistique $CompetenceLinguistique, CompetenceLinguistiqueRepository $CompetenceLinguistiqueRepository): Response
+   public function delete(CompetenceLinguistique $CompetenceLinguistique, CompetenceLinguistiqueRepository $CompetenceLinguistiqueRepository): Response
+
     {
 
         $CompetenceLinguistiqueRepository->remove($CompetenceLinguistique, true);

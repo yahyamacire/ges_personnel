@@ -2,17 +2,17 @@
   "gesEmployerApp": {
     "diplome": {
       "home": {
-        "title": "Diplomes",
+        "title": "Diplômes",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Diplome",
-        "createOrEditLabel": "Créer ou éditer un Diplome",
-        "notFound": "Aucun Diplome trouvé"
+        "createLabel": "Créer un nouveau Diplôme",
+        "createOrEditLabel": "Créer ou éditer un Diplôme",
+        "notFound": "Aucun Diplôme trouvé"
       },
-      "created": "Un nouveau Diplome a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Diplome avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Diplome avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Diplômes a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Diplôme avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Diplôme avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Diplome {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Diplome ?"
       },
       "detail": {
         "title": "Diplôme"

@@ -1,11 +1,30 @@
 <div class="employes">
   <section class="u-align-center u-clearfix u-section-1" id="carousel_e5f3">
     <div class="u-clearfix u-sheet u-sheet-1">
-      <h1 class="u-text u-text-default u-text-1">Les employés .....</h1>
+      <form class="wrap">
+        <div class="search">
+          <i class="bi bi-search"> <h3>Rechercher un employé par nom </h3> </i>
+
+
+          <input
+            class="form-control"
+            type="text"
+            name="searchTerm"
+            placeholder="Nom ..."
+            style="display: inline !important; width: auto !important"
+            [(ngModel)]="searchTerm"
+            (input)="search(searchTerm)"
+          />
+
+
+        </div>
+      </form>
+
+      <h1 class="u-text u-text-default u-text-1"> Liste des employés</h1>
       <div class="">
         <div class="">
-          <div class="row">
-            <div *ngFor="let employe of employes; trackBy: trackId" class="col-md-6">
+          <div class="row" *ngIf="employes">
+            <div *ngFor="let employe of employes | searchFilter: searchTerm; trackBy: trackId" class="col-md-6">
               <div class="">
                 <div class="">
                   <div class="card">

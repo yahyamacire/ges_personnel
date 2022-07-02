@@ -44,6 +44,9 @@ class StructureController extends AbstractFOSRestController
     }
 
 
+
+
+
     #[Rest\Post('structures', name: 'api_new_structures', )]
     public function new(Request $request, ManagerRegistry $doctrine, StructureRepository $structureRepository)
     {

@@ -22,7 +22,13 @@ class ProjetController extends AbstractFOSRestController
     #[Rest\Get('projets', name: 'api_list_projets')]
     public function list(ProjetRepository $projetRepository)
     {
-        $list = $projetRepository->findAll();
+        $list = [];
+
+        $user = $this->getUser();
+        if($user != null && $user->getEmploye() != null){
+            $list = $projetRepository->findBy(['employe' => $user->getEmploye()->getId()]);
+        }
+
         return $this->handleView($this->view($list));
     }
 
@@ -109,7 +115,7 @@ class ProjetController extends AbstractFOSRestController
     {
        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
         $projetRepository->remove($projet, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',

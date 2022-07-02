@@ -27,7 +27,7 @@ class ExperienceController extends AbstractFOSRestController
         if($user != null && $user->getEmploye() != null){
             $list = $experienceRepository->findBy(['employe' => $user->getEmploye()->getId()]);
         }
-        $list = $experienceRepository->findAll();
+
         return $this->handleView($this->view($list));
     }
 
@@ -38,7 +38,7 @@ class ExperienceController extends AbstractFOSRestController
         $parameters = json_decode($request->getContent(), true);
 
 
-        
+
         $entreprise = $parameters['entreprise'];
         $dateDebut= $parameters['dateDebut'];
         $dateFin = $parameters['dateFin'];
@@ -88,7 +88,7 @@ class ExperienceController extends AbstractFOSRestController
         $parameters = json_decode($request->getContent(), true);
 
 
-        
+
         $entreprise = $parameters['entreprise'];
         $dateDebut= $parameters['dateDebut'];
         $dateFin = $parameters['dateFin'];
@@ -107,7 +107,7 @@ class ExperienceController extends AbstractFOSRestController
 
         $experience->setDateDebut($dateDebut);
         $experience->setDateFin($dateFin);
-       
+
         $user = $this->getUser();
         if($user != null){
             $experience->setEmploye($user->getEmploye());
@@ -126,7 +126,7 @@ class ExperienceController extends AbstractFOSRestController
     {
        // if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
         $experienceRepository->remove($experience, true);
-        
+
 
         return new JsonResponse(
             '{"sttaus": "ok"}',
